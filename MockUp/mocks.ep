@@ -90,6 +90,151 @@
     			<path style="stroke-linejoin: round;" p:name="line1" id="f226e6df4a3349699a9ff1e57730c2a6" d="M 0 0 C 69 0 139 0 208 0 C 208 14 208 27 208 41 C 139 40 69 40 0 41 C 0 27 0 14 0 0 z"/>
     		</g>
     		<text p:name="text" id="e58e4917be87466ea9b6906f97887494" style="font-family: 'Comic Sans MS'; font-size: 22px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(51,29)">Timetable</text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:button" id="a57e39e6c2b245efa048600ef0f2097c" transform="matrix(1,0,0,1,18,216)"><p:metadata><p:property name="box"><![CDATA[208,41]]></p:property><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="default"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#CCCCCC73]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[Week]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|20px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
+            <g p:name="rect" id="eeea4fc75eed45dab51c5f0698b6bbdf" style="fill: rgb(204, 204, 204); fill-opacity: 0.45098; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+    			<path style="stroke-linejoin: round;" p:name="line1" id="0fa365bf6d6f43d19c3a90fc57b883fe" d="M 0 0 C 69 -1 139 -1 208 0 C 208 14 208 27 208 41 C 139 42 69 42 0 41 C 0 27 0 14 0 0 z"/>
+    		</g>
+    		<text p:name="text" id="35be61bc3ebd4eb8b0390526e69740ae" style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(77,29)">Week</text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:button" id="13deda84f5ce47abb5cee60d9955fca2" transform="matrix(1,0,0,1,241,216)"><p:metadata><p:property name="box"><![CDATA[208,41]]></p:property><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="default"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#CCCCCC73]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[Two weeks]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|20px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
+            <g p:name="rect" id="3841667a73d3400bae65982d881febc8" style="fill: rgb(204, 204, 204); fill-opacity: 0.45098; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+    			<path style="stroke-linejoin: round;" p:name="line1" id="af4e9ebb473c48abbc842fba8bf37d32" d="M 0 0 C 69 -1 139 -1 208 0 C 208 14 208 27 208 41 C 139 40 69 40 0 41 C 0 27 0 14 0 0 z"/>
+    		</g>
+    		<text p:name="text" id="e41be6d9eade4f4e86ca5422fcca78ed" style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(52,29)">Two weeks</text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:button" id="d4e2c5323dd44a668f4686f688876bf8" transform="matrix(1,0,0,1,462,215)"><p:metadata><p:property name="box"><![CDATA[208,41]]></p:property><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="default"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#CCCCCC73]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[Month]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|20px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
+            <g p:name="rect" id="f63e5de41c6c452dae46d6002c8c96d7" style="fill: rgb(204, 204, 204); fill-opacity: 0.45098; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+    			<path style="stroke-linejoin: round;" p:name="line1" id="eaa42acc68954207b37429b3bc41fabe" d="M 0 0 C 69 0 139 0 208 0 C 208 14 208 27 208 41 C 139 42 69 42 0 41 C 0 27 0 14 0 0 z"/>
+    		</g>
+    		<text p:name="text" id="48b5bebe312c486997debdc25e067165" style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(74,29)">Month</text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:button" id="209a9581bb1542b99ae11390e9ab0dc9" transform="matrix(1,0,0,1,684,215)"><p:metadata><p:property name="box"><![CDATA[208,41]]></p:property><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="default"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#CCCCCC73]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[Six Months]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|20px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
+            <g p:name="rect" id="fdf9f66c284f44ccaf325c90f41d20fa" style="fill: rgb(204, 204, 204); fill-opacity: 0.45098; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+    			<path style="stroke-linejoin: round;" p:name="line1" id="a70a3622847e4f359ed3bc709d517dd1" d="M 0 0 C 69 0 139 0 208 0 C 208 14 208 27 208 41 C 139 40 69 40 0 41 C 0 27 0 14 0 0 z"/>
+    		</g>
+    		<text p:name="text" id="afe2eb9e7eb04f82965ed14a7ca78ed9" style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(50,29)">Six Months</text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:button" id="87468fcd8c2543f2b19b0fcccb593c9f" transform="matrix(1,0,0,1,988.6875,216)"><p:metadata><p:property name="box"><![CDATA[53.3125,41]]></p:property><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="default"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#CCCCCC73]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|20px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
+            <g p:name="rect" id="2b46a8d5ccbb4889bc3463e81ac49609" style="fill: rgb(204, 204, 204); fill-opacity: 0.45098; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+    			<path style="stroke-linejoin: round;" p:name="line1" id="fad77965a74841b3b882773bb32d2d90" d="M 0 0 C 18 -1 36 -1 53.3125 0 C 53 14 53 27 53.3125 41 C 36 41 18 41 0 41 C 0 27 0 14 0 0 z"/>
+    		</g>
+    		<text p:name="text" id="17b30c60f99940f0b67fadbcb4028411" style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(27,21)"> </text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:SVGImage" id="1bbe22762e844a2899fb37601d35a6d3" transform="matrix(1,0,0,1,997.6875,221.75)"><p:metadata><p:property name="box"><![CDATA[37.5,29.6875]]></p:property><p:property name="originalDim"><![CDATA[340,340]]></p:property><p:property name="svgXML"><![CDATA[<g xmlns="http://www.w3.org/2000/svg" p:ImageSource="OpenClipart.org" xmlns:p="http://www.evolus.vn/Namespace/Pencil">
+  <defs id="3bd9157bdc3445cd88fb54e8470b1efe"/>
+  <sodipodi:namedview xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" id="59fc99a729ef402ea66017b6839303c5" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:pageshadow="2" inkscape:zoom="0.4375" inkscape:cx="682.83271" inkscape:cy="155.73143" inkscape:current-layer="layer1" showgrid="true" inkscape:grid-bbox="true" inkscape:document-units="px" width="744.09449px" height="1052.3622px" inkscape:window-width="1273" inkscape:window-height="766" inkscape:window-x="0" inkscape:window-y="0" inkscape:object-points="true" inkscape:object-bbox="true" objecttolerance="10000" inkscape:grid-points="true" gridtolerance="10000" inkscape:guide-points="true" guidetolerance="10000"/>
+  <g id="d0faabdae3ec4878ace4c15e01162de0" inkscape:label="Layer 1" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:groupmode="layer" transform="translate(-193.42857,-294.89315)">
+    <path style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 193.42857,474.97408 L 193.42857,634.97408 L 533.42857,634.97408 L 533.42857,474.97408 L 193.42857,474.97408 z M 493.42857,514.97408 L 493.42857,594.97408 L 233.42857,594.97408 L 233.42857,514.97408 L 493.42857,514.97408 z " id="a24b481686ed4cdc8fa36951f90ba6af" sodipodi:nodetypes="cccccccccc" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"/>
+    <path style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 473.42857,294.89315 L 253.42857,294.9869 L 253.42857,514.9869 L 293.42857,514.9869 L 293.42857,334.89315 L 433.83482,334.5494 L 433.83482,334.89315 L 433.42857,334.89315 L 433.42857,514.97408 L 473.42857,514.95565 L 473.42857,294.89315 z " id="918a37f2871c4639bdcfbb04f7bd7808" sodipodi:nodetypes="ccccccccccc" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"/>
+    <path style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 413.43047,354.90398 L 313.02427,355.24768 L 313.02427,354.90398 L 313.31477,354.90398 L 313.31477,394.90398 L 413.43047,394.90398 L 413.43047,354.90398 z " id="6d77cd2d9c6d4ce48f44dfbf82eb9373" sodipodi:nodetypes="ccccccc" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"/>
+    <path style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 413.83667,414.90398 L 313.43047,415.24768 L 313.43047,414.90398 L 313.72097,414.90398 L 313.72097,454.90398 L 413.83667,454.90398 L 413.83667,414.90398 z " id="8bb5b0c173214a37ba2ab05fc0c5c6c0" sodipodi:nodetypes="ccccccc" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"/>
+    <path style="fill:#0c0605;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 473.42857,534.97408 L 253.42857,535.31778 L 253.42857,534.97408 L 253.43057,535.44898 L 253.42857,574.97408 L 473.42857,574.97408 L 473.42857,534.97408 z " id="0a2c1b609eb54861866d9af18c9c61c8" sodipodi:nodetypes="ccccccc" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"/>
+  </g>
+  <metadata>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work xmlns:cc="http://web.resource.org/cc/">
+        <dc:format xmlns:dc="http://purl.org/dc/elements/1.1/">image/svg+xml</dc:format>
+        <dc:type xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Open Clip Art Library</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">printer mini icon</dc:title>
+        <dc:date xmlns:dc="http://purl.org/dc/elements/1.1/">2008-02-13T10:45:47</dc:date>
+        <dc:description xmlns:dc="http://purl.org/dc/elements/1.1/"/>
+        <dc:source xmlns:dc="http://purl.org/dc/elements/1.1/">http://openclipart.org/detail/13851/printer-mini-icon-by-artmaster</dc:source>
+        <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <cc:Agent>
+            <dc:title>artmaster</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Bag>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>image</rdf:li>
+            <rdf:li>media</rdf:li>
+            <rdf:li>mini</rdf:li>
+            <rdf:li>mini</rdf:li>
+            <rdf:li>png</rdf:li>
+            <rdf:li>print</rdf:li>
+            <rdf:li>print</rdf:li>
+            <rdf:li>printer</rdf:li>
+            <rdf:li>printer</rdf:li>
+            <rdf:li>public domain</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>svg</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License xmlns:cc="http://web.resource.org/cc/" rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</g>]]></p:property></p:metadata>
+            <g p:name="container" id="d91afe4a54a74c1fa9e5d51a629d650e" transform="scale(0.11029411764705882,0.08731617647058823)"><g xmlns="http://www.w3.org/2000/svg" p:ImageSource="OpenClipart.org" xmlns:p="http://www.evolus.vn/Namespace/Pencil">
+  <defs id="3bd9157bdc3445cd88fb54e8470b1efe"/>
+  <sodipodi:namedview xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" id="59fc99a729ef402ea66017b6839303c5" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:pageshadow="2" inkscape:zoom="0.4375" inkscape:cx="682.83271" inkscape:cy="155.73143" inkscape:current-layer="layer1" showgrid="true" inkscape:grid-bbox="true" inkscape:document-units="px" width="744.09449px" height="1052.3622px" inkscape:window-width="1273" inkscape:window-height="766" inkscape:window-x="0" inkscape:window-y="0" inkscape:object-points="true" inkscape:object-bbox="true" objecttolerance="10000" inkscape:grid-points="true" gridtolerance="10000" inkscape:guide-points="true" guidetolerance="10000"/>
+  <g id="d0faabdae3ec4878ace4c15e01162de0" inkscape:label="Layer 1" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:groupmode="layer" transform="translate(-193.42857,-294.89315)">
+    <path style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 193.42857,474.97408 L 193.42857,634.97408 L 533.42857,634.97408 L 533.42857,474.97408 L 193.42857,474.97408 z M 493.42857,514.97408 L 493.42857,594.97408 L 233.42857,594.97408 L 233.42857,514.97408 L 493.42857,514.97408 z " id="a24b481686ed4cdc8fa36951f90ba6af" sodipodi:nodetypes="cccccccccc" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"/>
+    <path style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 473.42857,294.89315 L 253.42857,294.9869 L 253.42857,514.9869 L 293.42857,514.9869 L 293.42857,334.89315 L 433.83482,334.5494 L 433.83482,334.89315 L 433.42857,334.89315 L 433.42857,514.97408 L 473.42857,514.95565 L 473.42857,294.89315 z " id="918a37f2871c4639bdcfbb04f7bd7808" sodipodi:nodetypes="ccccccccccc" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"/>
+    <path style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 413.43047,354.90398 L 313.02427,355.24768 L 313.02427,354.90398 L 313.31477,354.90398 L 313.31477,394.90398 L 413.43047,394.90398 L 413.43047,354.90398 z " id="6d77cd2d9c6d4ce48f44dfbf82eb9373" sodipodi:nodetypes="ccccccc" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"/>
+    <path style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 413.83667,414.90398 L 313.43047,415.24768 L 313.43047,414.90398 L 313.72097,414.90398 L 313.72097,454.90398 L 413.83667,454.90398 L 413.83667,414.90398 z " id="8bb5b0c173214a37ba2ab05fc0c5c6c0" sodipodi:nodetypes="ccccccc" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"/>
+    <path style="fill:#0c0605;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 473.42857,534.97408 L 253.42857,535.31778 L 253.42857,534.97408 L 253.43057,535.44898 L 253.42857,574.97408 L 473.42857,574.97408 L 473.42857,534.97408 z " id="0a2c1b609eb54861866d9af18c9c61c8" sodipodi:nodetypes="ccccccc" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"/>
+  </g>
+  <metadata>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work xmlns:cc="http://web.resource.org/cc/">
+        <dc:format xmlns:dc="http://purl.org/dc/elements/1.1/">image/svg+xml</dc:format>
+        <dc:type xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Open Clip Art Library</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">printer mini icon</dc:title>
+        <dc:date xmlns:dc="http://purl.org/dc/elements/1.1/">2008-02-13T10:45:47</dc:date>
+        <dc:description xmlns:dc="http://purl.org/dc/elements/1.1/"/>
+        <dc:source xmlns:dc="http://purl.org/dc/elements/1.1/">http://openclipart.org/detail/13851/printer-mini-icon-by-artmaster</dc:source>
+        <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <cc:Agent>
+            <dc:title>artmaster</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Bag>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>image</rdf:li>
+            <rdf:li>media</rdf:li>
+            <rdf:li>mini</rdf:li>
+            <rdf:li>mini</rdf:li>
+            <rdf:li>png</rdf:li>
+            <rdf:li>print</rdf:li>
+            <rdf:li>print</rdf:li>
+            <rdf:li>printer</rdf:li>
+            <rdf:li>printer</rdf:li>
+            <rdf:li>public domain</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>svg</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License xmlns:cc="http://web.resource.org/cc/" rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</g></g>
         </g></Content></Page><Page><Properties><Property name="name">Courses</Property><Property name="id">1369744415600_8023</Property><Property name="width">1052</Property><Property name="height">774</Property><Property name="dimBackground"/><Property name="transparentBackground">false</Property><Property name="backgroundColor">#FFFFFFFF</Property><Property name="background">1369744208289_8516</Property></Properties><Content><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:button" id="a591e09e3a01418999e5078da12f80b9" transform="matrix(1,0,0,1,241,159)"><p:metadata><p:property name="box"><![CDATA[208,41]]></p:property><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="default"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFCC00FF]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[Courses]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|22px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
             <g p:name="rect" id="9a10fe6b1f66451297cc42af7c5d7019" style="fill: rgb(255, 204, 0); fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
     			<path style="stroke-linejoin: round;" p:name="line1" id="c8253849d2f6428e9f9e5f5a914fb2ac" d="M 0 0 C 69 2 139 2 208 0 C 208 14 208 27 208 41 C 139 40 69 40 0 41 C 0 27 0 14 0 0 z"/>
@@ -286,9 +431,11 @@
             <foreignObject x="0" y="0" width="168" height="18" p:name="htmlObject" id="8524f6f077624bf8ba36e05d3a8776d6" style="">
                 <div xmlns="http://www.w3.org/1999/xhtml" p:name="textDiv" id="71c77399d5794422b3d8155a128a3029" style="display: inline-block; white-space: nowrap; color: rgb(51, 102, 255); opacity: 1; font-family: Comic Sans MS; font-size: 12px; font-weight: normal; font-style: normal; text-decoration: none;"><div xmlns="http://www.w3.org/1999/xhtml"><span style="color: rgba(51, 102, 255, 1); text-decoration: none;;">Home</span><span style="color: rgba(0, 0, 0, 0.5); margin: 0px 0.5ex; ">&gt;</span><span style="text-decoration: none;;">Profile</span><span style="color: rgba(0, 0, 0, 0.5); margin: 0px 0.5ex; ">&gt;</span><span style="color: rgba(0, 0, 0, 1); ;">Personal Data</span></div></div>
             </foreignObject>
-        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:box" id="494f503062164bb7ae14916f81c798a1" transform="matrix(1,0,0,1,34,237)"><p:metadata><p:property name="box"><![CDATA[178,34]]></p:property><p:property name="textPadding"><![CDATA[8.899999999999999,2.2666666666666666]]></p:property><p:property name="fillColor"><![CDATA[#33FF337D]]></p:property><p:property name="strokeColor"><![CDATA[#FF000075]]></p:property><p:property name="strokeStyle"><![CDATA[0|]]></p:property><p:property name="textContent"><![CDATA[]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|12px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
-            <path style="stroke-linejoin: round; fill: rgb(51, 255, 51); fill-opacity: 0.490196; stroke: rgb(255, 0, 0); stroke-opacity: 0.458824; stroke-width: 0;" p:name="line1" id="9eb25756e3a44352885eee7e4b0f72e5" transform="translate(0,0)" d="M 0 0 C 59 2 119 2 178 0 C 178 11 178 23 178 34 C 119 35 59 35 0 34 C 0 23 0 11 0 0 z"/>
-            <text p:name="text" id="b223e5b5225944c2bb0abd34d1c5b399" style="font-family: 'Comic Sans MS'; font-size: 12px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(89,17)"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:button" id="ae685f7d70134f839018ea1ed61b4128" transform="matrix(1,0,0,1,34,237)"><p:metadata><p:property name="box"><![CDATA[179.99999880790708,35.99999713897706]]></p:property><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="default"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFCC00FF]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[Personal Data]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|15px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
+            <g p:name="rect" id="9891158a12d74ed6a4e5798bac6bd18d" style="fill: rgb(255, 204, 0); fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+    			<path style="stroke-linejoin: round;" p:name="line1" id="f65e40351999415dafd0949a991c1fbe" d="M 0 0 C 60 1 120 1 179.99999880790708 0 C 180 12 180 24 179.99999880790708 35.99999713897706 C 120 37 60 37 0 35.99999713897706 C 0 24 0 12 0 0 z"/>
+    		</g>
+    		<text p:name="text" id="cb72f464da1c429c8f3ecedbdcf5517b" style="font-family: 'Comic Sans MS'; font-size: 15px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(42,24)">Personal Data</text>
         </g></Content></Page><Page><Properties><Property name="name">Empty_LandingPage_Template</Property><Property name="id">1369753651320_7000</Property><Property name="width">1052</Property><Property name="height">774</Property><Property name="dimBackground"/><Property name="transparentBackground">true</Property><Property name="backgroundColor">#FFFFFFFF</Property><Property name="background">transparent</Property></Properties><Content><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:box" id="ee04a2582f134bd5b998ac89fcfa60e2" transform="matrix(1,0,0,1,19,16)"><p:metadata><p:property name="box"><![CDATA[1022.625,127.5]]></p:property><p:property name="textPadding"><![CDATA[51.13124999999998,8.499999999999998]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFFFF]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|12px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
             <path style="stroke-linejoin: round; fill: rgb(255, 255, 255); fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;" p:name="line1" id="4c7fb711e6dd49bfac8158d801b6ff33" transform="translate(0.5,0.5)" d="M 0 0 C 341 -1 682 -1 1022.625 0 C 1024 42 1024 85 1022.625 127.5 C 682 129 341 129 0 127.5 C -1 85 -1 42 0 0 z"/>
             <text p:name="text" id="2cb74b37b85e48f1be83fe1bdd950299" style="font-family: 'Comic Sans MS'; font-size: 12px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(511,64)"/>
@@ -513,4 +660,9 @@
         </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:box" id="7f5bf17c276041d3a8fbbcda2a0eeb3a" transform="matrix(1,0,0,1,610,334)"><p:metadata><p:property name="box"><![CDATA[125.25,365.75]]></p:property><p:property name="textPadding"><![CDATA[6.2625,24.38333333333333]]></p:property><p:property name="fillColor"><![CDATA[#CC0000FF]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[Conference in Augsburg (9:00-20:00)]]></p:property><p:property name="textFont"><![CDATA[Comic Sans MS|normal|normal|15px|none]]></p:property><p:property name="textColor"><![CDATA[#FFFFFFFF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
             <path style="stroke-linejoin: round; fill: rgb(204, 0, 0); fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;" p:name="line1" id="54e631416703400da97016740637f149" transform="translate(0.5,0.5)" d="M 0 0 C 42 1 84 1 125.25 0 C 124 122 124 244 125.25 365.75 C 84 365 42 365 0 365.75 C 0 244 0 122 0 0 z"/>
             <text p:name="text" id="870be2a89b8542769e6794fc6f4096a1" style="font-family: Comic Sans MS; font-size: 15px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(255, 255, 255); fill-opacity: 1;" transform="translate(9,167)"><tspan x="6.362499999999997" y="0">Conference in</tspan><tspan x="21.987499999999997" y="21.25">Augsburg</tspan><tspan x="10.112499999999997" y="42.5">(9:00-20:00)</tspan></text>
+        </g></Content></Page><Page><Properties><Property name="name">Settings_Payment</Property><Property name="id">1369756656889_3957</Property><Property name="width">1052</Property><Property name="height">774</Property><Property name="dimBackground"/><Property name="transparentBackground">false</Property><Property name="backgroundColor">#FFFFFFFF</Property><Property name="background">1369752028296_8802</Property></Properties><Content><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:button" id="e0a9c023b26a4f46bfd486b65e09cc47" transform="matrix(1,0,0,1,34,338)"><p:metadata><p:property name="box"><![CDATA[180,36]]></p:property><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="default"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFCC00FF]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[Payment]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|15px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
+            <g p:name="rect" id="dc307f9c563248b19278636c5eef6844" style="fill: rgb(255, 204, 0); fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+    			<path style="stroke-linejoin: round;" p:name="line1" id="fe69e998e2224b10bb5f078e637a442a" d="M 0 0 C 60 1 120 1 180 0 C 180 12 180 24 180 36 C 120 36 60 36 0 36 C 0 24 0 12 0 0 z"/>
+    		</g>
+    		<text p:name="text" id="140665a4c9e3402a920baed875b9142d" style="font-family: 'Comic Sans MS'; font-size: 15px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(61,24)">Payment</text>
         </g></Content></Page></Pages></Document>
