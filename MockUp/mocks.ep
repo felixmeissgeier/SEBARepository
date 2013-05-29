@@ -5681,4 +5681,179 @@ Spanish | Midterm exam in 2 weeks | Manage]]></p:property><p:property name="text
         </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:PlainTextV2" p:sc="Label" id="75d9d5eb10b44bafaf42981892cdc7ee" transform="matrix(1,0,0,1,28.5,127.8125)"><p:metadata><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="width"><![CDATA[100,0]]></p:property><p:property name="fixedWidth"><![CDATA[false]]></p:property><p:property name="label"><![CDATA[Generated on: 28.05.2013 17:21]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|18px|none]]></p:property><p:property name="textAlign"><![CDATA[0,0]]></p:property></p:metadata>
             <rect x="0" y="0" style="fill: none; stroke: none; visibility: hidden; display: none;" p:name="bgRect" id="928f935cd4d24b4b95dce0fa50f92ce7" width="0" height="0"/>
             <text xml:space="preserve" p:name="text" id="2915e5be1b09463f8feff62301bbc45e" style="fill: rgb(0, 0, 0); fill-opacity: 1; font-family: 'Comic Sans MS'; font-size: 18px; font-weight: normal; font-style: normal; text-decoration: none;"><tspan x="0" y="0">Generated on: 28.05.2013 17:21</tspan></text>
+        </g></Content></Page><Page><Properties><Property name="name">LogIn</Property><Property name="id">1369816554164_6085</Property><Property name="width">1052</Property><Property name="height">774</Property><Property name="dimBackground"/><Property name="transparentBackground">false</Property><Property name="backgroundColor">#FFFFFFFF</Property><Property name="background">1369753651320_7000</Property></Properties><Content><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:box" id="1f863a335fd648a0b3997ae6dca3652c" transform="matrix(1,0,0,1,217.25,261)">
+          <p:metadata>
+            <p:property name="box"><![CDATA[579.0000076293945,198.4375]]></p:property>
+            <p:property name="textPadding"><![CDATA[0,0]]></p:property>
+            <p:property name="fillColor"><![CDATA[#FFFFFFFF]]></p:property>
+            <p:property name="strokeColor"><![CDATA[#C0C0C0FF]]></p:property>
+            <p:property name="strokeStyle"><![CDATA[1|]]></p:property>
+            <p:property name="textContent"><![CDATA[
+              
+            ]]></p:property>
+            <p:property name="textFont"><![CDATA[Comic Sans MS|normal|normal|14px|none]]></p:property>
+            <p:property name="textColor">
+              <![CDATA[#000000FF]]>
+            </p:property>
+            <p:property name="textAlign"><![CDATA[0,0]]></p:property>
+          </p:metadata>
+          <path style="stroke-linejoin: round; fill: rgb(255, 255, 255); fill-opacity: 1; stroke: rgb(192, 192, 192); stroke-opacity: 1; stroke-width: 1;" p:name="line1" id="ca1d2c36b92f41ad9cb30636bb5232da" transform="translate(0.5,0.5)" d="M 0 0 C 193 0 386 0 579.0000076293945 0 C 577 66 577 132 579.0000076293945 198.4375 C 386 200 193 200 0 198.4375 C 2 132 2 66 0 0 z"/>
+          <text p:name="text" id="188b2e5559884290a4b6472828baa39a" style="font-family: Comic Sans MS; font-size: 14px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(0,0)"/>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:PlainTextV2" p:sc="Label" id="bd3b4fc8cfc74440b9f2bf0e22b64cf5" transform="matrix(1,0,0,1,295,312)">
+          <p:metadata>
+            <p:property name="disabled">
+              <![CDATA[false]]>
+            </p:property>
+            <p:property name="width">
+              <![CDATA[100,0]]>
+            </p:property>
+            <p:property name="fixedWidth">
+              <![CDATA[false]]>
+            </p:property>
+            <p:property name="label"><![CDATA[Email:]]></p:property>
+            <p:property name="textColor">
+              <![CDATA[#000000FF]]>
+            </p:property>
+            <p:property name="textFont"><![CDATA[Comic Sans MS|normal|normal|14px|none]]></p:property>
+            <p:property name="textAlign">
+              <![CDATA[0,0]]>
+            </p:property>
+          </p:metadata>
+          <rect x="0" y="0" style="fill: none; stroke: none; visibility: hidden; display: none;" p:name="bgRect" id="72ca96ce02e14c04bf19db705f82e5ab" width="0" height="0"/>
+          <text xml:space="preserve" p:name="text" id="7a08545017c7426b87a2d223f57f3902" style="fill: rgb(0, 0, 0); fill-opacity: 1; font-family: Comic Sans MS; font-size: 14px; font-weight: normal; font-style: normal; text-decoration: none;"><tspan x="0" y="0">Email:</tspan></text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:textbox" id="d905224e97e24444ab91607dc2f71906" transform="matrix(1,0,0,1,387,293)">
+          <p:metadata>
+            <p:property name="box"><![CDATA[317.5625,26]]></p:property>
+            <p:property name="disabled">
+              <![CDATA[false]]>
+            </p:property>
+            <p:property name="fillColor">
+              <![CDATA[#FFFFFFFF]]>
+            </p:property>
+            <p:property name="strokeColor">
+              <![CDATA[#000000FF]]>
+            </p:property>
+            <p:property name="strokeStyle">
+              <![CDATA[1|]]>
+            </p:property>
+            <p:property name="textContent"><![CDATA[              klaus.mueller@gmail.com            ]]></p:property>
+            <p:property name="textFont"><![CDATA[Comic Sans MS|normal|normal|14px|none]]></p:property>
+            <p:property name="textColor">
+              <![CDATA[#000000FF]]>
+            </p:property>
+            <p:property name="textAlign">
+              <![CDATA[0,1]]>
+            </p:property>
+          </p:metadata>
+          <g p:name="rect" id="e653f0952729415ca5b00184ec453865" transform="translate(0.5,0.5)" style="fill: rgb(255, 255, 255); fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+            <path style="stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;" p:name="line1" id="d0510c4d95d744adbb6892a6575ecb65" transform="translate(0.5,0.5)" d="M 0 0 C 106 -1 212 -1 317.5625 0 C 318 9 318 17 317.5625 26 C 212 27 106 27 0 26 C 0 17 0 9 0 0 z"/>
+          </g>
+          <text p:name="text" id="072a56894cd941feac037ae0f9483fee" style="font-family: Comic Sans MS; font-size: 14px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(8,21)">              klaus.mueller@gmail.com            </text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:PlainTextV2" p:sc="Label" id="a7bb97f49bca4c799af172e2e71b419c" transform="matrix(1,0,0,1,295,353)">
+          <p:metadata>
+            <p:property name="disabled">
+              <![CDATA[false]]>
+            </p:property>
+            <p:property name="width">
+              <![CDATA[100,0]]>
+            </p:property>
+            <p:property name="fixedWidth">
+              <![CDATA[false]]>
+            </p:property>
+            <p:property name="label"><![CDATA[Password:]]></p:property>
+            <p:property name="textColor">
+              <![CDATA[#000000FF]]>
+            </p:property>
+            <p:property name="textFont"><![CDATA[Comic Sans MS|normal|normal|14px|none]]></p:property>
+            <p:property name="textAlign">
+              <![CDATA[0,0]]>
+            </p:property>
+          </p:metadata>
+          <rect x="0" y="0" style="fill: none; stroke: none; visibility: hidden; display: none;" p:name="bgRect" id="93100949e3244a00aa29a81477f8266d" width="0" height="0"/>
+          <text xml:space="preserve" p:name="text" id="0ed3e5bff9b043818089336b2b5ffa29" style="fill: rgb(0, 0, 0); fill-opacity: 1; font-family: Comic Sans MS; font-size: 14px; font-weight: normal; font-style: normal; text-decoration: none;"><tspan x="0" y="0">Password:</tspan></text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:textbox" id="05fd624fb4f54ab5b10af4280b312e33" transform="matrix(1,0,0,1,387,334)">
+          <p:metadata>
+            <p:property name="box"><![CDATA[317.5625,26]]></p:property>
+            <p:property name="disabled">
+              <![CDATA[false]]>
+            </p:property>
+            <p:property name="fillColor">
+              <![CDATA[#FFFFFFFF]]>
+            </p:property>
+            <p:property name="strokeColor">
+              <![CDATA[#000000FF]]>
+            </p:property>
+            <p:property name="strokeStyle">
+              <![CDATA[1|]]>
+            </p:property>
+            <p:property name="textContent"><![CDATA[              ******************            ]]></p:property>
+            <p:property name="textFont"><![CDATA[Comic Sans MS|normal|normal|14px|none]]></p:property>
+            <p:property name="textColor">
+              <![CDATA[#000000FF]]>
+            </p:property>
+            <p:property name="textAlign">
+              <![CDATA[0,1]]>
+            </p:property>
+          </p:metadata>
+          <g p:name="rect" id="e1bead93123647f799811c8a5a24f264" transform="translate(0.5,0.5)" style="fill: rgb(255, 255, 255); fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+            <path style="stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;" p:name="line1" id="5d1f07dbb0a04dda890f1dfd5d1ced93" transform="translate(0.5,0.5)" d="M 0 0 C 106 0 212 0 317.5625 0 C 318 9 318 17 317.5625 26 C 212 24 106 24 0 26 C 0 17 0 9 0 0 z"/>
+          </g>
+          <text p:name="text" id="29be204b36f944fc84b0cc3e57c4a608" style="font-family: Comic Sans MS; font-size: 14px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(8,21)">              ******************            </text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:button" id="10903db171c44baa8135cbb34df66f8e" transform="matrix(1,0,0,1,388,405)">
+          <p:metadata>
+            <p:property name="box"><![CDATA[123.5,26]]></p:property>
+            <p:property name="disabled">
+              <![CDATA[false]]>
+            </p:property>
+            <p:property name="default">
+              <![CDATA[false]]>
+            </p:property>
+            <p:property name="fillColor"><![CDATA[#CCCCCCFF]]></p:property>
+            <p:property name="strokeColor">
+              <![CDATA[#000000FF]]>
+            </p:property>
+            <p:property name="strokeStyle"><![CDATA[1|]]></p:property>
+            <p:property name="textContent"><![CDATA[Log In]]></p:property>
+            <p:property name="textFont"><![CDATA[Comic Sans MS|normal|normal|14px|none]]></p:property>
+            <p:property name="textColor"><![CDATA[#000000FF]]></p:property>
+            <p:property name="textAlign"><![CDATA[1,0]]></p:property>
+          </p:metadata>
+          <g p:name="rect" id="226435d75da74e83bae1759828aae67b" style="fill: rgb(204, 204, 204); fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+            <path style="stroke-linejoin: round;" p:name="line1" id="acc884d1777047cc86ae7c7025d3d3b3" d="M 0 0 C 41 0 82 0 123.5 0 C 124 9 124 17 123.5 26 C 82 27 41 27 0 26 C 0 17 0 9 0 0 z"/>
+          </g>
+          <text p:name="text" id="663f1cffe43e4150aadbc4e7ade311c7" style="font-family: Comic Sans MS; font-size: 14px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(40,20)">Log In</text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:PlainTextV2" p:sc="Label" id="593234596868415f96a8cd9c742938ad" transform="matrix(1,0,0,1,216.3125,213.625)">
+          <p:metadata>
+            <p:property name="disabled">
+              <![CDATA[false]]>
+            </p:property>
+            <p:property name="width">
+              <![CDATA[100,0]]>
+            </p:property>
+            <p:property name="fixedWidth">
+              <![CDATA[false]]>
+            </p:property>
+            <p:property name="label"><![CDATA[Log In]]></p:property>
+            <p:property name="textColor">
+              <![CDATA[#000000FF]]>
+            </p:property>
+            <p:property name="textFont">
+              <![CDATA['Comic Sans MS'|normal|normal|26px|none]]>
+            </p:property>
+            <p:property name="textAlign">
+              <![CDATA[0,0]]>
+            </p:property>
+          </p:metadata>
+          <rect x="0" y="0" style="fill: none; stroke: none; visibility: hidden; display: none;" p:name="bgRect" id="d04045ed8473490d8712e06a645d692d" width="0" height="0"/>
+          <text xml:space="preserve" p:name="text" id="ca5bceafbf5a46e4a81365299c49c780" style="fill: rgb(0, 0, 0); fill-opacity: 1; font-family: 'Comic Sans MS'; font-size: 26px; font-weight: normal; font-style: normal; text-decoration: none;"><tspan x="0" y="0">Log In</tspan></text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:htmlLink" id="af6e683964044670b1d1a02692a39e85" transform="matrix(1,0,0,1,527,408.0625)"><p:metadata><p:property name="textContent"><![CDATA[Can't access your account?]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|14px|none]]></p:property><p:property name="textColor"><![CDATA[#0000FFFF]]></p:property><p:property name="customStyle"><![CDATA[]]></p:property></p:metadata>
+            <foreignObject x="0" y="0" width="173" height="19" p:name="htmlObject" id="c3230ffc64984400a73acb2cd94fc46a" style="color: rgb(0, 0, 255); opacity: 1; font-family: 'Comic Sans MS'; font-size: 14px; font-weight: normal; font-style: normal; text-decoration: none;">
+                <div xmlns="http://www.w3.org/1999/xhtml" p:name="textDiv" id="7943577f16824fc098986609f52c9604" style="white-space: nowrap; text-decoration: underline; display: inline-block !important; "><div xmlns="http://www.w3.org/1999/xhtml">Can't access your account?</div></div>
+            </foreignObject>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:checkbox" p:sc="Checked Checkbox" id="dbc0d190b8de4b61a9c85061a4d5c2f8" transform="matrix(1,0,0,1,387.0625,374.9375)"><p:metadata><p:property name="checked"><![CDATA[true]]></p:property><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#FFFFFFFF]]></p:property><p:property name="strokeColor"><![CDATA[#000000FF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[Stay signed in]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|14px|none]]></p:property><p:property name="textColor"><![CDATA[#000000FF]]></p:property></p:metadata>
+           <g p:name="rect" id="f8f954ecd8504bdd8b69a5091bf872eb" style="fill: rgb(255, 255, 255); fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-opacity: 1; stroke-width: 1;">
+                <path d="m 1.2896594,14.987973 c 4.21875,-0.0313 9.1874996,-0.562496 13.4062466,-0.593746 0.44792,-4.21875 -0.604173,-8.4375002 -0.156253,-12.6562502 -4.5937436,-0.22917 -8.9374936,0.0417 -13.5312436,-0.1875 -0.0729,4.47917 0.35417,8.9583302 0.28125,13.4374962 z" p:name="cbBox" id="b18c8bfce31449e2ae723f27cb196721"/>
+                <path style="fill: none; visibility: visible;" d="m 5.0048894,5.0121168 1.88908,4.8033 3.3587596,-3.18198 c 2.28541,-4.02289 3.74045,-4.86056 5.126527,-8.83883" p:name="cbTick" id="33077ac8781d4fa1b7344094764af940"/>
+    		</g>
+    		<text p:name="text" id="e9e5c8a0a9f647409bf73360cc590a76" style="font-family: 'Comic Sans MS'; font-size: 14px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(3,1)" x="20" y="12">Stay signed in</text>
         </g></Content></Page></Pages></Document>
