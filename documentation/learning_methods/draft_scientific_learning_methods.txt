@@ -1,0 +1,9 @@
+
+
+- defining priorities
+- freetime slots
+- breaks between learning slots (0.75 learning, 0.25 relaxing)
+- personal learn type / skills: 
+    -> easier learning in the morning, afternoon, night
+    -> needs periodically exercise to practise / to fix knowledge
+    -> define personal difficulty level for each course
