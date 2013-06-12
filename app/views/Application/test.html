@@ -1,5 +1,71 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
+#{set 'moreStyles'}
+  <link href="@{'/public/stylesheets/fullcalendar.css'}" rel='stylesheet' />
+  <link href="@{'/public/stylesheets/fullcalendar.print.css'}" rel='stylesheet' media='print' />
+  <style>
+
+  body {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    }
+
+  #calendar {
+    width: 900px;
+    margin: 0 auto;
+    }
+
+  </style>     
+#{/set}
+#{set 'moreScripts'}
+  <script src="@{'/public/javascripts/fullcalendar.min.js'}"></script>
+  <script>
+
+  $(document).ready(function() {
+  
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+    
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      slotminutes: 60,
+      editable: false,
+      events: [
+  %{
+    i = 0;
+    for(entry in entryList){
+      i++; 
+  }%
+    {
+      title: '${entry.getTitle()}',
+      start: new Date(${entry.getStartDate().getYear()+1900},${entry.getStartDate().getMonth()},${entry.getStartDate().getDate()},${entry.getStartDate().getHours()},${entry.getStartDate().getMinutes()}),
+      end: new Date(${entry.getEndDate().getYear()+1900},${entry.getEndDate().getMonth()},${entry.getEndDate().getDate()},${entry.getEndDate().getHours()},${entry.getEndDate().getMinutes()}),
+      allDay: false
+    },  
+  %{
+    }
+  %}
+        {
+          title: 'Lunch',
+          start: new Date(y, m, d, 12, 0),
+          end: new Date(y, m, d, 17, 0),
+          allDay: false
+        }       
+      ]
+    });
+    
+  });
+
+  </script>   
+#{/set}
 
 
 <div class="container">
@@ -7,7 +73,11 @@
 <div class="page_header">
   <h1>Google Calendar Connector Test</h1>
 </div>
+<br><br>
 
+<div id='calendar'></div>
+
+<br><br>
 <table class="table table-hover">
   <thead>
     <tr>
