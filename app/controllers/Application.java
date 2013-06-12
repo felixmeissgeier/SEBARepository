@@ -26,7 +26,8 @@ public class Application extends Controller {
     	GoogleCalendarConnector calConnector = null;
     	String errorString = "";
     	try {
-			calConnector = new GoogleCalendarConnector(new URL("https://www.google.com/calendar/ical/felixmeissgeier%40gmail.com/private-0117a3fd278c58a3b44f04ca66702054/basic.ics"));
+			calConnector = new GoogleCalendarConnector(
+					new URL("https://www.google.com/calendar/ical/schmi.kalle%40gmail.com/private-82d40d6ada06fa5825d8910c4949e64f/basic.ics"));
 		} catch (MalformedURLException e) {
 			errorString += e.toString();
 		}

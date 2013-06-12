@@ -49,16 +49,13 @@
       start: new Date(${entry.getStartDate().getYear()+1900},${entry.getStartDate().getMonth()},${entry.getStartDate().getDate()},${entry.getStartDate().getHours()},${entry.getStartDate().getMinutes()}),
       end: new Date(${entry.getEndDate().getYear()+1900},${entry.getEndDate().getMonth()},${entry.getEndDate().getDate()},${entry.getEndDate().getHours()},${entry.getEndDate().getMinutes()}),
       allDay: false
-    },  
-  %{
+    }%{
+      if(i!=entryList.size()){
+  %}, 
+  %{   
+      }
     }
-  %}
-        {
-          title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 17, 0),
-          allDay: false
-        }       
+  %}      
       ]
     });
     
