@@ -1,0 +1,37 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+
+<div class="container">
+
+<div class="page_header">
+  <h1>Google Calendar Connector Test</h1>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th><th>Entry Title</th><th>Entry UID</th><th>Start Date</th><th>End Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  %{
+    i = 0;
+    for(entry in entryList){
+      i++; 
+  }%
+  
+  <tr><td>${i}</td><td>${entry.getTitle()}</td><td>${entry.getID()}</td><td>${entry.getStartDate().toLocaleString()}</td><td>${entry.getEndDate().toLocaleString()}</td></tr>
+  
+  %{
+    }
+  }%
+  </tbody>
+</table>
+	
+	
+	
+	<b>Errors:</b>
+	${errorString}
+
+</div>
