@@ -20,9 +20,18 @@ public class Application extends Controller {
     }
     
     
+    public static void courses() {
+    	render("Application/courses.html");
+    }
     
+    public static void settings(String category) {
+    	if(category==null){
+    		category = "personalData";
+    	}
+    	render("Application/settings.html",category);
+    }
 
-    public static void test() {
+    public static void timetable() {
     	GoogleCalendarConnector calConnector = null;
     	String errorString = "";
     	try {
@@ -39,6 +48,6 @@ public class Application extends Controller {
     		entryList = (List<CalendarEntry>) feed.getEntryList();
     	}   	
         
-    	render("Application/test.html", entryList, errorString);
+    	render("Application/timetable.html", entryList, errorString);
     }
 }

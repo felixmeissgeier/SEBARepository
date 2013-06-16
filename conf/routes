@@ -4,7 +4,9 @@
 
 # Home page
 GET     /                                       Application.index
-GET     /test                                   Application.test
+GET     /timetable                              Application.timetable
+GET     /courses                                Application.courses
+GET     /settings                               Application.settings
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

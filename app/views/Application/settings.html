@@ -1,0 +1,35 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+#{set timeTableNavActive:'' /}
+#{set myCoursesNavActive:'' /}
+%{
+  if(category==""){
+    category = "personalData";
+  }
+  personalDataNavActive = "";
+  importNavActive = "";
+  paymentNavActive = "";
+  if(category == "personalData"){
+    personalDataNavActive='active';
+  }
+  else if(category == "import"){
+    importNavActive='active';
+  }
+  else if(category == "payment"){
+    paymentNavActive='active';
+  }
+
+%}
+
+<div class="row">
+  <div class="span2">
+    <ul class="nav nav-tabs nav-stacked">
+      <li class="${personalDataNavActive}"><a href="@{Application.settings('personalData')}">Personal Data</a></li>
+      <li class="${importNavActive}"><a href="@{Application.settings('import')}">Import</a></li>
+      <li class="${paymentNavActive}"><a href="@{Application.settings('payment')}">Payment</a></li>  
+    </ul>
+  </div>
+  <div class="span1">
+
+  </div>
+</div>
