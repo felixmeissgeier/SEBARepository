@@ -1,6 +1,8 @@
 
 
-- defining priorities
+- defining priorities (high, medium, less)
+    -> one high prio task per day
+
 - freetime slots
 - breaks between learning slots (0.75 learning, 0.25 relaxing)
 - personal learn type / skills: 

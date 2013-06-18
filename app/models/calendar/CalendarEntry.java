@@ -1,16 +1,15 @@
 package models.calendar;
 
-import java.util.Date;
-
+import org.joda.time.DateTime;
 import org.simpleframework.xml.Element;
 
 public class CalendarEntry {
 
 	private String id;
-	private Date lastModified;
+	private DateTime lastModified;
 	private String title;
-	private Date startDate;
-	private Date endDate;
+	private DateTime startDate;
+	private DateTime endDate;
 	
 	
 	public String getID(){
@@ -21,11 +20,11 @@ public class CalendarEntry {
 		this.id = id;
 	}
 		
-	public Date getLastModified(){
+	public DateTime getLastModified(){
 		return lastModified;
 	}
 	
-	public void setLastModified(Date lastModified){
+	public void setLastModified(DateTime lastModified){
 		this.lastModified = lastModified;
 	}
 
@@ -37,19 +36,19 @@ public class CalendarEntry {
 		this.title = title;
 	}
 	
-	public Date getStartDate(){
+	public DateTime getStartDate(){
 		return startDate;
 	}
 	
-	public void setStartDate(Date startDate){
+	public void setStartDate(DateTime startDate){
 		this.startDate = startDate;
 	}
 	
-	public Date getEndDate(){
+	public DateTime getEndDate(){
 		return endDate;
 	}
 	
-	public void setEndDate(Date endDate){
+	public void setEndDate(DateTime endDate){
 		this.endDate = endDate;
 	}
 	
