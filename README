@@ -1,7 +1,8 @@
 Hey guys... here some notes, that maybe are good to know
 
 ### Initialize Project
-- after fetching the current repository branch you should execute the command "play eclipsify" 
+- after fetching the current repository branch you should download the dependencies by 
+  running the command "play deps --sync" and then execute the command "play eclipsify" 
   within the AcademicTimeManagementTool-directory by using command prompt
   
 ### Google Project Account
