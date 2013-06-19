@@ -1,21 +1,11 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
+import java.util.List;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.*;
-
-import models.*;
-import models.calendar.CalendarEntry;
-import models.calendar.CalendarFeed;
-import models.calendar.GoogleCalendarConnector;
-import play.mvc.Controller;
-import play.mvc.With;
 import models.timetable.PersonalizedTimetable;
 import models.timetable.TimetableEntry;
+import play.mvc.Controller;
+import play.mvc.With;
 
 @With(Secure.class)
 public class Application extends Controller {
