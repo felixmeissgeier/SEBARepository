@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
+import models.timetable.TimetableEntry;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
@@ -19,6 +21,7 @@ public class GoogleCalendarConnector implements CalendarConnector{
 	
 	private URL privateCalendarURL = null;
 	private HttpURLConnection httpConnection = null;
+	private CalendarFeed latestCalendarFeed = null;
 	
 	public GoogleCalendarConnector(URL privateCalendarURL){
 		this.privateCalendarURL = privateCalendarURL;
@@ -26,8 +29,7 @@ public class GoogleCalendarConnector implements CalendarConnector{
 	}
 
 	@Override
-	public CalendarFeed receiveCalendarFeed() {
-		CalendarFeed feed = null;
+	public void receiveCalendarFeed() {
 
 		try {
 			httpConnection = (HttpURLConnection) privateCalendarURL.openConnection();
@@ -58,20 +60,17 @@ public class GoogleCalendarConnector implements CalendarConnector{
 				e.printStackTrace();
 			}
 	        
-	        feed = new CalendarFeed(receivedGoogleCalendar);
-	        
-//	        Serializer serializer = new Persister();
-//	        try {
-//				feed = serializer.read(GoogleCalendarFeed.class, responseXML);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+	        latestCalendarFeed = new CalendarFeed(receivedGoogleCalendar);
+
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
-		return feed;
-	}	
+	}
+
+	@Override
+	public CalendarFeed getCalendarFeed() {
+		return latestCalendarFeed;
+	}
+
 }
