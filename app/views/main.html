@@ -1,31 +1,14 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.css'}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        
-        #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-        <script src="@{'/public/javascripts/jquery-1.9.1.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-        <script src="@{'/public/javascripts/jquery-ui-1.10.2.custom.min.js'}"></script>
-        #{get 'moreScripts' /}
-    </head>
-    <body>    
-      <div class="page-header">
-        <div class="container banner">
-          ATMT - Academic Time Management Tool
-        </div>        
+#{extends 'wrapper.html' /}
+#{set 'personalHeader'}
         <div class="container header-personal-info">
           <div class="pull-right">
             Hi Klaus Schmidt, nice to see you!<br>
-            <a href="@{Application.settings()}">Settings</a>&#8226;<a href="#">Log Out</a>
+            <a href="@{Application.settings()}">Settings</a>&#8226;<a href="@{Secure.logout()}">Log Out</a>
             
           </div>
         </div>
+#{/set}
+#{set 'contentHeader'}
         <div class="container">
         <form class="navbar-search pull-right">
           <input type="text" class="search-query" placeholder="Search">
@@ -35,17 +18,6 @@
           <li class="#{get 'myCoursesNavActive' /}"><a href="@{Application.courses()}">My Courses</a></li>
         </ul>   
         </div>
-      </div>
-      <div id="wrap">
-        <div class="container">      
-          #{doLayout /}
-        </div>
-      </div>
-      <div id="footer">
-        <div class="container">
-          <p class="muted credit"><a href="#">About</a>&#8226;<a href="#">Documentation</a>&#8226;<a href="#">Pricing</a>&#8226;<a href="#">Terms Of Use</a>&#8226;<a href="#">Privacy Policy</a></p>
-        </div>
-      </div>
+#{/set}
 
-    </body>
-</html>
+#{doLayout /}

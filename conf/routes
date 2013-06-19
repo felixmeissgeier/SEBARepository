@@ -2,6 +2,11 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+# Security
+GET		/signup                              	Security.signup
+POST	/createUser                            	Security.createUser
+*       /                                       module:secure
+
 # Home page
 GET     /                                       Application.index
 GET     /timetable                              Application.timetable
@@ -16,3 +21,6 @@ GET     /public/                                staticDir:public
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
+
+# Import CRUD routes
+*      /admin              						module:crud

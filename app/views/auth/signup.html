@@ -1,0 +1,67 @@
+#{extends 'auth/login.html' /}
+#{set 'pageStyles'}
+  <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/secure.css'}" />
+#{/set}
+
+#{set 'personalHeader'}
+        <div class="container header-personal-info">
+          <div class="pull-right">
+            <br>
+            <a href="#">Sign Up</a>&#8226;<a href="@{Secure.login()}">Log In</a>
+            
+          </div>
+        </div>
+#{/set}
+#{set header:'Sign Up' /}
+
+#{form @createUser()}
+    #{ifErrors}
+        <p class="error">
+            Please correct these errors.
+        </p>
+    #{/ifErrors}
+     
+    <p>
+        #{field 'name'}
+        <label>Name:</label>
+        <input type="text" name="${field.name}" 
+            value="${user?.name}" class="${field.errorClass}" />
+        #{/field}
+    </p>
+ 
+    <p>
+        #{field 'email'}
+        <label>Email:</label>
+        <input type="text" name="${field.name}" 
+            value="${user?.email}" class="${field.errorClass}" />
+        #{/field}
+    </p>
+
+     <p>
+        #{field 'password'}
+        <label>Password:</label>
+        <input type="text" name="${field.name}" 
+            value="" class="${field.errorClass}" />
+        #{/field}
+    </p>
+
+    <p>
+        #{field 'question'}
+        <label>Security question:</label>
+        <input type="text" name="${field.name}" 
+            value="${user?.question}" class="${field.errorClass}" />
+        #{/field}
+    </p>
+
+    <p>
+        #{field 'answer'}
+        <label>Answer to the security question:</label>
+        <input type="text" name="${field.name}" 
+            value="${user?.answer}" class="${field.errorClass}" />
+        #{/field}
+    </p>
+    
+    <p>
+        <input type="submit" value="Create an account" />
+    </p>
+#{/form}
