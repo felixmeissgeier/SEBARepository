@@ -17,8 +17,9 @@ public class User extends Model {
 	
 	@Required
 	public String password;
+	public String salt;
 	
-	public String securityQuestion;
-	public String securityAnswer;
+	public String question;
+	public String answer;
 	
 }

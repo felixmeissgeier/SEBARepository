@@ -14,54 +14,73 @@
 #{/set}
 #{set header:'Sign Up' /}
 
-#{form @createUser()}
+#{form @signup(), class:'form-horizontal'}
     #{ifErrors}
         <p class="error">
             Please correct these errors.
         </p>
     #{/ifErrors}
      
-    <p>
-        #{field 'name'}
-        <label>Name:</label>
-        <input type="text" name="${field.name}" 
-            value="${user?.name}" class="${field.errorClass}" />
-        #{/field}
-    </p>
- 
-    <p>
-        #{field 'email'}
-        <label>Email:</label>
-        <input type="text" name="${field.name}" 
-            value="${user?.email}" class="${field.errorClass}" />
-        #{/field}
-    </p>
-
-     <p>
-        #{field 'password'}
-        <label>Password:</label>
-        <input type="text" name="${field.name}" 
-            value="" class="${field.errorClass}" />
-        #{/field}
-    </p>
-
-    <p>
-        #{field 'question'}
-        <label>Security question:</label>
-        <input type="text" name="${field.name}" 
-            value="${user?.question}" class="${field.errorClass}" />
-        #{/field}
-    </p>
-
-    <p>
-        #{field 'answer'}
-        <label>Answer to the security question:</label>
-        <input type="text" name="${field.name}" 
-            value="${user?.answer}" class="${field.errorClass}" />
-        #{/field}
-    </p>
+	#{field 'name'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label">Name</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}" value="${user?.name}">
+	    <span class="help-inline">#{error 'name' /}</span>
+	  </div>
+	</div>
+	#{/field}
+	#{field 'email'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label required">Email</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}" value="${user?.email}">
+	    <span class="help-inline">#{error 'email' /}</span>
+	  </div>
+	</div>
+	#{/field}
+	#{field 'password'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label required">Password</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}">
+	    <span class="help-inline">#{error 'password' /}</span>
+	  </div>
+	</div>
+	#{/field}
+	#{field 'question'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label">Security question</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}" value="${user?.question}">
+	    <span class="help-inline">#{error 'question' /}</span>
+	  </div>
+	</div>
+	#{/field}
+	#{field 'answer'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label">Answer to the question</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}" value="${user?.answer}">
+	    <span class="help-inline">#{error 'answer' /}</span>
+	  </div>
+	</div>
+	#{/field}
     
-    <p>
-        <input type="submit" value="Create an account" />
-    </p>
+    
+	#{field 'captcha'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label required">Security check ("123")</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}">
+	    <span class="help-inline">#{error 'captcha' /}</span>
+	  </div>
+	</div>
+	#{/field}
+    
+	<div class="control-group">
+	  <div class="controls">
+	    <input type="submit" value="Create an account">
+	  </div>
+	</div>
 #{/form}

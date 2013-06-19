@@ -86,3 +86,17 @@ html, body {
     color: #fff;
     padding: 5px;
 }
+
+input.hasError {
+	border: 2px solid #d01000;
+}
+
+label.required:before {
+	content: "* ";
+	color: #d01000;
+	font-weight: bold;
+}
+
+.login-checkbox {
+	padding-top: 17px;
+}

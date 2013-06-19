@@ -3,8 +3,7 @@
 # ~~~~
 
 # Security
-GET		/signup                              	Security.signup
-POST	/createUser                            	Security.createUser
+*		/signup                              	Security.signup
 *       /                                       module:secure
 
 # Home page

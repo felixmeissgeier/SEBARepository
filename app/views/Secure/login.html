@@ -1,0 +1,46 @@
+#{extends 'Secure/layout.html' /}
+
+<div id="login">
+	
+	<h1>&{'secure.title'}</h1>
+		
+	#{form @authenticate(), class:'form-horizontal'}
+		
+		#{if flash.error}
+			<p class="error">
+				&{flash.error}
+			</p>
+		#{/if}
+		#{if flash.success}
+			<p class="success">
+				&{flash.success}
+			</p>
+		#{/if}
+	
+		<div class="control-group">
+		  <label class="control-label">Email</label>
+		  <div class="controls">
+		    <input type="text" name="username" id="username" value="${flash.username}">
+		  </div>
+		</div>
+		<div class="control-group">
+		  <label class="control-label">Password</label>
+		  <div class="controls">
+		    <input type="text" name="password" id="password" value="">
+		  </div>
+		</div>
+	
+		<div class="control-group">
+		  <label class="control-label" for="remember">&{'secure.remember'}</label>
+		  <div class="controls">
+			  <input type="checkbox" class="login-checkbox" name="remember" id="remember" value="true" ${flash.remember ? 'checked="true"' : ''} />
+		  </div>
+		</div>
+
+		<div class="control-group">
+		  <div class="controls">
+		    <input type="submit" id="signin" value="&{'secure.signin'}" />
+		  </div>
+		</div>
+	#{/form}
+</div>
