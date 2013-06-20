@@ -1,6 +1,15 @@
 package controllers;
 
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import models.User;
+
+import org.apache.commons.lang.StringUtils;
+
+import play.cache.Cache;
+import play.libs.Codec;
 import dto.UserDTO;
 
 public class Security extends Secure.Security {
@@ -12,8 +21,11 @@ public class Security extends Secure.Security {
 		
 		User user = User.find("byEmail", email).first();
 		if (user != null) {
-			// TODO: PZ: use hashes + salt!
-			if (user.password.equals(password)) {
+			String userSalt = user.salt;
+			String userPasswordHash = user.password;
+			String submittedPasswordHash = getHash(password, userSalt);
+			
+			if (userPasswordHash.equals(submittedPasswordHash)) {
 				return true;
 			}
 		}
@@ -21,31 +33,25 @@ public class Security extends Secure.Security {
 		return false;
 	}
 	
-    public static void signup(String name, String email, String password, String question, String answer, String captcha) {
+    public static void signup(String name, String email, String password, String question, String answer, String captchaId, String captcha) {
 
-    	if (areAllEmpty(name, email, password, question, answer, captcha)) {
+    	if (areAllEmpty(name, email, password, question, answer, captchaId, captcha)) {
     		// This is a new request to the page;
     		// Showing the new sign up page
-        	render("auth/signup.html");
+
+    		captchaId = Codec.UUID();
+        	render("auth/signup.html", captchaId);
     	}
     	else {
-    		// Some data was submitted;
+    		// The form with data has been submitted;
     		// Validating it
     		
-	    	// TODO: validation!
-	    	// check for duplicates as well
-	    	
 	    	validation.required(email);
 	    	validation.required(password);
 	    	validation.required(captcha);
 	    	validation.email(email);
 	    	
-	    	if (captcha != null) {
-	    		if (!captcha.equals("123")) {
-	    			// TODO: PZ: move consts to resources
-	    			validation.addError("captcha", "validation.captcha");
-	    		}
-	    	}
+	    	validation.equals(StringUtils.lowerCase(captcha), StringUtils.lowerCase((String)Cache.get(captchaId))).message("validation.captcha");	    	
 	    	
 	    	if (question != null && !question.isEmpty()) {
 	    		validation.required(answer);
@@ -61,15 +67,18 @@ public class Security extends Secure.Security {
 	    	if (validation.hasErrors()) {
 	    		UserDTO userDto = new UserDTO(name, email, password, question, answer);
 	    		renderArgs.put("user", userDto);
-	        	render("auth/signup.html");
+	    		captchaId = Codec.UUID();
+	        	render("auth/signup.html", captchaId);
 	    	}
 	    	else {
+	    		String salt = "";
 		    	User user = new User();
 		    	user.name = name;
 		    	user.email = email;
 		    	user.question = question;
 		    	user.answer = answer;
-		    	user.password = password;
+		    	user.salt = salt; 
+		    	user.password = getHash(password, salt);
 		    	user.save();
 		
 		    	// Authenticating the user in the system
@@ -94,4 +103,29 @@ public class Security extends Secure.Security {
     	
     	return true;
     }
+    
+    private static String getHash(String password, String salt) {
+    	String saltedPassword = "" + password + salt;
+    	return getSHA1(saltedPassword);
+    }
+    
+    private static String getSHA1(String s) {
+    	try {
+    		MessageDigest md = MessageDigest.getInstance("SHA-1");
+    		return byteArrayToHexString(md.digest(s.getBytes(Charset.forName("UTF-8"))));
+        }
+        catch(NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    	
+    	throw new RuntimeException("Unable to calculate hash for the password");
+    }
+    
+	public static String byteArrayToHexString(byte[] b) {
+		StringBuilder result = new StringBuilder();
+		for (int i = 0; i < b.length; i++) {
+			result.append(Integer.toString(b[i] + 0x100, 16).substring(1));
+		}
+		return result.toString();
+	}
 }

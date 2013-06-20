@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.timetable.PersonalizedTimetable;
 import models.timetable.TimetableEntry;
+import play.libs.Images;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -13,7 +14,6 @@ public class Application extends Controller {
     public static void index() {
         render();
     }
-    
     
     public static void courses() {
     	render("Application/courses.html");

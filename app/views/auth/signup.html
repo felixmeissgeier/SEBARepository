@@ -67,10 +67,17 @@
 	</div>
 	#{/field}
     
+	<div class="control-group">
+	  <label class="control-label"></label>
+	  <div class="controls">
+	  	<img src="@{Captcha.captcha(captchaId)}" />
+	  	<input type="hidden" name="captchaId" value="${captchaId}" />
+	  </div>
+	</div>
     
 	#{field 'captcha'}
 	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
-	  <label class="control-label required">Security check ("123")</label>
+	  <label class="control-label required">Security check</label>
 	  <div class="controls">
 	    <input type="text" name="${field.name}">
 	    <span class="help-inline">#{error 'captcha' /}</span>

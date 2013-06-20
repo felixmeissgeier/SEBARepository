@@ -2,18 +2,25 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+## Pages available without the login
+ 
+# Captcha
+GET     /captcha                                Captcha.captcha
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
 # Security
 *		/signup                              	Security.signup
 *       /                                       module:secure
+
+## Pages available after the login
 
 # Home page
 GET     /                                       Application.index
 GET     /timetable                              Application.timetable
 GET     /courses                                Application.courses
 GET     /settings                               Application.settings
-
-# Ignore favicon requests
-GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
