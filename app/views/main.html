@@ -1,18 +1,26 @@
 #{extends 'wrapper.html' /}
 #{set 'personalHeader'}
         <div class="container header-personal-info">
-          <div class="pull-right">
-            Hi Klaus Schmidt, nice to see you!<br>
-            <a href="@{Application.settings()}">Settings</a>&#8226;<a href="@{Secure.logout()}">Log Out</a>
-            
+          <div class="pull-right right-header-box">
+          	<div class="userpic">
+          		<div style="border: 1px solid #b02020; background-color: #f8f4f4; width: 100px; height: 100px;"></div>
+          	</div>
+          	<div>
+	            Hi Klaus Schmidt, nice to see you!<br>
+	            <div class="right-header-link-box">
+	            	<a href="@{Application.settings()}">Settings</a><span class="menu-link-separator">&#8226;</span><a href="@{Secure.logout()}">Log Out</a>
+	            </div>
+	        </div>
           </div>
         </div>
 #{/set}
 #{set 'contentHeader'}
         <div class="container">
-        <form class="navbar-search pull-right">
-          <input type="text" class="search-query" placeholder="Search">
-        </form>
+        <div class="pull-right right-header-box">
+	        <form class="navbar-search">
+	          <input type="text" class="search-query" placeholder="Search">
+	        </form>
+	    </div>
         <ul class="nav nav-pills">
           <li class="#{get 'timeTableNavActive' /}"><a href="@{Application.timetable()}">Timetable</a></li>
           <li class="#{get 'myCoursesNavActive' /}"><a href="@{Application.courses()}">My Courses</a></li>

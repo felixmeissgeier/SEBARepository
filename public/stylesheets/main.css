@@ -19,12 +19,12 @@ body {
   padding-top: 10px;
 }
 
-.page-header .banner{
+.page-header .banner {
 	font-size: 20px;
 	font-weight:bold;
 	padding-top: 20px;
 	padding-bottom: 20px;
-  
+	margin-bottom: -115px;
 }
 
 .page-header .header-personal-info{
@@ -69,4 +69,35 @@ body {
     padding-left: 20px;
     padding-right: 20px;
   }
+}
+
+.right-header-box {
+	width: 320px;
+}
+
+.right-header-box a {
+	margin: 0 !important;
+}
+
+.menu-link-separator {
+	padding: 0 7px;
+}
+
+.right-header-box .userpic {
+	float: left;
+	width: 100px;
+	margin-right: 15px;
+	margin-top: 3px;
+}
+
+.right-header-box .navbar-search {
+	margin: 0 10px 0 115px;
+}
+
+.right-header-box .navbar-search INPUT {
+	width: 98% !important;
+}
+
+.right-header-link-box {
+	margin-top: 12px;
 }

@@ -7,7 +7,6 @@
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
         
         #{get 'pageStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <script src="@{'/public/javascripts/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         <script src="@{'/public/javascripts/jquery-1.9.1.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         <script src="@{'/public/javascripts/jquery-ui-1.10.2.custom.min.js'}"></script>
@@ -16,7 +15,7 @@
     <body>    
       <div class="page-header">
         <div class="container banner">
-          ATMT - Academic Time Management Tool
+        	<a href="/"><img src="/public/images/logo.png" border="1" width="225" height="106"></a>
         </div>
         #{get 'personalHeader' /}
         #{get 'contentHeader' /}
