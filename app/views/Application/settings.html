@@ -1,34 +1,19 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set header:'Settings' /}
 #{set timeTableNavActive:'' /}
 #{set myCoursesNavActive:'' /}
-#{set header:'Settings' /}
-%{
-
-  personalDataNavActive = "";
-  importNavActive = "";
-  paymentNavActive = "";
-  if(category == "personalData"){
-    personalDataNavActive='active';
-  }
-  else if(category == "import"){
-    importNavActive='active';
-  }
-  else if(category == "payment"){
-    paymentNavActive='active';
-  }
-
-%}
 
 <div class="row">
-  <div class="span2">
-    <ul class="nav nav-tabs nav-stacked">
-      <li class="${personalDataNavActive}"><a href="@{Application.settings('personalData')}">Personal Data</a></li>
-      <li class="${importNavActive}"><a href="@{Application.settings('import')}">Import</a></li>
-      <li class="${paymentNavActive}"><a href="@{Application.settings('payment')}">Payment</a></li>  
-    </ul>
-  </div>
-  <div class="span1">
-
-  </div>
+	<div class="span3">
+		<ul class="nav nav-tabs nav-stacked nav-side-left">
+			<li class="${personalDataNavActive}"><a href="@{Application.settings('personalData')}">Personal Data</a></li>
+			<li class="${importNavActive}"><a href="@{Application.settings('import')}">Import</a></li>
+			<li class="${paymentNavActive}"><a href="@{Application.settings('payment')}">Payment</a></li>  
+		</ul>
+	</div>
+	<div class="span"></div>
+	<div class="span"></div>
+	<div class="settings-content">
+		#{doLayout /}
+	</div>
 </div>

@@ -24,14 +24,20 @@ body {
 	font-weight:bold;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	margin-bottom: -115px;
+	/* margin-bottom: -115px; */
 }
 
-.page-header .header-personal-info{
+.page-header .header-login {
   padding-bottom: 20px;
+  margin-top: -60px;
 }
 
-.page-header .header-personal-info a{
+.page-header .header-personal-info {
+  padding-bottom: 20px;
+  margin-top: -115px;
+}
+
+.page-header .header-personal-info a, .page-header .header-login a {
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -91,13 +97,18 @@ body {
 }
 
 .right-header-box .navbar-search {
-	margin: 0 10px 0 115px;
+	margin: 0 10px 0 0px;
+	width: 100%;
 }
 
 .right-header-box .navbar-search INPUT {
-	width: 98% !important;
+	width: 90% !important;
 }
 
 .right-header-link-box {
 	margin-top: 12px;
+}
+
+.nav-side-left li.active a {
+	font-weight: bold;
 }

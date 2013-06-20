@@ -10,6 +10,10 @@ import play.mvc.With;
 
 @With(Secure.class)
 public class Application extends Controller {
+	
+	private static final String SETTINGS_PERSONAL_DATA = "personalData";
+	private static final String SETTINGS_IMPORT = "import";
+	private static final String SETTINGS_PAYMENT = "payment";
 
     public static void index() {
         render();
@@ -20,10 +24,15 @@ public class Application extends Controller {
     }
     
     public static void settings(String category) {
-    	if(category==null){
-    		category = "personalData";
+    	if (SETTINGS_IMPORT.equals(category)) {
+        	render("Application/import.html");
     	}
-    	render("Application/settings.html",category);
+    	else if (SETTINGS_PAYMENT.equals(category)) {
+        	render("Application/payment.html");
+    	}
+    	else {
+        	render("Application/personaldata.html");
+    	}
     }
 
     public static void timetable() {
