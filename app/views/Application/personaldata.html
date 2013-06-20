@@ -4,4 +4,97 @@
 %}
 #{extends 'Application/settings.html' /}
 
-Pesonal settings placeholder
+Personal Data placeholder.
+
+<!-- 
+
+#{form @savePersonalData(), class:'form-horizontal'}
+    #{ifErrors}
+        <p class="error">
+            Please correct these errors.
+        </p>
+    #{/ifErrors}
+    
+    <div class="settings-group">
+    	<h4>Personal settings</h4>
+		#{field 'name'}
+		<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+		  <label class="control-label">Name1</label>
+		  <div class="controls">
+		    <input type="text" name="${field.name}" value="${user?.name}">
+		    <span class="help-inline">#{error 'name' /}</span>
+		  </div>
+		</div>
+		#{/field}
+	     
+		#{field 'name'}
+		<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+		  <label class="control-label">Email settings long label</label>
+		  <div class="controls">
+		    <input type="text" name="${field.name}" value="${user?.name}">
+		    <span class="help-inline">#{error 'name' /}</span>
+		  </div>
+		</div>
+		#{/field}
+	</div>
+	
+    <div class="b">
+	#{field 'name'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label">Name3</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}" value="${user?.name}">
+	    <span class="help-inline">#{error 'name' /}</span>
+	  </div>
+	</div>
+	#{/field}
+     
+	#{field 'name'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label">Name4</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}" value="${user?.name}">
+	    <span class="help-inline">#{error 'name' /}</span>
+	  </div>
+	</div>
+	#{/field}
+	</div>
+
+	#{field 'email'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label required">Email</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}" value="${user?.email}">
+	    <span class="help-inline">#{error 'email' /}</span>
+	  </div>
+	</div>
+	#{/field}
+
+	#{field 'question'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label">Security question</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}" value="${user?.question}">
+	    <span class="help-inline">#{error 'question' /}</span>
+	  </div>
+	</div>
+	#{/field}
+
+	#{field 'answer'}
+	<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+	  <label class="control-label">Answer to the question</label>
+	  <div class="controls">
+	    <input type="text" name="${field.name}" value="${user?.answer}">
+	    <span class="help-inline">#{error 'answer' /}</span>
+	  </div>
+	</div>
+	#{/field}
+
+	<div class="control-group">
+	  <div class="controls">
+	    <input type="submit" value="   Save   ">
+	  </div>
+	</div>
+#{/form}
+</div>
+-->

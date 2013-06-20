@@ -112,3 +112,14 @@ body {
 .nav-side-left li.active a {
 	font-weight: bold;
 }
+
+.settings-content {
+	padding-left: 190px;
+	afloat: left;
+}
+
+.a, .b, .settings-group {
+	width: 400px;
+	float: left;
+	background-color: #d0d0d0;
+}

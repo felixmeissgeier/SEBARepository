@@ -2,18 +2,19 @@ package controllers;
 
 import java.util.List;
 
+import models.User;
 import models.timetable.PersonalizedTimetable;
 import models.timetable.TimetableEntry;
-import play.libs.Images;
 import play.mvc.Controller;
 import play.mvc.With;
+import dto.UserDTO;
 
 @With(Secure.class)
 public class Application extends Controller {
 	
-	private static final String SETTINGS_PERSONAL_DATA = "personalData";
-	private static final String SETTINGS_IMPORT = "import";
-	private static final String SETTINGS_PAYMENT = "payment";
+	public static final String SETTINGS_PERSONAL_DATA = "personalData";
+	public static final String SETTINGS_IMPORT = "import";
+	public static final String SETTINGS_PAYMENT = "payment";
 
     public static void index() {
         render();
@@ -31,8 +32,16 @@ public class Application extends Controller {
         	render("Application/payment.html");
     	}
     	else {
+    		String currentUser = session.get(Security.SESSION_USERNAME);
+    		User user = User.find("byEmail", currentUser).first();
+    		UserDTO userDto = new UserDTO(user);
+    		renderArgs.put("user", userDto);
         	render("Application/personaldata.html");
     	}
+    }
+    
+    public static void savePersonalData() {
+    	redirect("Application.settings", SETTINGS_PERSONAL_DATA);
     }
 
     public static void timetable() {

@@ -14,6 +14,8 @@ import dto.UserDTO;
 
 public class Security extends Secure.Security {
 	
+	public static final String SESSION_USERNAME = "username";
+	
 	static boolean authenticate(String email, String password) {
 		if ("admin".equals(email) && "admin".equals(password)) {
 			return true;
@@ -82,7 +84,7 @@ public class Security extends Secure.Security {
 		    	user.save();
 		
 		    	// Authenticating the user in the system
-		    	session.put("username", email);
+		    	session.put(SESSION_USERNAME, email);
 		    	
 		    	// Redirecting to the start page
 		    	redirect("Application.index");

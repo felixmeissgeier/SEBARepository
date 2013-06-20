@@ -1,7 +1,6 @@
 package dto;
 
-import play.data.validation.Email;
-import play.data.validation.Required;
+import models.User;
 
 /**
  * DTO for a user object used to transfer the 
@@ -13,18 +12,19 @@ public class UserDTO {
 	
 	private String name;
 	private String email;
-	private String password;
 	private String question;
 	private String answer;
 	
 	public UserDTO(String name, String email, String password, String question,
 			String answer) {
-		super();
 		this.name = name;
 		this.email = email;
-		this.password = password;
 		this.question = question;
 		this.answer = answer;
+	}
+	
+	public UserDTO(User user) {
+		this(user.name, user.email, user.password, user.question, user.answer);
 	}
 
 	public String getName() {
@@ -41,14 +41,6 @@ public class UserDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getQuestion() {
