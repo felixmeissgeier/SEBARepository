@@ -5,12 +5,13 @@
 #{set header:'Course overview' /}
 
 
-<table class="table table-hover">
+<table class="table table-hover tablesorter" id="courseList">
   <thead>
     <tr>
       <th>#</th>
-      <th>Course title</th>
-      <th>Course remarks</th>
+      <th>Course</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -22,12 +23,20 @@
   
   <tr>
   	<td>${i}</td>
-  	<td>${course.getTitle()}</td>
-  	<td>${course.getRemarks()}</td>
+  	<td><a href="@{Application.course(course.id)}">${course.title}</a></td>
+  	<td>${course.hint}</td>
+  	<td><a href="#">manage</a></td>
   </tr>
   
   %{
     }
   }%
   </tbody>
-</table>	
+</table>
+<script language="JavaScript">
+	$(document).ready(function() {
+	  $(function() {
+	    $("table#courseList").tablesorter({ sortList: [[1,0]], headers: { 2: { sorter: false}, 3: {sorter: false} } });
+	  });
+	});
+</script>

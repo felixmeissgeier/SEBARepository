@@ -1,0 +1,55 @@
+#{extends "main.html" /}
+#{set title: "${course.title}" /}
+#{set timeTableNavActive: "" /}
+#{set myCoursesNavActive: "active" /}
+#{set header: "${course.title}" /}
+
+<table class="course-details">
+	<tr>
+		<td width="50%">
+			<div class="course-desc-block">
+				<div class="subheader">Notifications</div>
+				<ul>
+					<li>Exercise 2 deadline tomorrow</li>
+					<li>Lecture overview next Monday</li>
+				</ul>
+			</div>
+			<div class="course-desc-block">
+				<div class="subheader">Status</div>
+				You are doing well to prepare for your exam.
+			</div>
+			<div class="course-desc-block">
+				<div class="subheader">Details</div>
+				<div>Spent time so far: 50h (3h/week)</div>
+				<div>Time planned to spend: 60h (3h/week)</div>
+				<div>Overall difficulty factor: 1.2</div>
+				<div>Personal difficulty factor: 0.9</div>
+				<div>Community course rating: ***** (4.6 of 5)</div>
+			</div>
+		</td>
+		<td width="50%">
+			<div class="course-desc-block">
+				<div class="subheader">Course material</div>
+				<div><a href="#">Lecture slides</a></div>
+				<div><a href="#">Exercises</a></div>
+				<div><a href="#">Wiki</a></div>
+			</div>
+			<div class="course-desc-block">
+				<div class="subheader">Further reading</div>
+				<div><a href="#">Web Site Design Patterns</a></div>
+				<div><a href="#">Business model in a nutshell</a></div>
+			</div>
+			<div class="course-desc-block">
+				<div class="subheader">Rate the subject</div>
+				<div class="slider-row"><div class="slider-label">Difficulty: </div><div id="slider-difficulty" data-slider-min="1" data-slider-max="5" data-slider-step="1" data-slider-value="4"></div></div>
+				<div class="slider-row"><div class="slider-label">Interest: </div><div id="slider-interest" data-slider-min="1" data-slider-max="5" data-slider-step="1" data-slider-value="5"></div></div>
+			</div>
+		</td>
+	</tr>
+</table>
+<script>
+  $(function() {
+    $("#slider-difficulty").slider();
+    $("#slider-interest").slider();
+  });
+</script>

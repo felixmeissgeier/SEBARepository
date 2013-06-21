@@ -34,6 +34,13 @@ public class Application extends BaseController {
     	render("Application/courses.html", coursesList);
     }
     
+    public static void course(Long id) {
+    	Course course = Course.findById(id);
+    	CourseDTO courseDTO = new CourseDTO(course);
+		renderArgs.put("course", courseDTO);
+    	render("Application/course-details.html");
+    }
+
     public static void settings(String category) {
     	if (SETTINGS_IMPORT.equals(category)) {
         	render("Application/import.html");

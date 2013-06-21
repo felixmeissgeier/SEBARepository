@@ -20,6 +20,7 @@ GET     /favicon.ico                            404
 GET     /                                       Application.index
 GET     /timetable                              Application.timetable
 GET     /courses                                Application.courses
+GET     /courses/{id}                           Application.course
 GET     /settings                               Application.settings
 
 # Map static resources from the /app/public folder to the /public path

@@ -1,16 +1,20 @@
 package dto;
 
+import java.util.Random;
+
 import models.Course;
 
 import org.joda.time.DateTime;
 
 public class CourseDTO {
 
+	private Long id;
 	private String title;
 	private String remarks;
 	private double difficulty;
 	private double priority;
 	private DateTime deadline;
+	private String hint;
 
 	private boolean periodicExercisesNeeded;
 	private double exerciseHoursPerWeek;
@@ -20,8 +24,9 @@ public class CourseDTO {
 	public CourseDTO() {
 	}
 
-	public CourseDTO(String title, String remarks, double difficulty,
+	public CourseDTO(Long id, String title, String remarks, double difficulty,
 			double priority, DateTime deadline, CourseMaterialDTO courseMaterial) {
+		this.id = id;
 		this.title = title;
 		this.remarks = remarks;
 		this.difficulty = difficulty;
@@ -31,9 +36,17 @@ public class CourseDTO {
 	}
 
 	public CourseDTO(Course cource) {
-		this(cource.title, cource.remarks, cource.difficulty, cource.priority,
+		this(cource.id, cource.title, cource.remarks, cource.difficulty, cource.priority,
 				new DateTime(cource.deadline.getTime()), new CourseMaterialDTO(
 						cource.courseMaterial));
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -98,6 +111,32 @@ public class CourseDTO {
 
 	public void setCourseMaterial(CourseMaterialDTO courseMaterial) {
 		this.courseMaterial = courseMaterial;
+	}
+	
+	public String getHint() {
+		if (hint != null) {
+			return hint;
+		}
+		
+		switch (new Random().nextInt(10)) {
+		case 0:
+			return "2nd exercise deadline tomorrow";
+		case 1:
+			return "You are one week ahead";
+		case 2:
+			return "[!] 3 study slots missed";
+		case 3:
+			return "Midterm exam in 2 weeks";
+		case 4:
+			return "Spend more time on this";
+		}
+		
+		// Empty placeholder
+		return new String(new char[25]).replaceAll("\0", "\u00A0");
+	}
+	
+	public void setHint(String hint) {
+		this.hint = hint;
 	}
 
 }

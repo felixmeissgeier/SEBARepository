@@ -113,13 +113,36 @@ body {
 	font-weight: bold;
 }
 
-.settings-content {
-	padding-left: 190px;
-	afloat: left;
+.slider-label {
+	width: 100px;
+	float: left;
 }
 
-.a, .b, .settings-group {
-	width: 400px;
-	float: left;
-	background-color: #d0d0d0;
+#slider-difficulty, #slider-interest {
+
+}
+.slider-selection {
+	background: #8ab1d2 !important;
+}
+.slider-handle {
+	background: #678baa !important;
+}
+
+.course-desc-block {
+	margin: 0 10px 30px 0;
+}
+
+.course-desc-block .subheader {
+	font-weight: bold;
+	font-size: larger;
+	margin: 0 0 10px 0;
+}
+
+.slider-row {
+	margin-bottom: 10px;
+}
+
+.course-details {
+	width: 100%;
+	margin: 25px 0;
 }
