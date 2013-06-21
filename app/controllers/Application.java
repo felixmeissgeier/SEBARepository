@@ -20,7 +20,7 @@ public class Application extends BaseController {
 	public static final String SETTINGS_PAYMENT = "payment";
 
     public static void index() {
-        render();
+    	redirect("Application.timetable");
     }
     
     public static void courses() {
