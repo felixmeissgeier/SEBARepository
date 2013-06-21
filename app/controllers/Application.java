@@ -13,7 +13,7 @@ import dto.CourseDTO;
 import dto.UserDTO;
 
 @With(Secure.class)
-public class Application extends Controller {
+public class Application extends BaseController {
 	
 	public static final String SETTINGS_PERSONAL_DATA = "personalData";
 	public static final String SETTINGS_IMPORT = "import";
@@ -42,7 +42,7 @@ public class Application extends Controller {
         	render("Application/payment.html");
     	}
     	else {
-    		String currentUser = session.get(Security.SESSION_USERNAME);
+    		String currentUser = session.get(Security.SESSION_USERID);
     		User user = User.find("byEmail", currentUser).first();
     		UserDTO userDto = new UserDTO(user);
     		renderArgs.put("user", userDto);

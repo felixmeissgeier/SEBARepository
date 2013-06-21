@@ -14,17 +14,19 @@ public class UserDTO {
 	private String email;
 	private String question;
 	private String answer;
+	private String userpic;
 	
 	public UserDTO(String name, String email, String password, String question,
-			String answer) {
+			String answer, String userpic) {
 		this.name = name;
 		this.email = email;
 		this.question = question;
 		this.answer = answer;
+		this.userpic = userpic;
 	}
 	
 	public UserDTO(User user) {
-		this(user.name, user.email, user.password, user.question, user.answer);
+		this(user.name, user.email, user.password, user.question, user.answer, user.userpic);
 	}
 
 	public String getName() {
@@ -57,6 +59,14 @@ public class UserDTO {
 
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+
+	public String getUserpic() {
+		return userpic;
+	}
+
+	public void setUserpic(String userpic) {
+		this.userpic = userpic;
 	}
 
 }

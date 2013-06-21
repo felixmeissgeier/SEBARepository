@@ -1,3 +1,37 @@
+# Users
+
+User(u1):
+  name: Klaus Schmidt
+  email: ks@ks.com
+  password: "ff750787d1cf6e618122a796cb2556f59ccdeaf0" # "pwd"
+  salt: "abc"
+  
+  question: "First pet's name"
+  answer: "Queequeg"
+
+  sharedTimetable: false
+
+  deadlineEmail: true
+  learnSlotEmail: false
+  userpic: 01.jpg
+
+User(u2):
+  name: Klaus 2
+  email: k2@k2.com
+  password: "5ba5167eab3cb2ed2b679c3971045d462b8a169a" # "pwd"
+  salt: "abd"
+  
+  question: "Second pet's name"
+  answer: "Queequeg 2"
+
+  sharedTimetable: true
+
+  deadlineEmail: false
+  learnSlotEmail: false
+  userpic: 02.jpg
+
+# Course Materials
+
 CourseMaterial(easycourse):
   scriptPagesDone: 20
   scriptPagesToDo: 150
@@ -9,6 +43,8 @@ CourseMaterial(hardcourse):
   scriptPagesToDo: 380
   workloadHoursExpected: 10.0
   considerExpectedHours: true
+
+# Courses
 
 Course(c1):
   title: "Course A"
@@ -27,5 +63,3 @@ Course(c2):
   deadline: "2013-09-01 12:00"
   periodicExercisesNeeded: true
   courseMaterial: hardcourse
-
- 

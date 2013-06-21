@@ -3,6 +3,7 @@ package controllers;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 import models.User;
 
@@ -14,11 +15,12 @@ import dto.UserDTO;
 
 public class Security extends Secure.Security {
 	
-	public static final String SESSION_USERNAME = "username";
+	public static final String SESSION_USERID = "username";
 	
 	static boolean authenticate(String email, String password) {
-		if ("admin".equals(email) && "admin".equals(password)) {
-			return true;
+		
+		if (email == null || email.isEmpty()) {
+			return false;
 		}
 		
 		User user = User.find("byEmail", email).first();
@@ -67,13 +69,14 @@ public class Security extends Secure.Security {
 	    	}
 	    	
 	    	if (validation.hasErrors()) {
-	    		UserDTO userDto = new UserDTO(name, email, password, question, answer);
+	    		String defaultUserpic = "default.jpg";
+	    		UserDTO userDto = new UserDTO(name, email, password, question, answer, defaultUserpic);
 	    		renderArgs.put("user", userDto);
 	    		captchaId = Codec.UUID();
 	        	render("auth/signup.html", captchaId);
 	    	}
 	    	else {
-	    		String salt = "";
+	    		String salt = generateSalt();
 		    	User user = new User();
 		    	user.name = name;
 		    	user.email = email;
@@ -84,7 +87,7 @@ public class Security extends Secure.Security {
 		    	user.save();
 		
 		    	// Authenticating the user in the system
-		    	session.put(SESSION_USERNAME, email);
+		    	session.put(SESSION_USERID, email);
 		    	
 		    	// Redirecting to the start page
 		    	redirect("Application.index");
@@ -126,8 +129,17 @@ public class Security extends Secure.Security {
 	public static String byteArrayToHexString(byte[] b) {
 		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < b.length; i++) {
-			result.append(Integer.toString(b[i] + 0x100, 16).substring(1));
+			result.append(Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1));
 		}
 		return result.toString();
+	}
+	
+	public static String generateSalt() {
+		// 6 bytes of salt
+		int saltSize = 6;
+		
+		byte[] b = new byte[saltSize];
+		new Random().nextBytes(b);
+		return byteArrayToHexString(b);
 	}
 }

@@ -3,10 +3,13 @@
         <div class="container header-personal-info">
           <div class="pull-right right-header-box">
           	<div class="userpic">
-          		<div style="border: 1px solid #b02020; background-color: #f8f4f4; width: 100px; height: 100px;"></div>
+          		<div style="border: 1px solid #404040; background-color: #f0f0f0; width: 100px; height: 100px;">
+          			<img src="@{'/public/userpic'}/${user.userpic}" width="100" height="100" border="0" alt="" />
+          		</div>
+          		
           	</div>
           	<div>
-	            Hi Klaus Schmidt, nice to see you!<br>
+	            Hi ${user.name}, <br />nice to see you!<br>
 	            <div class="right-header-link-box">
 	            	<a href="@{Application.settings()}">Settings</a><span class="menu-link-separator">&#8226;</span><a href="@{Secure.logout()}">Log Out</a>
 	            </div>

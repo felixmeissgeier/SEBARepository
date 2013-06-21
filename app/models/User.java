@@ -2,7 +2,6 @@ package models;
 
 import javax.persistence.Entity;
 
-import models.subtypes.UserEmailPeriod;
 import play.data.validation.Email;
 import play.data.validation.Required;
 import play.db.jpa.Model;
@@ -15,6 +14,7 @@ public class User extends Model {
 	@Email
 	@Required
 	public String email;
+	public String userpic;
 	
 	@Required
 	public String password;
@@ -27,7 +27,6 @@ public class User extends Model {
 	
 	public boolean deadlineEmail;
 	public boolean learnSlotEmail;
-	public UserEmailPeriod emailPeriod;
 	
 }
 
