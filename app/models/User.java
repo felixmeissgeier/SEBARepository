@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 
 import play.data.validation.Email;
 import play.data.validation.Required;
+import play.data.validation.Unique;
 import play.db.jpa.Model;
 
 @Entity
@@ -13,6 +14,7 @@ public class User extends Model {
 	
 	@Email
 	@Required
+	@Unique
 	public String email;
 	public String userpic;
 	
