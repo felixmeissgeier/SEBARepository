@@ -8,8 +8,10 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 
+import dto.CourseDTO;
+import dto.CourseMaterialDTO;
+
 import models.Course;
-import models.CourseMaterial;
 import models.CustomerPreferences;
 import models.DateUtility;
 import models.TimeInterval;
@@ -22,8 +24,8 @@ public class PersonalizedTimetable {
 	private TimeSlotScheduler timeSlotScheduler = null;
 	
 	public PersonalizedTimetable(){
-		Course agtCourse = new Course("Algorithmic Game Theory","very tough lecture..",1.0,1.0,new DateTime().plusMonths(2),new CourseMaterial(200, 40));
-		List<Course> courses = new ArrayList<Course>();
+		CourseDTO agtCourse = new CourseDTO("Algorithmic Game Theory","very tough lecture..",1.0,1.0,new DateTime().plusMonths(2),new CourseMaterialDTO(200, 40));
+		List<CourseDTO> courses = new ArrayList<CourseDTO>();
 		courses.add(agtCourse);
 		
 		CustomerPreferences dummyCustomerPrefs = new CustomerPreferences(DateUtility.LearningDayTime.AFTERNOON,1.0,0.5,0.25);

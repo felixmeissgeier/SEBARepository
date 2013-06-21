@@ -11,9 +11,10 @@ import org.joda.time.PeriodType;
 
 import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 
+import dto.CourseDTO;
+
 import java.util.Collections;
 
-import models.Course;
 import models.CustomerPreferences;
 import models.DateTimeInterval;
 import models.DateUtility;
@@ -22,11 +23,11 @@ import models.TimeInterval;
 import models.timetable.TimetableEntry.TimetableEntryType;
 
 public class TimeSlotScheduler {
-	private List<Course> courses;
+	private List<CourseDTO> courses;
 	private CustomerPreferences customerPreferences;
 	private double minSlotDuration = 0;
 	
-	public TimeSlotScheduler(List<Course> courses, CustomerPreferences customerPreferences){
+	public TimeSlotScheduler(List<CourseDTO> courses, CustomerPreferences customerPreferences){
 		this.courses = courses;
 		this.customerPreferences = customerPreferences;
 		this.minSlotDuration = customerPreferences.getMinLearningSlotDuration();
@@ -34,19 +35,19 @@ public class TimeSlotScheduler {
 	
 	public List<TimetableEntry> scheduleTimeSlots(List<TimetableEntry> externalCalendarData){
 		List<TimetableEntry> scheduledTimeSlotList = null;
-		TreeMap<String, Course> priorizedCourseMap = getCoursePriorityMap(courses);		
+		TreeMap<String, CourseDTO> priorizedCourseMap = getCoursePriorityMap(courses);		
 		
 		scheduledTimeSlotList = addBlockedTimeSlots(externalCalendarData, getLatestCourseDeadline());
 		
 		//iterate over courses, depending on priorities
-		for(Course course : priorizedCourseMap.values()){
+		for(CourseDTO course : priorizedCourseMap.values()){
 			scheduledTimeSlotList = computeCourseLearningSlots(scheduledTimeSlotList, course);
 		}		
 		
 		return scheduledTimeSlotList;
 	}
 	
-	private List<TimetableEntry> computeCourseLearningSlots(List<TimetableEntry> currentTimetable, Course course){
+	private List<TimetableEntry> computeCourseLearningSlots(List<TimetableEntry> currentTimetable, CourseDTO course){
 		List<DateTimeInterval> freeTimeSlots = computeFreeTimeSlots(currentTimetable, course.getDeadline());
 		for(DateTimeInterval interval : freeTimeSlots){
 			TimetableEntry entry = new TimetableEntry("Pot.Scheduling", "", interval.getStartDateTime(), interval.getEndDateTime(), TimetableEntryType.BLOCKED);
@@ -55,9 +56,9 @@ public class TimeSlotScheduler {
 		return currentTimetable;
 	}
 	
-	private TreeMap<String,Course> getCoursePriorityMap(List<Course> courses){
-		TreeMap<String, Course> courseMap = new TreeMap<String, Course>();
-		for(Course course : courses){
+	private TreeMap<String,CourseDTO> getCoursePriorityMap(List<CourseDTO> courses){
+		TreeMap<String, CourseDTO> courseMap = new TreeMap<String, CourseDTO>();
+		for(CourseDTO course : courses){
 			courseMap.put(String.valueOf(course.getPriority()), course);
 		}
 		
@@ -156,7 +157,7 @@ public class TimeSlotScheduler {
 	private DateTime getLatestCourseDeadline(){
 		DateTime latestDeadline = new DateTime();
 		
-		for(Course course : courses){
+		for(CourseDTO course : courses){
 			if(course.getDeadline().isAfter(latestDeadline)){
 				latestDeadline = course.getDeadline();
 			}

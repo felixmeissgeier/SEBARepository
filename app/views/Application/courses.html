@@ -3,3 +3,31 @@
 #{set timeTableNavActive:'' /}
 #{set myCoursesNavActive:'active' /}
 #{set header:'Course overview' /}
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Course title</th>
+      <th>Course remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+  %{
+    i = 0;
+    for(course in coursesList){
+      i++; 
+  }%
+  
+  <tr>
+  	<td>${i}</td>
+  	<td>${course.getTitle()}</td>
+  	<td>${course.getRemarks()}</td>
+  </tr>
+  
+  %{
+    }
+  }%
+  </tbody>
+</table>	

@@ -1,12 +1,15 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import models.Course;
 import models.User;
 import models.timetable.PersonalizedTimetable;
 import models.timetable.TimetableEntry;
 import play.mvc.Controller;
 import play.mvc.With;
+import dto.CourseDTO;
 import dto.UserDTO;
 
 @With(Secure.class)
@@ -21,7 +24,14 @@ public class Application extends Controller {
     }
     
     public static void courses() {
-    	render("Application/courses.html");
+    	List<Course> courses = Course.findAll();
+    	List<CourseDTO> coursesList = new ArrayList<CourseDTO>();
+    	for (Course course : courses) {
+    		CourseDTO courseDTO = new CourseDTO(course);
+    		coursesList.add(courseDTO);
+    	}
+    	
+    	render("Application/courses.html", coursesList);
     }
     
     public static void settings(String category) {

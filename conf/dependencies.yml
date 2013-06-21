@@ -1,7 +1,6 @@
 # Application dependencies
 
 require:
-    # - play
     - play -> crud
     - org.mnode.ical4j -> ical4j 1.0.4
     - org.simpleframework -> simple-xml 2.7
