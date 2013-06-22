@@ -34,38 +34,38 @@ User(u2):
 
 CourseMaterial(cm1):
   scriptPagesDone: 20
-  scriptPagesToDo: 150
-  workloadHoursExpected: 2.0
+  scriptPagesToDo: 50
+  workloadHoursExpected: 0.0
   considerExpectedHours: false
 
 CourseMaterial(cm2):
-  scriptPagesDone: 60
-  scriptPagesToDo: 380
-  workloadHoursExpected: 3.0
+  scriptPagesDone: 0
+  scriptPagesToDo: 0
+  workloadHoursExpected: 70.0
   considerExpectedHours: true
 
 CourseMaterial(cm3):
-  scriptPagesDone: 30
-  scriptPagesToDo: 200
-  workloadHoursExpected: 1.0
+  scriptPagesDone: 0
+  scriptPagesToDo: 0
+  workloadHoursExpected: 20.0
   considerExpectedHours: true
 
 CourseMaterial(cm4):
   scriptPagesDone: 80
-  scriptPagesToDo: 220
-  workloadHoursExpected: 1.5
+  scriptPagesToDo: 50
+  workloadHoursExpected: 0.0
   considerExpectedHours: false
 
 CourseMaterial(cm5):
-  scriptPagesDone: 120
-  scriptPagesToDo: 180
-  workloadHoursExpected: 3.0
+  scriptPagesDone: 0
+  scriptPagesToDo: 0
+  workloadHoursExpected: 10.0
   considerExpectedHours: true
 
 CourseMaterial(cm6):
-  scriptPagesDone: 55
-  scriptPagesToDo: 300
-  workloadHoursExpected: 2.0
+  scriptPagesDone: 0
+  scriptPagesToDo: 0
+  workloadHoursExpected: 55.0
   considerExpectedHours: true
 
 # Courses
@@ -73,16 +73,16 @@ CourseMaterial(cm6):
 Course(c1):
   title: "Algorithmic Game Theory"
   remarks: "AGT remarks"
-  difficulty: 1.0
+  difficulty: 3.0
   priority: 1.0
   deadline: "2013-07-22 14:00"
   periodicExercisesNeeded: true
   courseMaterial: cm1
 
 Course(c2):
-  title: "Master's practicum course"
+  title: "Masters practicum course"
   remarks: "Remarks for course B"
-  difficulty: 0.9
+  difficulty: 1.2
   priority: 1.0
   deadline: "2013-09-01 12:00"
   periodicExercisesNeeded: true
@@ -100,7 +100,7 @@ Course(c3):
 Course(c4):
   title: "Social Computing"
   remarks: "Remarks for course D"
-  difficulty: 0.9
+  difficulty: 0.5
   priority: 0.8
   deadline: "2013-09-01 12:00"
   periodicExercisesNeeded: true
@@ -110,7 +110,7 @@ Course(c5):
   title: "Spanish"
   remarks: "Remarks for course E"
   difficulty: 1.0
-  priority: 0.9
+  priority: 0.6
   deadline: "2013-06-30 12:00"
   periodicExercisesNeeded: true
   courseMaterial: cm5

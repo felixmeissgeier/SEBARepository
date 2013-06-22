@@ -1,5 +1,7 @@
 package models.timetable;
 
+import java.awt.Color;
+
 import org.joda.time.DateTime;
 
 public class TimetableEntry implements Comparable<TimetableEntry>{
@@ -16,18 +18,36 @@ public class TimetableEntry implements Comparable<TimetableEntry>{
 	private DateTime startDateTime;
 	private DateTime endDateTime;
 	private TimetableEntryType entryType;
+	private Color entryColor;
 	
 	public TimetableEntry(){	
 	}
 	
-	public TimetableEntry(String title, String description, DateTime startDateTime, DateTime endDateTime, TimetableEntryType entryType){
+	public TimetableEntry(String title, String description, DateTime startDateTime, DateTime endDateTime, TimetableEntryType entryType, Color color){
 		this.title = title;
 		this.description = description;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 		this.entryType = entryType;
+		if(color!=null){
+			this.entryColor = color;
+		}
+		else{
+			this.entryColor = new Color(120,130,140);
+			
+		}
 	}
 	
+	public void setColor(int r, int g, int b){
+		entryColor = new Color(r,g,b);
+	}
+	public void setColor(Color color){
+		entryColor = color;
+	}
+	
+	public Color getColor(){
+		return entryColor; 
+	}
 	public String getTitle() {
 		return title;
 	}
