@@ -1,15 +1,16 @@
 package models;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 import play.data.validation.Email;
 import play.data.validation.Required;
 import play.data.validation.Unique;
 import play.db.jpa.Model;
 
+/**
+ * DAO class for a user object.
+ *
+ */
 @Entity
 public class User extends Model {
 	

@@ -3,17 +3,18 @@ package dto;
 import java.util.Random;
 
 import models.Course;
-import models.DateTimeInterval;
 
 import org.joda.time.DateTime;
 
+/**
+ * DTO for a course object.
+ *
+ */
 public class CourseDTO implements Comparable<CourseDTO> {
-	public final static int DIFFICULTY_RELATION_PAGES_PER_X_HOURS = 10;
-
+    
 	private Long id;
 	private String title;
 	private String remarks;
-	// hours per DIFFICULTY_RELATION_PAGES_PER_X_HOURS script-pages
 	private double difficulty;
 	private double priority;
 	private DateTime deadline;
@@ -156,5 +157,4 @@ public class CourseDTO implements Comparable<CourseDTO> {
 	public void setHint(String hint) {
 		this.hint = hint;
 	}
-
 }
