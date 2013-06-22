@@ -6,8 +6,8 @@
 #{extends 'Application/settings.html' /}
 
 <div class="settings-block">
-	<div class="settings-block-entry">Actual payment plan: 6 months</div>
-	<div class="settings-block-entry">Payment is active till: August 12, 2013</div>
+	<div class="settings-block-entry">Actual payment plan: ${user.subscriptionPeriod}</div>
+	<div class="settings-block-entry">Payment is active till: ${user.subscriptionExpires}</div>
 </div>
 
 <h4>Renew your payment</h4>
@@ -20,31 +20,31 @@
 		<th>Price</th>
 	<tr>
 	<tr>
-		<td><input type="radio" name="payment" /></td>
+		<td><input type="radio" name="payment" ${user.pfree} /></td>
 		<td>Free membership</td>
 		<td>Manage 1 course</td>
 		<td>Free</td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="payment" /></td>
+		<td><input type="radio" name="payment" ${user.p1} /></td>
 		<td>1 month</td>
 		<td>Unlimited courses + community access</td>
 		<td>5 &euro;</td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="payment" /></td>
+		<td><input type="radio" name="payment" ${user.p3} /></td>
 		<td>3 months</td>
 		<td>Unlimited courses + community access</td>
 		<td>10 &euro;</td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="payment" checked /></td>
+		<td><input type="radio" name="payment" ${user.p6} /></td>
 		<td>6 months</td>
 		<td>Unlimited courses + community access</td>
 		<td>15 &euro;</td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="payment" /></td>
+		<td><input type="radio" name="payment" ${user.p12} /></td>
 		<td>12 months</td>
 		<td>Unlimited courses + community access</td>
 		<td>20 &euro;</td>

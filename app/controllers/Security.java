@@ -9,6 +9,8 @@ import models.User;
 
 import org.apache.commons.lang.StringUtils;
 
+import controllers.subtypes.ServiceSubscriptionPeriod;
+
 import play.cache.Cache;
 import play.libs.Codec;
 import dto.UserDTO;
@@ -77,12 +79,11 @@ public class Security extends Secure.Security {
      * @param captcha
      *            Submitted captcha value
      */
-    public static void signup(String name, String email, String password,
-	    String question, String answer, String captchaId, String captcha) {
+    public static void signup(String name, String email, String password, String question, String answer,
+	    String captchaId, String captcha) {
 
 	// Showing the page with an empty form if this is a new requiest
-	if (areAllEmpty(name, email, password, question, answer, captchaId,
-		captcha)) {
+	if (areAllEmpty(name, email, password, question, answer, captchaId, captcha)) {
 	    captchaId = Codec.UUID();
 	    render("auth/signup.html", captchaId);
 	} else {
@@ -97,8 +98,7 @@ public class Security extends Secure.Security {
 		validation.required(answer);
 	    }
 
-	    validation.equals(StringUtils.lowerCase(captcha),
-		    StringUtils.lowerCase((String) Cache.get(captchaId)))
+	    validation.equals(StringUtils.lowerCase(captcha), StringUtils.lowerCase((String) Cache.get(captchaId)))
 		    .message("validation.captcha");
 
 	    // Checking the user with such an email address does not exist yet
@@ -111,8 +111,7 @@ public class Security extends Secure.Security {
 
 	    if (validation.hasErrors()) {
 		// Showing the form again if the input was invalid
-		UserDTO userDto = new UserDTO(name, email, password, question,
-			answer, "", false, false, false);
+		UserDTO userDto = new UserDTO(name, email, password, question, answer, "", false, false, false);
 		renderArgs.put("user", userDto);
 		captchaId = Codec.UUID();
 		render("auth/signup.html", captchaId);
@@ -128,6 +127,8 @@ public class Security extends Secure.Security {
 		user.salt = salt;
 		user.password = getHash(password, salt);
 		user.userpic = defaultUserpic;
+		user.serviceSubscriptionPeriod = ServiceSubscriptionPeriod.FREE;
+		user.subscriptionExpires = null;
 		user.save();
 
 		// Authenticating the user in the system
@@ -184,8 +185,7 @@ public class Security extends Secure.Security {
     private static String getSHA1(String s) {
 	try {
 	    MessageDigest md = MessageDigest.getInstance("SHA-1");
-	    return byteArrayToHexString(md.digest(s.getBytes(Charset
-		    .forName("UTF-8"))));
+	    return byteArrayToHexString(md.digest(s.getBytes(Charset.forName("UTF-8"))));
 	} catch (NoSuchAlgorithmException e) {
 	    e.printStackTrace();
 	}
@@ -205,8 +205,7 @@ public class Security extends Secure.Security {
 
 	// CSOFF: MagicNumber
 	for (int i = 0; i < b.length; i++) {
-	    result.append(Integer.toString((b[i] & 0xff) + 0x100, 16)
-		    .substring(1));
+	    result.append(Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1));
 	}
 	// CSON: MagicNumber
 

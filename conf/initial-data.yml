@@ -5,30 +5,28 @@ User(u1):
   email: ks@ks.com
   password: "ff750787d1cf6e618122a796cb2556f59ccdeaf0" # "pwd"
   salt: "abc"
-  
   question: "First pet's name"
   answer: "Queequeg"
-
   sharedTimetable: false
-
   deadlineEmail: true
   learnSlotEmail: false
   userpic: 01.jpg
+  serviceSubscriptionPeriod: ${controllers.subtypes.ServiceSubscriptionPeriod.SIX_MONTHS}
+  subscriptionExpires: "2013-08-24 16:22"
 
 User(u2):
   name: Klaus 2
   email: k2@k2.com
   password: "5ba5167eab3cb2ed2b679c3971045d462b8a169a" # "pwd"
   salt: "abd"
-  
   question: "Second pet's name"
   answer: "Queequeg 2"
-
   sharedTimetable: true
-
   deadlineEmail: false
   learnSlotEmail: false
   userpic: 02.jpg
+  serviceSubscriptionPeriod: ${controllers.subtypes.ServiceSubscriptionPeriod.TWELWE_MONTHS}
+  subscriptionExpires: "2014-01-12 08:51"
 
 # Course Materials
 
