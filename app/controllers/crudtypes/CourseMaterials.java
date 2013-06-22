@@ -1,9 +1,13 @@
 package controllers.crudtypes;
 
+import play.mvc.With;
 import controllers.CRUD;
 import controllers.Secure;
-import play.mvc.With;
 
+/**
+ * CRUD object to manage course materials entities.
+ * 
+ */
 @With(Secure.class)
 public class CourseMaterials extends CRUD {
 

@@ -5,4 +5,58 @@
 %}
 #{extends 'Application/settings.html' /}
 
-Payment settings placeholder
+<div class="settings-block">
+	<div class="settings-block-entry">Actual payment plan: 6 months</div>
+	<div class="settings-block-entry">Payment is active till: August 12, 2013</div>
+</div>
+
+<h4>Renew your payment</h4>
+
+<table class="table table-hover">
+	<tr>
+		<th></th>
+		<th>Duration</th>
+		<th>Features</th>
+		<th>Price</th>
+	<tr>
+	<tr>
+		<td><input type="radio" name="payment" /></td>
+		<td>Free membership</td>
+		<td>Manage 1 course</td>
+		<td>Free</td>
+	</tr>
+	<tr>
+		<td><input type="radio" name="payment" /></td>
+		<td>1 month</td>
+		<td>Unlimited courses + community access</td>
+		<td>5 &euro;</td>
+	</tr>
+	<tr>
+		<td><input type="radio" name="payment" /></td>
+		<td>3 months</td>
+		<td>Unlimited courses + community access</td>
+		<td>10 &euro;</td>
+	</tr>
+	<tr>
+		<td><input type="radio" name="payment" checked /></td>
+		<td>6 months</td>
+		<td>Unlimited courses + community access</td>
+		<td>15 &euro;</td>
+	</tr>
+	<tr>
+		<td><input type="radio" name="payment" /></td>
+		<td>12 months</td>
+		<td>Unlimited courses + community access</td>
+		<td>20 &euro;</td>
+	</tr>
+</table>
+
+<div class="recurring-payment">
+	<label><input type="checkbox" id="recurring" /> Recurring payment</label>
+</div>
+<div class="settings-block">
+	<div class="settings-block-entry">
+		<button type="submit" class="btn">Continue</button>
+	</div>
+</div> 
+<div class="settings-block-entry">The time will be added to your current expiration date.</div> 

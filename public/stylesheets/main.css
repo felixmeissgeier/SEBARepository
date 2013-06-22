@@ -146,3 +146,27 @@ body {
 	width: 100%;
 	margin: 25px 0;
 }
+
+.settings-content {
+	padding-left: 280px;
+}
+
+.settings-block {
+	margin-bottom: 20px;
+}
+
+.settings-block-entry {
+	margin-bottom: 5px;
+}
+
+.recurring-payment {
+	margin: 0 0 10px 1px;
+}
+
+.recurring-payment label {
+	display: inline !important;
+}
+
+.recurring-payment input {
+	margin: 0 5px 1px 0 !important;
+}
