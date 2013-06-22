@@ -53,14 +53,19 @@ public class TimeSlotScheduler {
 		return scheduledTimeSlotList;
 	}
 	
+	/*
+	 * Computes learning time slots for each course
+	 */
 	private List<TimetableEntry> computeCourseLearningSlots(List<TimetableEntry> currentTimetable, CourseDTO course){
+		
 		currentCourseColor = new Color((int)(Math.random()*250),(int)(Math.random()*250),(int)(Math.random()*250));
+		
 		//compute timeslots where scheduling is possible
 		List<DateTimeInterval> freeTimeSlots = computeFreeTimeSlots(currentTimetable, course.getDeadline());
 		Collections.sort(freeTimeSlots);
 		Collections.sort(currentTimetable);
 		
-		//get/compute some needed values
+		// get and compute some needed values
 		double accumulatedFreeTimeHours = getAccumulatedFreeTimeHours(freeTimeSlots); 
 		int coursePeriodNumberOfDays = DateUtility.getDaysOfDuration(new DateTime(), course.getDeadline());
 		double averageFreeTimeHoursPerDay = accumulatedFreeTimeHours / coursePeriodNumberOfDays;
@@ -87,7 +92,10 @@ public class TimeSlotScheduler {
 			if(currentDateTime.getDayOfYear()<currentInterval.getStartDateTime().getDayOfYear()){
 				currentDateTime = currentInterval.getStartDateTime();
 			}
+			//current interval matches with current considered date
 			if(currentDateTime.getDayOfYear()==currentInterval.getStartDateTime().getDayOfYear()){
+				
+				//retrieve best time to start learn time slot, depending on daytime
 				DateTime bestStartTime = DateUtility.getBestDayTimeMatch(currentInterval.getStartDateTime(),currentInterval.getEndDateTime(), customerPreferences.getPreferredLearningDayTime());
 				if(bestStartTime!=null){
 					int learningSlotDurationMinutes = 0;
@@ -100,6 +108,7 @@ public class TimeSlotScheduler {
 						learningSlotDurationMinutes = (int)(hoursToSchedule*60);
 					}
 					if(learningSlotDurationMinutes!=0){
+						//add new timetable entry (learn time slot) to timetable entry list
 						hoursToSchedule -= learningSlotDurationMinutes/60.0;
 						scheduledWorkLoad.add(new TimetableEntry(course.getTitle(), "Learning Slot", currentInterval.getStartDateTime(), currentInterval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT,currentCourseColor));
 					}
@@ -124,15 +133,18 @@ public class TimeSlotScheduler {
 			int timetableEntryIterator = 0;
 			int freeTimeSlotIterator = 0;
 			while(currentDateTime.isBefore(course.getDeadline()) && hoursToSchedule>0){
+				
 				//if timetableEntry day is before currentDateTime day, then switch to next entry
 				while(scheduledWorkLoad.get(timetableEntryIterator).getStartDateTime().getDayOfYear()<currentDateTime.getDayOfYear() && (timetableEntryIterator<scheduledWorkLoad.size()-1)){
 					timetableEntryIterator++;
 				}
 				
 				int timetableEntryDay = scheduledWorkLoad.get(timetableEntryIterator).getStartDateTime().getDayOfYear();
+				
 				//next timetableentry (already stored learning slot) is located in the future
 				//thus, this day hasn't scheduled slot
 				if(timetableEntryDay>currentDateTime.getDayOfYear()){
+					
 					//go to next free time slot blocks
 					while(freeTimeSlots.get(freeTimeSlotIterator).getStartDateTime().getDayOfYear()<=currentDateTime.getDayOfYear() && freeTimeSlotIterator<(freeTimeSlots.size()-1)){
 						DateTimeInterval interval = freeTimeSlots.get(freeTimeSlotIterator);
@@ -165,6 +177,8 @@ public class TimeSlotScheduler {
 			}
 		}
 
+		//applying previous additions to time table
+		//as precondition of the next step
 		for(TimetableEntry entry : scheduledWorkLoad){
 			currentTimetable.add(entry);
 		}
@@ -201,6 +215,9 @@ public class TimeSlotScheduler {
 		return currentTimetable;
 	}
 	
+	/*
+	 * Returns the duration of all free time slots (as a sum of the subdurations)
+	 */
 	private double getAccumulatedFreeTimeHours(List<DateTimeInterval> freeTimeSlots){
 		double accumulatedHours = 0;
 		for(DateTimeInterval currentInterval : freeTimeSlots){
@@ -209,6 +226,10 @@ public class TimeSlotScheduler {
 		return accumulatedHours;
 	}
 	
+	/*
+	 * determine and add time slots, where no scheduling of learning time slots are allowed
+	 * these are defined by the customer preferences "days of rest" and "rest time intervals"
+	 */
 	private List<TimetableEntry> addBlockedTimeSlots(List<TimetableEntry> timetableEntries, DateTime deadline){
 		List<TimetableEntry> extendedTimetableEntries = timetableEntries;
 		Collections.sort(extendedTimetableEntries);
@@ -243,6 +264,9 @@ public class TimeSlotScheduler {
 		return extendedTimetableEntries;
 	}
 	
+	/*
+	 * Computes time slots where scheduling of learn time slots is allowed
+	 */
 	private List<DateTimeInterval> computeFreeTimeSlots(List<TimetableEntry> currentCalendarData, DateTime deadline){
 		List<DateTimeInterval> freeTimeSlots = new ArrayList<DateTimeInterval>();
 		if(currentCalendarData!=null){			
@@ -298,6 +322,9 @@ public class TimeSlotScheduler {
 		return freeTimeSlots;
 	}
 	
+	/*
+	 * returns the latest daedline datetime of all courses
+	 */
 	private DateTime getLatestCourseDeadline(){
 		DateTime latestDeadline = new DateTime();
 		
