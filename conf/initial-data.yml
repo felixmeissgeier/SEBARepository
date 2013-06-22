@@ -73,8 +73,8 @@ CourseMaterial(cm6):
 Course(c1):
   title: "Algorithmic Game Theory"
   remarks: "AGT remarks"
-  difficulty: 1.1
-  priority: 1.3
+  difficulty: 1.0
+  priority: 1.0
   deadline: "2013-07-22 14:00"
   periodicExercisesNeeded: true
   courseMaterial: cm1

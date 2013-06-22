@@ -83,10 +83,10 @@ public class TimeSlotScheduler {
 					int learningSlotDurationMinutes = 0;
 					currentInterval.setStartDateTime(bestStartTime);
 					double intervalHours = currentInterval.getDurationInHours();
-					if(intervalHours<hoursToSchedule && intervalHours>=customerPreferences.getMaxLearningSlotDuration()){
+					if(customerPreferences.getMaxLearningSlotDuration()<hoursToSchedule && intervalHours>=customerPreferences.getMaxLearningSlotDuration()){
 						learningSlotDurationMinutes = (int)(customerPreferences.getMaxLearningSlotDuration()*60);
 					}
-					else if(intervalHours>=hoursToSchedule){
+					else if(customerPreferences.getMaxLearningSlotDuration()>=hoursToSchedule){
 						learningSlotDurationMinutes = (int)(hoursToSchedule*60);
 					}
 					if(learningSlotDurationMinutes!=0){
@@ -104,7 +104,7 @@ public class TimeSlotScheduler {
 			}
 		}
 		Collections.sort(scheduledWorkLoad);
-		
+
 		//second iteration
 		//if more hours to schedule than
 		//go through all days and look for days without
@@ -154,7 +154,7 @@ public class TimeSlotScheduler {
 				currentDateTime = currentDateTime.plusDays(1);
 			}
 		}
-		
+
 		for(TimetableEntry entry : scheduledWorkLoad){
 			currentTimetable.add(entry);
 		}

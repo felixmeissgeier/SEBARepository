@@ -24,8 +24,8 @@ public class PersonalizedTimetable {
 	private TimeSlotScheduler timeSlotScheduler = null;
 	
 	public PersonalizedTimetable(){
-		CourseDTO agtCourse = new CourseDTO(null, "Algorithmic Game Theory","very tough lecture..",0.9,1.0,new DateTime().plusWeeks(2),new CourseMaterialDTO(20, 40));
-		CourseDTO sebaCourse = new CourseDTO(null, "SEBA","Web App",1.0,1.0,new DateTime().plusWeeks(2),new CourseMaterialDTO(30, 40));
+		CourseDTO agtCourse = new CourseDTO(null, "Algorithmic Game Theory","very tough lecture..",0.9,1.0,new DateTime().plusWeeks(2),new CourseMaterialDTO(500, 40));
+		CourseDTO sebaCourse = new CourseDTO(null, "SEBA","Web App",1.0,1.0,new DateTime().plusWeeks(4),new CourseMaterialDTO(120, 40));
 		
 		List<CourseDTO> courses = new ArrayList<CourseDTO>();
 		courses.add(agtCourse);
