@@ -6,6 +6,11 @@ import models.Course;
 
 import org.joda.time.DateTime;
 
+/**
+ * DTO for a course object used to transfer the 
+ * data between controllers and views.
+ *  
+ */
 public class CourseDTO {
 
 	private Long id;
@@ -138,5 +143,4 @@ public class CourseDTO {
 	public void setHint(String hint) {
 		this.hint = hint;
 	}
-
 }

@@ -2,6 +2,12 @@ package dto;
 
 import models.CourseMaterial;
 
+/**
+ * DTO for a course material object used to 
+ * transfer the data between controllers and 
+ * views.
+ *  
+ */
 public class CourseMaterialDTO {
 	private int scriptPagesDone = 0;
 	private int scriptPagesToDo = 0;

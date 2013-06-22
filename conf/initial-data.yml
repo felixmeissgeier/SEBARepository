@@ -32,34 +32,96 @@ User(u2):
 
 # Course Materials
 
-CourseMaterial(easycourse):
+CourseMaterial(cm1):
   scriptPagesDone: 20
   scriptPagesToDo: 150
   workloadHoursExpected: 2.0
   considerExpectedHours: false
 
-CourseMaterial(hardcourse):
+CourseMaterial(cm2):
   scriptPagesDone: 60
   scriptPagesToDo: 380
-  workloadHoursExpected: 10.0
+  workloadHoursExpected: 3.0
+  considerExpectedHours: true
+
+CourseMaterial(cm3):
+  scriptPagesDone: 30
+  scriptPagesToDo: 200
+  workloadHoursExpected: 1.0
+  considerExpectedHours: true
+
+CourseMaterial(cm4):
+  scriptPagesDone: 80
+  scriptPagesToDo: 220
+  workloadHoursExpected: 1.5
+  considerExpectedHours: false
+
+CourseMaterial(cm5):
+  scriptPagesDone: 120
+  scriptPagesToDo: 180
+  workloadHoursExpected: 3.0
+  considerExpectedHours: true
+
+CourseMaterial(cm6):
+  scriptPagesDone: 55
+  scriptPagesToDo: 300
+  workloadHoursExpected: 2.0
   considerExpectedHours: true
 
 # Courses
 
 Course(c1):
-  title: "Course A"
-  remarks: "Remarks for course A"
+  title: "Algorithmic Game Theory"
+  remarks: "AGT remarks"
   difficulty: 1.1
   priority: 1.3
   deadline: "2013-07-22 14:00"
   periodicExercisesNeeded: true
-  courseMaterial: easycourse
+  courseMaterial: cm1
 
 Course(c2):
-  title: "Course B"
+  title: "Master's practicum course"
   remarks: "Remarks for course B"
   difficulty: 0.9
   priority: 1.0
   deadline: "2013-09-01 12:00"
   periodicExercisesNeeded: true
-  courseMaterial: hardcourse
+  courseMaterial: cm2
+
+Course(c3):
+  title: "Efficient Algorithms and Data Structures"
+  remarks: "Remarks for course C"
+  difficulty: 1.0
+  priority: 0.7
+  deadline: "2013-07-17 19:00"
+  periodicExercisesNeeded: true
+  courseMaterial: cm3
+  
+Course(c4):
+  title: "Social Computing"
+  remarks: "Remarks for course D"
+  difficulty: 0.9
+  priority: 0.8
+  deadline: "2013-09-01 12:00"
+  periodicExercisesNeeded: true
+  courseMaterial: cm4
+  
+Course(c5):
+  title: "Spanish"
+  remarks: "Remarks for course E"
+  difficulty: 1.0
+  priority: 0.9
+  deadline: "2013-06-30 12:00"
+  periodicExercisesNeeded: true
+  courseMaterial: cm5
+  
+Course(c6):
+  title: "Distributed Systems"
+  remarks: "Remarks for course F"
+  difficulty: 0.8
+  priority: 1.0
+  deadline: "2013-07-08 12:00"
+  periodicExercisesNeeded: false
+  courseMaterial: cm6
+  
+ 

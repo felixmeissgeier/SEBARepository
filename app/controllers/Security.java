@@ -99,7 +99,7 @@ public class Security extends Secure.Security {
 
 	    	if (validation.hasErrors()) {
 	    		// Showing the form again if the input was invalid
-	    		UserDTO userDto = new UserDTO(name, email, password, question, answer, "");
+	    		UserDTO userDto = new UserDTO(name, email, password, question, answer, "", false, false, false);
 	    		renderArgs.put("user", userDto);
 	    		captchaId = Codec.UUID();
 	        	render("auth/signup.html", captchaId);
