@@ -35,34 +35,168 @@ public class TimeSlotScheduler {
 	
 	public List<TimetableEntry> scheduleTimeSlots(List<TimetableEntry> externalCalendarData){
 		List<TimetableEntry> scheduledTimeSlotList = null;
-		TreeMap<String, CourseDTO> priorizedCourseMap = getCoursePriorityMap(courses);		
+		Collections.sort(courses,Collections.reverseOrder());
 		
 		scheduledTimeSlotList = addBlockedTimeSlots(externalCalendarData, getLatestCourseDeadline());
 		
 		//iterate over courses, depending on priorities
-		for(CourseDTO course : priorizedCourseMap.values()){
+		for(CourseDTO course : courses){
 			scheduledTimeSlotList = computeCourseLearningSlots(scheduledTimeSlotList, course);
-		}		
+		}
 		
 		return scheduledTimeSlotList;
 	}
 	
 	private List<TimetableEntry> computeCourseLearningSlots(List<TimetableEntry> currentTimetable, CourseDTO course){
 		List<DateTimeInterval> freeTimeSlots = computeFreeTimeSlots(currentTimetable, course.getDeadline());
-		for(DateTimeInterval interval : freeTimeSlots){
-			TimetableEntry entry = new TimetableEntry("Pot.Scheduling", "", interval.getStartDateTime(), interval.getEndDateTime(), TimetableEntryType.BLOCKED);
+		Collections.sort(freeTimeSlots);
+		Collections.sort(currentTimetable);
+		double accumulatedFreeTimeHours = getAccumulatedFreeTimeHours(freeTimeSlots); 
+		int coursePeriodNumberOfDays = DateUtility.getDaysOfDuration(new DateTime(), course.getDeadline());
+		double averageFreeTimeHoursPerDay = accumulatedFreeTimeHours / coursePeriodNumberOfDays;
+		double hoursToSchedule = 0;
+		if(course.getCourseMaterial().isConsiderExpectedHours()){
+			hoursToSchedule = course.getCourseMaterial().getWorkloadHoursExpected();
+		}
+		else{
+			hoursToSchedule = (course.getDifficulty()/course.DIFFICULTY_RELATION_PAGES_PER_X_HOURS)*course.getCourseMaterial().getScriptPagesToDo();
+		}
+		double averageNeededHoursPerDay = hoursToSchedule/coursePeriodNumberOfDays;
+		
+		DateTime currentDateTime = new DateTime().plusDays(1);
+		List<TimetableEntry> scheduledWorkLoad = new ArrayList<TimetableEntry>();
+
+		//first iteration
+		//iterate over all freetime slots and prioritize daytime 
+		//procedure: 	find free time slot within daytime which is long enough and 
+		//						store learning slot there (only one each day)
+		for(int i = 0; i<freeTimeSlots.size(); i++){
+			DateTimeInterval currentInterval = new DateTimeInterval(freeTimeSlots.get(i));
+			boolean tryNextIntervalSameDay = false;
+			//if intervals jump, like multiple days slot
+			if(currentDateTime.getDayOfYear()<currentInterval.getStartDateTime().getDayOfYear()){
+				currentDateTime = currentInterval.getStartDateTime();
+			}
+			if(currentDateTime.getDayOfYear()==currentInterval.getStartDateTime().getDayOfYear()){
+				DateTime bestStartTime = DateUtility.getBestDayTimeMatch(currentInterval.getStartDateTime(),currentInterval.getEndDateTime(), customerPreferences.getPreferredLearningDayTime());
+				if(bestStartTime!=null){
+					int learningSlotDurationMinutes = 0;
+					currentInterval.setStartDateTime(bestStartTime);
+					double intervalHours = currentInterval.getDurationInHours();
+					if(intervalHours<hoursToSchedule && intervalHours>=customerPreferences.getMaxLearningSlotDuration()){
+						learningSlotDurationMinutes = (int)(customerPreferences.getMaxLearningSlotDuration()*60);
+					}
+					else if(intervalHours>=hoursToSchedule){
+						learningSlotDurationMinutes = (int)(hoursToSchedule*60);
+					}
+					if(learningSlotDurationMinutes!=0){
+						hoursToSchedule -= learningSlotDurationMinutes/60.0;
+						scheduledWorkLoad.add(new TimetableEntry(course.getTitle(), "Learning Slot", currentInterval.getStartDateTime(), currentInterval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT));
+					}
+					else{
+						//if free timeslot is too small
+						tryNextIntervalSameDay = true;
+					}
+				}
+				if(!tryNextIntervalSameDay){
+					currentDateTime = currentDateTime.plusDays(1);
+				}
+			}
+		}
+		Collections.sort(scheduledWorkLoad);
+		
+		//second iteration
+		//if more hours to schedule than
+		//go through all days and look for days without
+		//specified learning slot
+		if(hoursToSchedule>0){
+			currentDateTime = new DateTime().plusDays(1);
+			int timetableEntryIterator = 0;
+			int freeTimeSlotIterator = 0;
+			while(currentDateTime.isBefore(course.getDeadline()) && hoursToSchedule>0){
+				//if timetableEntry day is before currentDateTime day, then switch to next entry
+				while(scheduledWorkLoad.get(timetableEntryIterator).getStartDateTime().getDayOfYear()<currentDateTime.getDayOfYear() && (timetableEntryIterator<scheduledWorkLoad.size()-1)){
+					timetableEntryIterator++;
+				}
+				
+				int timetableEntryDay = scheduledWorkLoad.get(timetableEntryIterator).getStartDateTime().getDayOfYear();
+				//next timetableentry (already stored learning slot) is located in the future
+				//thus, this day hasn't scheduled slot
+				if(timetableEntryDay>currentDateTime.getDayOfYear()){
+					//go to next free time slot blocks
+					while(freeTimeSlots.get(freeTimeSlotIterator).getStartDateTime().getDayOfYear()<=currentDateTime.getDayOfYear() && freeTimeSlotIterator<(freeTimeSlots.size()-1)){
+						DateTimeInterval interval = freeTimeSlots.get(freeTimeSlotIterator);
+						if(interval.getStartDateTime().getDayOfYear()==currentDateTime.getDayOfYear()){
+							double intervalHours = interval.getDurationInHours();
+							int learningSlotDurationMinutes = 0;
+							if(intervalHours<hoursToSchedule && intervalHours>=customerPreferences.getMaxLearningSlotDuration()){
+								learningSlotDurationMinutes = (int)(customerPreferences.getMaxLearningSlotDuration()*60);
+							}
+							else if(intervalHours>=hoursToSchedule){
+								learningSlotDurationMinutes = (int)(hoursToSchedule*60);
+							}
+							if(learningSlotDurationMinutes!=0){
+								hoursToSchedule -= learningSlotDurationMinutes/60.0;
+								scheduledWorkLoad.add(new TimetableEntry(course.getTitle(), "Learning Slot", interval.getStartDateTime(), interval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT));
+								break;
+							}
+						}
+						freeTimeSlotIterator++;
+					}
+					
+				}
+				else if(timetableEntryDay==currentDateTime.getDayOfYear()){
+					if(timetableEntryIterator<scheduledWorkLoad.size()-1){
+						timetableEntryIterator++;
+					}
+				}
+				
+				currentDateTime = currentDateTime.plusDays(1);
+			}
+		}
+		
+		for(TimetableEntry entry : scheduledWorkLoad){
 			currentTimetable.add(entry);
 		}
+
+		//third iteration
+		//if more hours to schedule than
+		//apply previous additions to timetable and recompute free time slots
+		if(hoursToSchedule>0){
+			freeTimeSlots = computeFreeTimeSlots(currentTimetable, course.getDeadline());
+			Collections.sort(freeTimeSlots);
+			int day=0;
+			for(DateTimeInterval interval : freeTimeSlots){
+				if(interval.getStartDateTime().getDayOfYear()>day){
+					day = interval.getStartDateTime().getDayOfYear();
+				}
+				if(hoursToSchedule>0 && interval.getDurationInHours()>=minSlotDuration && day==interval.getStartDateTime().getDayOfYear()){
+					int duration = 0;
+					if(hoursToSchedule<minSlotDuration){
+						duration = (int)(hoursToSchedule*60);
+					}
+					else{
+						duration = (int)(minSlotDuration*60);
+					}
+					currentTimetable.add(new TimetableEntry(course.getTitle(), "Learning Slot", interval.getStartDateTime(), interval.getStartDateTime().plusMinutes(duration), TimetableEntryType.SCHEDULED_LEARNINGSLOT));
+					hoursToSchedule -= duration/60.0;
+					day++;
+				}
+				if(hoursToSchedule==0){
+					break;
+				}
+			}
+		}
+
 		return currentTimetable;
 	}
 	
-	private TreeMap<String,CourseDTO> getCoursePriorityMap(List<CourseDTO> courses){
-		TreeMap<String, CourseDTO> courseMap = new TreeMap<String, CourseDTO>();
-		for(CourseDTO course : courses){
-			courseMap.put(String.valueOf(course.getPriority()), course);
+	private double getAccumulatedFreeTimeHours(List<DateTimeInterval> freeTimeSlots){
+		double accumulatedHours = 0;
+		for(DateTimeInterval currentInterval : freeTimeSlots){
+			accumulatedHours += DateUtility.getMinutesOfDuration(currentInterval.getStartDateTime(), currentInterval.getEndDateTime())/60.0;
 		}
-		
-		return courseMap;
+		return accumulatedHours;
 	}
 	
 	private List<TimetableEntry> addBlockedTimeSlots(List<TimetableEntry> timetableEntries, DateTime deadline){
@@ -81,7 +215,7 @@ public class TimeSlotScheduler {
 					if(restDays.contains(DateUtility.getDayConstByOrdinal(date.getDayOfWeek()-1))){
 						DateTime startDateTime = new DateTime(date.getYear(),date.getMonthOfYear(),date.getDayOfMonth(),0,0);
 						DateTime endDateTime = new DateTime(date.getYear(),date.getMonthOfYear(),date.getDayOfMonth(),23,59);
-						TimetableEntry blockEntry = new TimetableEntry("All Day Block","",startDateTime,endDateTime,TimetableEntryType.BLOCKED);
+						TimetableEntry blockEntry = new TimetableEntry("Day Of Rest","",startDateTime,endDateTime,TimetableEntryType.BLOCKED);
 						extendedTimetableEntries.add(blockEntry);
 						continue;
 					}
@@ -90,7 +224,7 @@ public class TimeSlotScheduler {
 				for(TimeInterval timeInterval : restTimeIntervals){
 					DateTime startDateTime = new DateTime(date.getYear(),date.getMonthOfYear(),date.getDayOfMonth(),timeInterval.getTime1().getHourOfDay(),timeInterval.getTime1().getMinuteOfHour());
 					DateTime endDateTime = new DateTime(date.getYear(),date.getMonthOfYear(),date.getDayOfMonth(),timeInterval.getTime2().getHourOfDay(),timeInterval.getTime2().getMinuteOfHour());
-					TimetableEntry blockEntry = new TimetableEntry("Free Time Slot","",startDateTime,endDateTime,TimetableEntryType.BLOCKED);
+					TimetableEntry blockEntry = new TimetableEntry("Free Time","",startDateTime,endDateTime,TimetableEntryType.BLOCKED);
 					extendedTimetableEntries.add(blockEntry);	
 				}				
 			}

@@ -24,13 +24,17 @@ public class PersonalizedTimetable {
 	private TimeSlotScheduler timeSlotScheduler = null;
 	
 	public PersonalizedTimetable(){
-		CourseDTO agtCourse = new CourseDTO(null, "Algorithmic Game Theory","very tough lecture..",1.0,1.0,new DateTime().plusMonths(2),new CourseMaterialDTO(200, 40));
+		CourseDTO agtCourse = new CourseDTO(null, "Algorithmic Game Theory","very tough lecture..",0.9,1.0,new DateTime().plusWeeks(2),new CourseMaterialDTO(20, 40));
+		CourseDTO sebaCourse = new CourseDTO(null, "SEBA","Web App",1.0,1.0,new DateTime().plusWeeks(2),new CourseMaterialDTO(30, 40));
+		
 		List<CourseDTO> courses = new ArrayList<CourseDTO>();
 		courses.add(agtCourse);
+		courses.add(sebaCourse);
 		
-		CustomerPreferences dummyCustomerPrefs = new CustomerPreferences(DateUtility.LearningDayTime.AFTERNOON,1.0,0.5,0.25);
+		CustomerPreferences dummyCustomerPrefs = new CustomerPreferences(DateUtility.LearningDayTime.MORNING,1.0,0.5,0.25);
 		List<TimeInterval> dummyCustomerRestTimeIntervals = new ArrayList<TimeInterval>();
-		dummyCustomerRestTimeIntervals.add(new TimeInterval(new LocalTime(8, 0), new LocalTime(10, 0)));
+		dummyCustomerRestTimeIntervals.add(new TimeInterval(new LocalTime(0, 0), new LocalTime(7, 0)));
+		dummyCustomerRestTimeIntervals.add(new TimeInterval(new LocalTime(22, 0), new LocalTime(23, 59)));
 		dummyCustomerPrefs.setTimeIntervalsOfRest(dummyCustomerRestTimeIntervals);
 		List<DateUtility.Day> dummyRestDays = new ArrayList<DateUtility.Day>();
 		dummyRestDays.add(DateUtility.Day.Saturday);

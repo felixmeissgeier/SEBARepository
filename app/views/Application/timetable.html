@@ -39,23 +39,34 @@
     i = 0;
     for(entry in entryList){
       i++; 
-  }%
-    {
-      title: '${entry.getTitle()}',
-      %{
-        if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.BLOCKED){
-      %}
-        color: '#dddddd',
-      %{
+      println '{';
+      println 'title: \''+entry.getTitle()+'\',';
+      if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.BLOCKED){
+        println 'color: \'#dddddd\','
+      }
+      else if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+        title = entry.getTitle();
+        if(title.length()>=3){
+          r = 70+(int)title.charAt(0);
+          g = 20+(int)title.charAt(1);
+          b = 100+(int)title.charAt(2);
         }
-      %}
+        else{
+          r = 130;
+          g = 132;
+          b = 176;
+        }
+        
+        println 'color: \'rgb('+r+','+g+','+b+')\',';
+      }
+  %}
       start: new Date(${entry.getStartDateTime().getYear()},${entry.getStartDateTime().getMonthOfYear()-1},${entry.getStartDateTime().getDayOfMonth()},${entry.getStartDateTime().getHourOfDay()},${entry.getStartDateTime().getMinuteOfHour()}),
       end: new Date(${entry.getEndDateTime().getYear()},${entry.getEndDateTime().getMonthOfYear()-1},${entry.getEndDateTime().getDayOfMonth()},${entry.getEndDateTime().getHourOfDay()},${entry.getEndDateTime().getMinuteOfHour()}),
       allDay: false
-    }%{
+    }
+  %{
       if(i!=entryList.size()){
-  %}, 
-  %{   
+        print ',';
       }
     }
   %}      

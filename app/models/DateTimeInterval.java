@@ -8,6 +8,11 @@ public class DateTimeInterval implements Comparable<DateTimeInterval> {
 	protected DateTime dateTime1 = null;
 	protected DateTime dateTime2 = null;
 	
+	public DateTimeInterval(DateTimeInterval interval){
+		this.dateTime1 = interval.getStartDateTime();
+		this.dateTime2 = interval.getEndDateTime();
+	}
+	
 	public DateTimeInterval(){
 		dateTime1 = new DateTime();
 		dateTime2 = new DateTime();
@@ -29,6 +34,18 @@ public class DateTimeInterval implements Comparable<DateTimeInterval> {
 	
 	public DateTime getEndDateTime(){
 		return dateTime2;
+	}
+	
+	public void setStartDateTime(DateTime startDateTime){
+		this.dateTime1 = startDateTime;
+	}
+
+	public void setEndDateTime(DateTime endDateTime){
+		this.dateTime2 = endDateTime;
+	}
+	
+	public double getDurationInHours(){
+		return DateUtility.getMinutesOfDuration(dateTime1, dateTime2)/60.0;
 	}
 
 	@Override

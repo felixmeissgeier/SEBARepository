@@ -21,6 +21,7 @@ public class Course extends Model {
 	
 	public String title;
 	public String remarks;
+	//hours per DIFFICULTY_RELATION_PAGES_PER_X_HOURS script-pages
 	public double difficulty;
 	public double priority;
 	
