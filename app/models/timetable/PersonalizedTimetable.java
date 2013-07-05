@@ -21,59 +21,62 @@ import dto.CourseDTO;
  * 
  */
 public class PersonalizedTimetable {
-    private static final String CALENDER_SYNC_URL = "https://www.google.com/calendar/ical/schmi.kalle%40gmail.com/private-82d40d6ada06fa5825d8910c4949e64f/basic.ics";
-    private List<TimetableEntry> allEntries = null;
-    private TimeSlotScheduler timeSlotScheduler = null;
+	private static final String CALENDER_SYNC_URL = "https://www.google.com/calendar/ical/schmi.kalle%40gmail.com/private-82d40d6ada06fa5825d8910c4949e64f/basic.ics";
+	private TimeSlotScheduler timeSlotScheduler = null;
 
-    public PersonalizedTimetable(List<CourseDTO> courses) {
-//	CourseDTO agtCourse = new CourseDTO(null, "Algorithmic Game Theory", "very tough lecture..", 0.9, 1.0,
-//		new DateTime().plusWeeks(2), new CourseMaterialDTO(500, 40));
-//	CourseDTO sebaCourse = new CourseDTO(null, "SEBA", "Web App", 1.0, 1.0, new DateTime().plusWeeks(4),
-//		new CourseMaterialDTO(120, 40));
-//
-//	List<CourseDTO> courses = new ArrayList<CourseDTO>();
-//	courses.add(agtCourse);
-//	courses.add(sebaCourse);
+	public PersonalizedTimetable(List<CourseDTO> courses) {
+		// CourseDTO agtCourse = new CourseDTO(null, "Algorithmic Game Theory",
+		// "very tough lecture..", 0.9, 1.0,
+		// new DateTime().plusWeeks(2), new CourseMaterialDTO(500, 40));
+		// CourseDTO sebaCourse = new CourseDTO(null, "SEBA", "Web App", 1.0, 1.0,
+		// new DateTime().plusWeeks(4),
+		// new CourseMaterialDTO(120, 40));
+		//
+		// List<CourseDTO> courses = new ArrayList<CourseDTO>();
+		// courses.add(agtCourse);
+		// courses.add(sebaCourse);
 
-	CustomerPreferences dummyCustomerPrefs = new CustomerPreferences(DateUtility.LearningDayTime.MORNING, 1.0, 0.5,
-		0.25);
-	List<TimeInterval> dummyCustomerRestTimeIntervals = new ArrayList<TimeInterval>();
-	dummyCustomerRestTimeIntervals.add(new TimeInterval(new LocalTime(0, 0), new LocalTime(7, 0)));
-	dummyCustomerRestTimeIntervals.add(new TimeInterval(new LocalTime(22, 0), new LocalTime(23, 59)));
-	dummyCustomerPrefs.setTimeIntervalsOfRest(dummyCustomerRestTimeIntervals);
-	List<DateUtility.Day> dummyRestDays = new ArrayList<DateUtility.Day>();
-	dummyRestDays.add(DateUtility.Day.Saturday);
-	dummyRestDays.add(DateUtility.Day.Sunday);
-	dummyCustomerPrefs.setDaysOfRest(dummyRestDays);
+		CustomerPreferences dummyCustomerPrefs = new CustomerPreferences(
+				DateUtility.LearningDayTime.MORNING, 1.0, 0.5, 0.25);
+		List<TimeInterval> dummyCustomerRestTimeIntervals = new ArrayList<TimeInterval>();
+		dummyCustomerRestTimeIntervals.add(new TimeInterval(new LocalTime(0, 0), new LocalTime(7, 0)));
+		dummyCustomerRestTimeIntervals
+				.add(new TimeInterval(new LocalTime(22, 0), new LocalTime(23, 59)));
+		dummyCustomerPrefs.setTimeIntervalsOfRest(dummyCustomerRestTimeIntervals);
+		List<DateUtility.Day> dummyRestDays = new ArrayList<DateUtility.Day>();
+		dummyRestDays.add(DateUtility.Day.Saturday);
+		dummyRestDays.add(DateUtility.Day.Sunday);
+		dummyCustomerPrefs.setDaysOfRest(dummyRestDays);
 
-	timeSlotScheduler = new TimeSlotScheduler(courses, dummyCustomerPrefs);
-    }
-
-    private List<TimetableEntry> importExternalCalendarData() {
-	List<TimetableEntry> receivedEntries = null;
-	GoogleCalendarConnector calConnector = null;
-	try {
-	    calConnector = new GoogleCalendarConnector(new URL(CALENDER_SYNC_URL));
-	} catch (MalformedURLException e) {
-	    throw new RuntimeException(e);
+		timeSlotScheduler = new TimeSlotScheduler(courses, dummyCustomerPrefs);
 	}
 
-	calConnector.receiveCalendarFeed();
-	CalendarFeed feed = calConnector.getCalendarFeed();
+	private List<TimetableEntry> importExternalCalendarData() {
+		List<TimetableEntry> receivedEntries = null;
+		GoogleCalendarConnector calConnector = null;
+		try {
+			calConnector = new GoogleCalendarConnector(new URL(CALENDER_SYNC_URL));
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
 
-	if (feed != null) {
-	    receivedEntries = feed.getTimetableEntryList();
+		calConnector.receiveCalendarFeed();
+		CalendarFeed feed = calConnector.getCalendarFeed();
+
+		if (feed != null) {
+			receivedEntries = feed.getTimetableEntryList();
+		}
+
+		return receivedEntries;
+
 	}
 
-	return receivedEntries;
-
-    }
-
-    public List<TimetableEntry> scheduleTimeSlots() {
-	List<TimetableEntry> receivedEntries = importExternalCalendarData();
-	if (timeSlotScheduler != null) {
-	    allEntries = timeSlotScheduler.scheduleTimeSlots(receivedEntries);
+	public ScheduledTimetableEntryList scheduleTimeSlots() {
+		List<TimetableEntry> receivedEntries = importExternalCalendarData();
+		ScheduledTimetableEntryList allEntries = null;
+		if (timeSlotScheduler != null) {
+			allEntries = timeSlotScheduler.scheduleTimeSlots(receivedEntries);
+		}
+		return allEntries;
 	}
-	return allEntries;
-    }
 }
