@@ -1,5 +1,6 @@
 package dto;
 
+import java.awt.Color;
 import java.util.Random;
 
 import models.Course;
@@ -19,6 +20,7 @@ public class CourseDTO implements Comparable<CourseDTO> {
 	private double priority;
 	private DateTime deadline;
 	private String hint;
+	private Color color;
 
 	private boolean periodicExercisesNeeded;
 	private double exerciseHoursPerWeek;
@@ -29,7 +31,7 @@ public class CourseDTO implements Comparable<CourseDTO> {
 	}
 
 	public CourseDTO(Long id, String title, String remarks, double difficulty,
-			double priority, DateTime deadline, CourseMaterialDTO courseMaterial) {
+			double priority, DateTime deadline, CourseMaterialDTO courseMaterial, Color color) {
 		this.id = id;
 		this.title = title;
 		this.remarks = remarks;
@@ -37,12 +39,21 @@ public class CourseDTO implements Comparable<CourseDTO> {
 		this.priority = priority;
 		this.deadline = deadline;
 		this.courseMaterial = courseMaterial;
+		if(color!=null){
+			this.color = color;
+		}
+		else{
+			this.color = new Color((int) (Math.random() * 250), (int) (Math.random() * 250), (int) (Math.random() * 250));
+		}
 	}
 
 	public CourseDTO(Course cource) {
 		this(cource.id, cource.title, cource.remarks, cource.difficulty,
 				cource.priority, new DateTime(cource.deadline.getTime()),
-				new CourseMaterialDTO(cource.courseMaterial));
+				new CourseMaterialDTO(cource.courseMaterial),null);
+		if(cource.color!=-1){
+			this.color = new Color(cource.color);
+		}
 	}
 
 	public Long getId() {
@@ -156,5 +167,13 @@ public class CourseDTO implements Comparable<CourseDTO> {
 
 	public void setHint(String hint) {
 		this.hint = hint;
+	}
+	
+	public void setColor(Color color){
+		this.color = color;
+	}
+	
+	public Color getColor(){
+		return this.color;
 	}
 }

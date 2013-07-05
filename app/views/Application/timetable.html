@@ -46,19 +46,17 @@
       }
       else if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
         title = entry.getTitle();
-        if(title.length()>=3 && false){
-          r = (int)title.charAt(0);
-          g = 20+(int)title.charAt(1);
-          b = 100+(int)title.charAt(2);
-        }
-        else{
-          r = entry.getColor().getRed();
-          g = entry.getColor().getGreen();
-          b = entry.getColor().getBlue();
-          
-        }
+        r = entry.getColor().getRed();
+        g = entry.getColor().getGreen();
+        b = entry.getColor().getBlue();
         
         println 'color: \'rgb('+r+','+g+','+b+')\',';
+      }
+      else if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.EXTERNAL){
+        println 'color: \'#aaaaaa\','
+      }
+      else if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_BREAKSLOT){
+        println 'color: \'#FAFAFA\','
       }
   %}
       start: new Date(${entry.getStartDateTime().getYear()},${entry.getStartDateTime().getMonthOfYear()-1},${entry.getStartDateTime().getDayOfMonth()},${entry.getStartDateTime().getHourOfDay()},${entry.getStartDateTime().getMinuteOfHour()}),

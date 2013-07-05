@@ -1,8 +1,14 @@
 package models;
 
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +26,7 @@ public class Course extends Model {
     public String remarks;
     public double difficulty;
     public double priority;
+    public int color = -1;
 
     @NotNull
     @As(lang = { "*" }, value = { "yyyy-MM-dd HH:mm" })
