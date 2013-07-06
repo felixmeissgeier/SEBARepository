@@ -42,7 +42,7 @@
       println '{';
       println 'title: \''+entry.getTitle()+'\',';
       if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.BLOCKED){
-        println 'color: \'#dddddd\','
+        println 'color: \'#EEEEEE\','
       }
       else if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
         title = entry.getTitle();
@@ -61,7 +61,8 @@
   %}
       start: new Date(${entry.getStartDateTime().getYear()},${entry.getStartDateTime().getMonthOfYear()-1},${entry.getStartDateTime().getDayOfMonth()},${entry.getStartDateTime().getHourOfDay()},${entry.getStartDateTime().getMinuteOfHour()}),
       end: new Date(${entry.getEndDateTime().getYear()},${entry.getEndDateTime().getMonthOfYear()-1},${entry.getEndDateTime().getDayOfMonth()},${entry.getEndDateTime().getHourOfDay()},${entry.getEndDateTime().getMinuteOfHour()}),
-      allDay: false
+      allDay: false,
+      description: '${entry.getDescription()}'
     }
   %{
       if(i!=entryList.getScheduledTimeSlotList().size()){
@@ -116,4 +117,3 @@
 
 ${errorString}
 <br>
-

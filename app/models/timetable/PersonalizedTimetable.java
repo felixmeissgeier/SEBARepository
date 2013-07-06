@@ -37,7 +37,7 @@ public class PersonalizedTimetable {
 		// courses.add(sebaCourse);
 
 		CustomerPreferences dummyCustomerPrefs = new CustomerPreferences(
-				DateUtility.LearningDayTime.MORNING, 1.0, 0.5, 0.25);
+				DateUtility.LearningDayTime.AFTERNOON, 1.0, 0.5, 0.25);
 		List<TimeInterval> dummyCustomerRestTimeIntervals = new ArrayList<TimeInterval>();
 		dummyCustomerRestTimeIntervals.add(new TimeInterval(new LocalTime(0, 0), new LocalTime(7, 0)));
 		dummyCustomerRestTimeIntervals
