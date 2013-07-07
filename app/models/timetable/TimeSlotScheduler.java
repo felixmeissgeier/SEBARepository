@@ -67,12 +67,15 @@ public class TimeSlotScheduler {
 	 */
 	private ScheduledTimetableEntryList computeCourseLearningSlots(ScheduledTimetableEntryList currentTimetableEntryList, CourseDTO course) {
 		List<TimetableEntry> currentTimetable = currentTimetableEntryList.getScheduledTimeSlotList();
-		ScheduledTimetableEntryList.ScheduleStatus status;
+		ScheduledTimetableEntryList.ScheduleStatus status = ScheduledTimetableEntryList.ScheduleStatus.SUCCESS;
 		currentCourseColor = course.getColor();
+		if(course.getDeadline().isBefore((new DateTime().plusDays(1)))){
+			status = ScheduledTimetableEntryList.ScheduleStatus.ERROR_DEADLINE_IN_PAST;
+		}
 
 		// compute timeslots where scheduling is possible
 		List<DateTimeInterval> freeTimeSlots = computeFreeTimeSlots(currentTimetable, course.getDeadline());
-		if(freeTimeSlots.size()>0){
+		if(freeTimeSlots.size()>0 && status!=ScheduledTimetableEntryList.ScheduleStatus.ERROR_DEADLINE_IN_PAST){
 			Collections.sort(freeTimeSlots);
 			Collections.sort(currentTimetable);
 	
@@ -123,7 +126,7 @@ public class TimeSlotScheduler {
 							// add new timetable entry (learn time slot) to
 							// timetable entry list
 							hoursToSchedule -= learningSlotDurationMinutes / 60.0;
-							TimetableEntry learnSlotEntry = new TimetableEntry("1"+course.getTitle(), "Learning Slot", currentInterval.getStartDateTime(), currentInterval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor);
+							TimetableEntry learnSlotEntry = new TimetableEntry(course.getTitle(), "Learning Slot", currentInterval.getStartDateTime(), currentInterval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor);
 							scheduledWorkLoad.add(learnSlotEntry);
 							scheduledWorkLoad.add(new TimetableEntry("Break", "", learnSlotEntry.getEndDateTime(), learnSlotEntry.getEndDateTime().plusMinutes((int)(neededHoursBreak*60.0)), TimetableEntryType.SCHEDULED_BREAKSLOT, null));	
 						} else {
@@ -204,7 +207,7 @@ public class TimeSlotScheduler {
 								}
 								if (learningSlotDurationMinutes != 0) {
 									hoursToSchedule -= learningSlotDurationMinutes / 60.0;
-									TimetableEntry learnSlotEntry = new TimetableEntry("2"+course.getTitle(), "Learning Slot", interval.getStartDateTime(), interval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor); 
+									TimetableEntry learnSlotEntry = new TimetableEntry(course.getTitle(), "Learning Slot", interval.getStartDateTime(), interval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor); 
 									scheduledWorkLoad.add(learnSlotEntry);
 									scheduledWorkLoad.add(new TimetableEntry("Break", "", learnSlotEntry.getEndDateTime(), learnSlotEntry.getEndDateTime().plusMinutes((int)(neededHoursBreak*60.0)), TimetableEntryType.SCHEDULED_BREAKSLOT, null));	
 									break;
@@ -234,7 +237,7 @@ public class TimeSlotScheduler {
 			// apply previous additions to timetable and recompute free time slots
 			//TODO: maybe not they fully correct approach to bluntly iterate simply over free time slots -> better considering best
 			//time slots (daytime) each day..
-			if (hoursToSchedule > 0) {
+			while (hoursToSchedule > 0) {
 				freeTimeSlots = computeFreeTimeSlots(currentTimetable, course.getDeadline());
 				Collections.sort(freeTimeSlots);
 				int day = 0;
@@ -261,7 +264,7 @@ public class TimeSlotScheduler {
 						} else {
 							duration = (int) (neededHoursMinSlot * 60);
 						}
-						TimetableEntry learnSlotEntry = new TimetableEntry("3"+course.getTitle(), "Learning Slot", interval.getStartDateTime(), interval.getStartDateTime().plusMinutes(duration), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor);
+						TimetableEntry learnSlotEntry = new TimetableEntry(course.getTitle(), "Learning Slot", interval.getStartDateTime(), interval.getStartDateTime().plusMinutes(duration), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor);
 						currentTimetable.add(learnSlotEntry);
 						currentTimetable.add(new TimetableEntry("Break", "", learnSlotEntry.getEndDateTime(), learnSlotEntry.getEndDateTime().plusMinutes((int)(neededHoursBreak*60.0)), TimetableEntryType.SCHEDULED_BREAKSLOT, null));	
 						hoursToSchedule -= duration / 60.0;
@@ -281,7 +284,9 @@ public class TimeSlotScheduler {
 			}
 		}
 		else{
-			status = ScheduleStatus.ERROR_NO_FREETIME_SLOTS;
+			if(status!=ScheduleStatus.ERROR_DEADLINE_IN_PAST){
+				status = ScheduleStatus.ERROR_NO_FREETIME_SLOTS;
+			}
 		}
 		currentTimetableEntryList.setScheduledTimeSlotList(currentTimetable);
 		currentTimetableEntryList.addCourseScheduleStatus(course.getTitle(), status);

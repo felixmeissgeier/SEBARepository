@@ -88,7 +88,7 @@ Course(c1):
   difficulty: 3.0
   priority: 1.0
   color: 0x33C5FF
-  deadline: "2013-07-22 14:00"
+  deadline: "2013-09-22 14:00"
   periodicExercisesNeeded: true
   courseMaterial: cm1
 
@@ -108,7 +108,7 @@ Course(c3):
   difficulty: 1.0
   priority: 0.7
   color: 0x39E912
-  deadline: "2013-07-17 19:00"
+  deadline: "2013-07-10 19:00"
   periodicExercisesNeeded: true
   courseMaterial: cm3
   

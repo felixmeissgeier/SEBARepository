@@ -9,7 +9,8 @@ public class ScheduledTimetableEntryList {
 	public enum ScheduleStatus{
 		SUCCESS,
 		ERROR_REACHED_DEADLINE,
-		ERROR_NO_FREETIME_SLOTS
+		ERROR_NO_FREETIME_SLOTS,
+		ERROR_DEADLINE_IN_PAST
 	}
 	
 	private List<TimetableEntry> scheduledTimetableEntryList;

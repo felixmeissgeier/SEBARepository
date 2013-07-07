@@ -15,7 +15,7 @@
   </style>     
 #{/set}
 #{set 'pageScripts'}
-  <script src="@{'/public/javascripts/fullcalendar.min.js'}"></script>
+  <script src="@{'/public/javascripts/fullcalendar.js'}"></script>
   <script>
 
   $(document).ready(function() {
@@ -79,20 +79,65 @@
 #{/set}
 
 %{
-  statusAlert = '';
+  failureCourses = '';
+  courseStats = '';
+  courseSuccessCount = 0;
   for(statusKey in entryList.getCourseScheduleStatusList().keySet()){
     status = entryList.getCourseScheduleStatusList().get(statusKey).toString();
-    if(!status.equals('SUCCESS')){
-     statusAlert += statusKey+' //  Status: '+status+'<br>';
+    if(status.equals('SUCCESS')){
+      courseSuccessCount++;
+      courseStats +=  '<tr><td>'+statusKey+'</td><td><span class=\'label label-success\'>Success</span></td><td>Course was successfully scheduled</td></tr>';
+    }
+    else{
+     if(status.equals('ERROR_REACHED_DEADLINE')){
+      courseStats +=  '<tr><td>'+statusKey+'</td><td><span class=\'label label-important\'>Deadline Reached</span></td><td>Deadline was reached during scheduling. Reason may be too much workload.</td></tr>';
+     }
+     else if(status.equals('ERROR_NO_FREETIME_SLOTS')){
+      courseStats +=  '<tr><td>'+statusKey+'</td><td><span class=\'label label-important\'>No Freetime Slots</span></td><td>There are no time slots between start date and deadline to schedule learn slots.</td></tr>';
+     }
+     else if(status.equals('ERROR_DEADLINE_IN_PAST')){
+      courseStats +=  '<tr><td>'+statusKey+'</td><td><span class=\'label label-important\'>Deadline Located In Past</span></td><td>Deadline of the certain course is before start date.</td></tr>';
+     }
+     if(!failureCourses.equals('')){
+      failureCourses += ', ';
+     }
+     failureCourses += statusKey;
     }
   }
-  if(!statusAlert.equals('')){
-    print '<div class=\'alert alert-error\'><b>Following courses couldn\'t be scheduled:</b><br>'+statusAlert+'</div>';
+  if(statusAlert.equals('')){
+    print '<div class=\'alert alert-success\'><b>All '+courseSuccessCount+' courses were successfully scheduled</b><button class=\'btn btn-primary\' type=\'button\'>Reschedule</button>';
+    print '<br><a href=\'';
+    %}
+      @{Application.timetable()}
+    %{
+    print '\' class=\'btn btn-primary btn-right\' type=\'button\'>Reschedule</a></div>';  
+  }
+  else{ 
+    print '<div class=\'alert alert-error\'><b>Following courses couldn\'t be scheduled (for further information see below):</b> '+failureCourses;
+    print '<br><br><a href=\'';
+    %}
+      @{Application.timetable()}
+    %{
+    print '\' class=\'btn btn-primary btn-right\' type=\'button\'>Reschedule</a></div>';  
   }
 %}
-    
-<div id='calendar'></div>
 
+<div id='calendar'></div>
+<br><br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Course</th><th>Schedule-Status</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    %{
+      print courseStats;
+    %}
+  </tbody>
+</table>  
+
+<!--
 <br><br>
 <table class="table table-hover">
   <thead>
@@ -116,4 +161,5 @@
 </table>	
 
 ${errorString}
+-->
 <br>

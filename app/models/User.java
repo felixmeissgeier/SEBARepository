@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -39,6 +40,11 @@ public class User extends Model {
     public boolean sharedTimetable;
     public boolean deadlineEmail;
     public boolean learnSlotEmail;
+    
+    //to be implemented
+    //public String privateCalendarURL;
+    //public CustomerPreferences preferences;
+    
 
     public ServiceSubscriptionPeriod serviceSubscriptionPeriod;
     @As(lang = { "*" }, value = { "yyyy-MM-dd HH:mm" })

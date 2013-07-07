@@ -7,7 +7,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import models.Course;
+import models.DateUtility;
 import models.User;
 import models.timetable.PersonalizedTimetable;
 import models.timetable.ScheduledTimetableEntryList;
