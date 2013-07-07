@@ -40,9 +40,9 @@
 </script>
 
 #{form @Application.courses()}
-<button class="btn" type="submit" #{if user.isFreeUser() && coursesList.size() > 0} disabled #{/if}>Add a new course</button>
+<button class="btn" type="submit" #{if !user.isPaidUser() && coursesList.size() > 0} disabled #{/if}>Add a new course</button>
 
-#{if user.isFreeUser() && coursesList.size() > 0} 
+#{if !user.isPaidUser() && coursesList.size() > 0} 
 <div class="course-limit-reached">
 	The number of courses you already have is ${coursesList.size()}. 
 	Your current plan does not allow to add a new course. Please

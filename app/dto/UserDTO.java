@@ -23,7 +23,7 @@ public class UserDTO {
     private boolean sharedTimetable;
     private boolean deadlineEmail;
     private boolean learnSlotEmail;
-    private boolean freeUser;
+    private boolean paidUser;
     private String subscriptionPeriod;
     private String subscriptionExpires;
     private int subscriptionMonths;
@@ -54,7 +54,7 @@ public class UserDTO {
 	this.subscriptionPeriod = UserHelper.subscriptionPeriodToText(user.serviceSubscriptionPeriod);
 	this.subscriptionMonths = UserHelper.subscriptionPeriodToMonths(user.serviceSubscriptionPeriod);
 	this.subscriptionExpires = UserHelper.expirationDateToString(user.subscriptionExpires);
-	this.freeUser = (user.subscriptionExpires == null || user.subscriptionExpires.before(new Date())); 
+	this.paidUser = (user.subscriptionExpires != null && user.subscriptionExpires.after(new Date())); 
     }
 
     public String getName() {
@@ -141,7 +141,7 @@ public class UserDTO {
 	return subscriptionMonths;
     }
     
-    public boolean isFreeUser() {
-	return freeUser;
+    public boolean isPaidUser() {
+	return paidUser;
     }
 }
