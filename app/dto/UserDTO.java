@@ -1,5 +1,7 @@
 package dto;
 
+import helper.UserHelper;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,13 +23,10 @@ public class UserDTO {
     private boolean sharedTimetable;
     private boolean deadlineEmail;
     private boolean learnSlotEmail;
+    private boolean freeUser;
     private String subscriptionPeriod;
     private String subscriptionExpires;
-    private String pfree;
-    private String p1;
-    private String p3;
-    private String p6;
-    private String p12;
+    private int subscriptionMonths;
 
     public UserDTO(String name, String email, String password, String question,
 	    String answer, String userpic, boolean sharedTimetable,
@@ -52,40 +51,10 @@ public class UserDTO {
 	this.deadlineEmail = user.deadlineEmail;
 	this.learnSlotEmail = user.learnSlotEmail;
 	
-	this.subscriptionPeriod = getSubscriptionPeriod(user.serviceSubscriptionPeriod);
-	this.subscriptionExpires = getSubscriptionExpirationDate(user.subscriptionExpires);
-    }
-
-    private String getSubscriptionExpirationDate(Date expirationDate) {
-	
-	if (expirationDate == null || expirationDate.before(new Date())) {
-	    return "forever";
-	}
-	
-	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-	return sdf.format(expirationDate);
-    }
-
-    private String getSubscriptionPeriod(ServiceSubscriptionPeriod serviceSubscriptionPeriod) {
-	switch (serviceSubscriptionPeriod) {
-	case FREE:
-	    pfree = "checked";
-	    return "Free";
-	case ONE_MONTH:
-	    p1 = "checked";
-	    return "1 month";
-	case THREE_MONTHS:
-	    p3 = "checked";
-	    return "3 months";
-	case SIX_MONTHS:
-	    p6 = "checked";
-	    return "6 months";
-	case TWELWE_MONTHS:
-	    p12 = "checked";
-	    return "12 months";
-	default:
-	    return "";
-	}
+	this.subscriptionPeriod = UserHelper.subscriptionPeriodToText(user.serviceSubscriptionPeriod);
+	this.subscriptionMonths = UserHelper.subscriptionPeriodToMonths(user.serviceSubscriptionPeriod);
+	this.subscriptionExpires = UserHelper.expirationDateToString(user.subscriptionExpires);
+	this.freeUser = (user.subscriptionExpires == null || user.subscriptionExpires.before(new Date())); 
     }
 
     public String getName() {
@@ -168,23 +137,11 @@ public class UserDTO {
 	this.subscriptionPeriod = subscriptionPeriod;
     }
     
-    public String getPfree() {
-	return pfree;
+    public int getSubscriptionMonths() {
+	return subscriptionMonths;
     }
     
-    public String getP1() {
-	return p1;
-    }
-    
-    public String getP3() {
-	return p3;
-    }
-    
-    public String getP6() {
-	return p6;
-    }
-    
-    public String getP12() {
-	return p12;
+    public boolean isFreeUser() {
+	return freeUser;
     }
 }

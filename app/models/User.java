@@ -37,7 +37,6 @@ public class User extends Model {
     public String answer;
 
     public boolean sharedTimetable;
-
     public boolean deadlineEmail;
     public boolean learnSlotEmail;
 

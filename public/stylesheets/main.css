@@ -170,3 +170,23 @@ body {
 .recurring-payment input {
 	margin: 0 5px 1px 0 !important;
 }
+
+.personal-data-table TD {
+	padding: 0 30px 6px 0;
+}
+
+.personal-data-table TD IMG {
+	padding: 6px 0;
+}
+
+.personal-data-table TD BUTTON {
+	margin: 5px 10px 10px 10px;
+}
+.personal-data-table TD BUTTON.submit {
+	margin: 15px 0 10px 0;
+}
+
+.course-limit-reached {
+	padding: 10px 0 10px 0;
+	font-size: smaller;
+}

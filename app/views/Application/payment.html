@@ -6,12 +6,13 @@
 #{extends 'Application/settings.html' /}
 
 <div class="settings-block">
-	<div class="settings-block-entry">Actual payment plan: ${user.subscriptionPeriod}</div>
-	<div class="settings-block-entry">Payment is active till: ${user.subscriptionExpires}</div>
+	<div class="settings-block-entry">Actual payment plan: ${userSettings.subscriptionPeriod}</div>
+	<div class="settings-block-entry">Payment is active till: ${userSettings.subscriptionExpires}</div>
 </div>
 
 <h4>Renew your payment</h4>
 
+#{form @Application.updatePaymentStatus(), method:'POST', class:'navbar-form pull-left'}
 <table class="table table-hover">
 	<tr>
 		<th></th>
@@ -20,31 +21,31 @@
 		<th>Price</th>
 	<tr>
 	<tr>
-		<td><input type="radio" name="payment" ${user.pfree} /></td>
+		<td><input type="radio" name="payment" value="0" #{if userSettings.subscriptionMonths == 0 } checked #{/if} /></td>
 		<td>Free membership</td>
 		<td>Manage 1 course</td>
 		<td>Free</td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="payment" ${user.p1} /></td>
+		<td><input type="radio" name="payment" value="1" #{if userSettings.subscriptionMonths == 1 } checked #{/if} /></td>
 		<td>1 month</td>
 		<td>Unlimited courses + community access</td>
 		<td>5 &euro;</td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="payment" ${user.p3} /></td>
+		<td><input type="radio" name="payment" value="3" #{if userSettings.subscriptionMonths == 3 } checked #{/if} /></td>
 		<td>3 months</td>
 		<td>Unlimited courses + community access</td>
 		<td>10 &euro;</td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="payment" ${user.p6} /></td>
+		<td><input type="radio" name="payment" value="6" #{if userSettings.subscriptionMonths == 6 } checked #{/if} /></td>
 		<td>6 months</td>
 		<td>Unlimited courses + community access</td>
 		<td>15 &euro;</td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="payment" ${user.p12} /></td>
+		<td><input type="radio" name="payment" value="12" #{if userSettings.subscriptionMonths == 12 } checked #{/if} /></td>
 		<td>12 months</td>
 		<td>Unlimited courses + community access</td>
 		<td>20 &euro;</td>
@@ -59,4 +60,5 @@
 		<button type="submit" class="btn">Continue</button>
 	</div>
 </div> 
-<div class="settings-block-entry">The time will be added to your current expiration date.</div> 
+<div class="settings-block-entry">The time will be added to your current expiration date.</div>
+#{/form} 

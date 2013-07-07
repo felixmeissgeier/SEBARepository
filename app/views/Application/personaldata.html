@@ -5,4 +5,66 @@
 %}
 #{extends 'Application/settings.html' /}
 
-Personal Data placeholder
+<!-- 
+<div class="settings-block">
+	<div class="settings-block-entry">Actual payment plan: ${user.subscriptionPeriod}</div>
+	<div class="settings-block-entry">Payment is active till: ${user.subscriptionExpires}</div>
+</div>
+ -->
+
+
+#{ifErrors}
+    <p class="error">
+        Please correct these errors.
+    </p>
+#{/ifErrors}
+#{form @Application.savePersonalData(), method:'POST', id:'userSettingsForm', class:'navbar-form pull-left'}
+	<table class="personal-data-table">
+		<tr>
+			<td><label class="control-label">Name:</label></td>
+			<td>
+				#{field 'name'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${userSettings.name}"  />
+					<span class="help-inline">#{error 'name' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">E-mail:</label></td>
+			<td>
+				#{field 'email'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${userSettings.email}"  />
+					<span class="help-inline">#{error 'email' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">User image:</td>
+			<td valign="top">
+				<img src="@{'/public/userpic'}/${userSettings.userpic}" width="100" height="100" border="0" alt="" align="left" />
+				<button class="btn">Upload a new image</button>
+				
+			</td>
+		</tr>
+		<tr>
+			<td>Shared timetable:</td>
+			<td><input type="checkbox" name="sharedTimetable" value="true" #{if userSettings.sharedTimetable } checked #{/if} /></td>
+		</tr>
+		<tr>
+			<td>Send emails for deadlines:</td>
+			<td><input type="checkbox" name="deadlineEmail" value="true" #{if userSettings.deadlineEmail } checked #{/if} /></td>
+		</tr>
+		<tr>
+			<td>Send emails for slots:</td>
+			<td><input type="checkbox" name="learnSlotEmail" value="true" #{if userSettings.learnSlotEmail } checked #{/if} /></td>
+		</tr>
+		<tr>
+			<td><button type="submit" class="btn submit">Save Settings</button></td>
+			<td></td>
+		</tr>
+	</table>
+#{/form}

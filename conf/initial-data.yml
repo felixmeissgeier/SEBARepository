@@ -28,6 +28,20 @@ User(u2):
   serviceSubscriptionPeriod: ${controllers.subtypes.ServiceSubscriptionPeriod.TWELWE_MONTHS}
   subscriptionExpires: "2014-01-12 08:51"
 
+User(u3):
+  name: Andread Steiner 
+  email: ka@ka.com
+  password: "5ba5167eab3cb2ed2b679c3971045d462b8a169a" # "pwd"
+  salt: "abd"
+  question: "Third pet's name"
+  answer: "Queequeg 3"
+  sharedTimetable: true
+  deadlineEmail: false
+  learnSlotEmail: false
+  userpic: 03.jpg
+  serviceSubscriptionPeriod: ${controllers.subtypes.ServiceSubscriptionPeriod.FREE}
+  subscriptionExpires: null
+
 # Course Materials
 
 CourseMaterial(cm1):

@@ -16,7 +16,7 @@
   <tbody>
   %{
     i = 0;
-    for(course in coursesList){
+    for (course in coursesList) {
       i++; 
   }%
   
@@ -38,3 +38,16 @@
 	  });
 	});
 </script>
+
+#{form @Application.courses()}
+<button class="btn" type="submit" #{if user.isFreeUser() && coursesList.size() > 0} disabled #{/if}>Add a new course</button>
+
+#{if user.isFreeUser() && coursesList.size() > 0} 
+<div class="course-limit-reached">
+	The number of courses you already have is ${coursesList.size()}. 
+	Your current plan does not allow to add a new course. Please
+	upgrade your plan to be able to add more courses.
+</div>
+#{/if}
+
+#{/form}

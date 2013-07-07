@@ -18,9 +18,13 @@ public class BaseController extends Controller {
     static void setConnectedUser() {
 	if (Security.isConnected()) {
 	    User user = User.find("byEmail", Security.connected()).first();
-	    UserDTO userDto = new UserDTO(user);
-	    renderArgs.put("user", userDto);
+	    if (user == null) {
+		// No such user, logging out
+		session.remove(Security.SESSION_USERID);
+	    } else {
+		UserDTO userDto = new UserDTO(user);
+		renderArgs.put("user", userDto);
+	    }
 	}
     }
-
 }
