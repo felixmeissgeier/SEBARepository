@@ -261,11 +261,10 @@ public class TimeSlotScheduler {
 			// apply previous additions to timetable and recompute free time slots
 			//TODO: maybe not they fully correct approach to bluntly iterate simply over free time slots -> better considering best
 			//time slots (daytime) each day..
-			while (hoursToSchedule > 0 && freeTimeSlots.size()!=0) {
+			while (hoursToSchedule > 0 && freeTimeSlots.size()!=0 && status != ScheduleStatus.ERROR_MAX_WORKLOAD_HOURS_REACHED) {
 				freeTimeSlots = computeFreeTimeSlots(currentTimetable, course.getDeadline());
 				Collections.sort(freeTimeSlots);
 				int day = 0;
-				int maxWorkloadHoursReachedCounter = 0;
 				for (DateTimeInterval interval : freeTimeSlots) {
 					if (interval.getStartDateTime().getDayOfYear() > day) {
 						day = interval.getStartDateTime().getDayOfYear();
@@ -296,15 +295,14 @@ public class TimeSlotScheduler {
 							currentTimetable.add(learnSlotEntry);
 							currentTimetable.add(new TimetableEntry("Break", "", learnSlotEntry.getEndDateTime(), learnSlotEntry.getEndDateTime().plusMinutes((int)(neededHoursBreak*60.0)), TimetableEntryType.SCHEDULED_BREAKSLOT, null));	
 							hoursToSchedule -= duration / 60.0;
-							//increaseScheduledDayHours(isDifficultCourse,interval.getStartDateTime().getDayOfYear(), duration/60.0);							
+							increaseScheduledDayHours(isDifficultCourse,interval.getStartDateTime().getDayOfYear(), duration/60.0);							
 						}
-						else{
-							maxWorkloadHoursReachedCounter++;
-						}
+						
 						if(day>=course.getDeadline().getDayOfYear()){
 							status = ScheduleStatus.ERROR_MAX_WORKLOAD_HOURS_REACHED;
 							break;
 						}
+						
 						day++;
 					}
 					if (hoursToSchedule == 0) {

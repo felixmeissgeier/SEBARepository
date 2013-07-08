@@ -98,6 +98,9 @@
      else if(status.equals('ERROR_DEADLINE_IN_PAST')){
       courseStats +=  '<tr><td>'+statusKey+'</td><td><span class=\'label label-important\'>Deadline Located In Past</span></td><td>Deadline of the certain course is before start date.</td></tr>';
      }
+     else if(status.equals('ERROR_MAX_WORKLOAD_HOURS_REACHED')){
+      courseStats +=  '<tr><td>'+statusKey+'</td><td><span class=\'label label-important\'>Maximum Workload Exceeded</span></td><td>Maximum workload hours each day has been exceeded.</td></tr>';
+     }
      if(!failureCourses.equals('')){
       failureCourses += ', ';
      }
