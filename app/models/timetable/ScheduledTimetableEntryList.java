@@ -10,7 +10,8 @@ public class ScheduledTimetableEntryList {
 		SUCCESS,
 		ERROR_REACHED_DEADLINE,
 		ERROR_NO_FREETIME_SLOTS,
-		ERROR_DEADLINE_IN_PAST
+		ERROR_DEADLINE_IN_PAST,
+		ERROR_MAX_WORKLOAD_HOURS_REACHED
 	}
 	
 	private List<TimetableEntry> scheduledTimetableEntryList;

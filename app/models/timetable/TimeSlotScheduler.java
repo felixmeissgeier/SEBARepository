@@ -3,6 +3,7 @@ package models.timetable;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import models.CustomerPreferences;
@@ -14,6 +15,7 @@ import models.timetable.ScheduledTimetableEntryList.ScheduleStatus;
 import models.timetable.TimetableEntry.TimetableEntryType;
 
 import org.joda.time.DateTime;
+import org.joda.time.Hours;
 
 import dto.CourseDTO;
 
@@ -24,6 +26,8 @@ import dto.CourseDTO;
 public class TimeSlotScheduler {
 
 	public static final int DIFFICULTY_RELATION_PAGES_PER_X_HOURS = 10;
+	public static final double MAX_DIFFICULT_LEARN_HOURS_PER_DAY = 4.0;
+	public static final double MAX_LEARN_HOURS_PER_DAY = 8.0;	
 
 	private List<CourseDTO> courses;
 	private CustomerPreferences customerPreferences;
@@ -33,6 +37,11 @@ public class TimeSlotScheduler {
 	private double neededHoursMaxSlot = 0;
 	private double neededHoursMinSlot = 0;	
 	private Color currentCourseColor = new Color(0, 0, 0);
+	
+	//map<dayOfYear, accumulatedHours>
+	private HashMap<Integer, Double> dayHoursOfDifficultCourses = new HashMap<Integer, Double>();
+	private HashMap<Integer, Double> dayHoursOfEasyCourses = new HashMap<Integer, Double>();
+		
 
 	public TimeSlotScheduler(List<CourseDTO> courses, CustomerPreferences customerPreferences) {
 		this.courses = courses;
@@ -66,6 +75,7 @@ public class TimeSlotScheduler {
 	 * Computes learning time slots for each course
 	 */
 	private ScheduledTimetableEntryList computeCourseLearningSlots(ScheduledTimetableEntryList currentTimetableEntryList, CourseDTO course) {
+		boolean isDifficultCourse = (course.getDifficulty()>0.5)?true:false;
 		List<TimetableEntry> currentTimetable = currentTimetableEntryList.getScheduledTimeSlotList();
 		ScheduledTimetableEntryList.ScheduleStatus status = ScheduledTimetableEntryList.ScheduleStatus.SUCCESS;
 		currentCourseColor = course.getColor();
@@ -123,12 +133,19 @@ public class TimeSlotScheduler {
 							learningSlotDurationMinutes = (int) (hoursToSchedule * 60);
 						}
 						if (learningSlotDurationMinutes != 0) {
-							// add new timetable entry (learn time slot) to
-							// timetable entry list
-							hoursToSchedule -= learningSlotDurationMinutes / 60.0;
-							TimetableEntry learnSlotEntry = new TimetableEntry(course.getTitle(), "Learning Slot", currentInterval.getStartDateTime(), currentInterval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor);
-							scheduledWorkLoad.add(learnSlotEntry);
-							scheduledWorkLoad.add(new TimetableEntry("Break", "", learnSlotEntry.getEndDateTime(), learnSlotEntry.getEndDateTime().plusMinutes((int)(neededHoursBreak*60.0)), TimetableEntryType.SCHEDULED_BREAKSLOT, null));	
+							double hoursUntilThreshold = hoursUntilWorkloadDayThresholdExceedance(isDifficultCourse,currentInterval.getStartDateTime().getDayOfYear());
+							if(hoursUntilThreshold>=neededHoursMinSlot){
+								if(hoursUntilThreshold<(learningSlotDurationMinutes/60.0)){
+									learningSlotDurationMinutes = (int)(hoursUntilThreshold*60.0);
+								}
+								// add new timetable entry (learn time slot) to
+								// timetable entry list
+								hoursToSchedule -= learningSlotDurationMinutes / 60.0;
+								increaseScheduledDayHours(isDifficultCourse,currentInterval.getStartDateTime().getDayOfYear(),learningSlotDurationMinutes / 60.0);
+								TimetableEntry learnSlotEntry = new TimetableEntry(course.getTitle(), "Learning Slot", currentInterval.getStartDateTime(), currentInterval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor);
+								scheduledWorkLoad.add(learnSlotEntry);
+								scheduledWorkLoad.add(new TimetableEntry("Break", "", learnSlotEntry.getEndDateTime(), learnSlotEntry.getEndDateTime().plusMinutes((int)(neededHoursBreak*60.0)), TimetableEntryType.SCHEDULED_BREAKSLOT, null));	
+							}
 						} else {
 							// if free timeslot is too small
 							tryNextIntervalSameDay = true;
@@ -206,11 +223,18 @@ public class TimeSlotScheduler {
 									learningSlotDurationMinutes = (int) (hoursToSchedule * 60);
 								}
 								if (learningSlotDurationMinutes != 0) {
-									hoursToSchedule -= learningSlotDurationMinutes / 60.0;
-									TimetableEntry learnSlotEntry = new TimetableEntry(course.getTitle(), "Learning Slot", interval.getStartDateTime(), interval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor); 
-									scheduledWorkLoad.add(learnSlotEntry);
-									scheduledWorkLoad.add(new TimetableEntry("Break", "", learnSlotEntry.getEndDateTime(), learnSlotEntry.getEndDateTime().plusMinutes((int)(neededHoursBreak*60.0)), TimetableEntryType.SCHEDULED_BREAKSLOT, null));	
-									break;
+									double hoursUntilThreshold = hoursUntilWorkloadDayThresholdExceedance(isDifficultCourse,interval.getStartDateTime().getDayOfYear());
+									if(hoursUntilThreshold>=neededHoursMinSlot){
+										if(hoursUntilThreshold<(learningSlotDurationMinutes/60.0)){
+											learningSlotDurationMinutes = (int)(hoursUntilThreshold*60.0);
+										}
+										hoursToSchedule -= learningSlotDurationMinutes / 60.0;
+										increaseScheduledDayHours(isDifficultCourse,interval.getStartDateTime().getDayOfYear(),learningSlotDurationMinutes / 60.0);
+										TimetableEntry learnSlotEntry = new TimetableEntry(course.getTitle(), "Learning Slot", interval.getStartDateTime(), interval.getStartDateTime().plusMinutes(learningSlotDurationMinutes), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor); 
+										scheduledWorkLoad.add(learnSlotEntry);
+										scheduledWorkLoad.add(new TimetableEntry("Break", "", learnSlotEntry.getEndDateTime(), learnSlotEntry.getEndDateTime().plusMinutes((int)(neededHoursBreak*60.0)), TimetableEntryType.SCHEDULED_BREAKSLOT, null));	
+										break;
+									}
 								}
 							}
 							freeTimeSlotIterator++;
@@ -237,10 +261,11 @@ public class TimeSlotScheduler {
 			// apply previous additions to timetable and recompute free time slots
 			//TODO: maybe not they fully correct approach to bluntly iterate simply over free time slots -> better considering best
 			//time slots (daytime) each day..
-			while (hoursToSchedule > 0) {
+			while (hoursToSchedule > 0 && freeTimeSlots.size()!=0) {
 				freeTimeSlots = computeFreeTimeSlots(currentTimetable, course.getDeadline());
 				Collections.sort(freeTimeSlots);
 				int day = 0;
+				int maxWorkloadHoursReachedCounter = 0;
 				for (DateTimeInterval interval : freeTimeSlots) {
 					if (interval.getStartDateTime().getDayOfYear() > day) {
 						day = interval.getStartDateTime().getDayOfYear();
@@ -264,10 +289,22 @@ public class TimeSlotScheduler {
 						} else {
 							duration = (int) (neededHoursMinSlot * 60);
 						}
-						TimetableEntry learnSlotEntry = new TimetableEntry(course.getTitle(), "Learning Slot", interval.getStartDateTime(), interval.getStartDateTime().plusMinutes(duration), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor);
-						currentTimetable.add(learnSlotEntry);
-						currentTimetable.add(new TimetableEntry("Break", "", learnSlotEntry.getEndDateTime(), learnSlotEntry.getEndDateTime().plusMinutes((int)(neededHoursBreak*60.0)), TimetableEntryType.SCHEDULED_BREAKSLOT, null));	
-						hoursToSchedule -= duration / 60.0;
+						
+						double hoursUntilThreshold = hoursUntilWorkloadDayThresholdExceedance(isDifficultCourse,interval.getStartDateTime().getDayOfYear());
+						if(hoursUntilThreshold>=neededHoursMinSlot){
+							TimetableEntry learnSlotEntry = new TimetableEntry(course.getTitle(), "Learning Slot", interval.getStartDateTime(), interval.getStartDateTime().plusMinutes(duration), TimetableEntryType.SCHEDULED_LEARNINGSLOT, currentCourseColor);
+							currentTimetable.add(learnSlotEntry);
+							currentTimetable.add(new TimetableEntry("Break", "", learnSlotEntry.getEndDateTime(), learnSlotEntry.getEndDateTime().plusMinutes((int)(neededHoursBreak*60.0)), TimetableEntryType.SCHEDULED_BREAKSLOT, null));	
+							hoursToSchedule -= duration / 60.0;
+							//increaseScheduledDayHours(isDifficultCourse,interval.getStartDateTime().getDayOfYear(), duration/60.0);							
+						}
+						else{
+							maxWorkloadHoursReachedCounter++;
+						}
+						if(day>=course.getDeadline().getDayOfYear()){
+							status = ScheduleStatus.ERROR_MAX_WORKLOAD_HOURS_REACHED;
+							break;
+						}
 						day++;
 					}
 					if (hoursToSchedule == 0) {
@@ -276,11 +313,8 @@ public class TimeSlotScheduler {
 				}
 			}
 			
-			if(hoursToSchedule>0){
+			if(hoursToSchedule>0 && status==ScheduleStatus.SUCCESS){
 				status = ScheduleStatus.ERROR_REACHED_DEADLINE;
-			}
-			else{
-				status = ScheduleStatus.SUCCESS;
 			}
 		}
 		else{
@@ -292,7 +326,45 @@ public class TimeSlotScheduler {
 		currentTimetableEntryList.addCourseScheduleStatus(course.getTitle(), status);
 		return currentTimetableEntryList;
 	}
+	
+	private void increaseScheduledDayHours(boolean checkDifficultCourses, int dayOfYear, double scheduledHours){
+		if(checkDifficultCourses==true){
+			if(dayHoursOfDifficultCourses.containsKey(dayOfYear)){
+				dayHoursOfDifficultCourses.put(dayOfYear, dayHoursOfDifficultCourses.get(dayOfYear)+scheduledHours);
+			}
+			else{
+				dayHoursOfDifficultCourses.put(dayOfYear, scheduledHours);	
+			}
+		}
+		else{
+			if(dayHoursOfEasyCourses.containsKey(dayOfYear)){
+				dayHoursOfEasyCourses.put(dayOfYear, dayHoursOfEasyCourses.get(dayOfYear)+scheduledHours);
+			}
+			else{
+				dayHoursOfEasyCourses.put(dayOfYear, scheduledHours);	
+			}
+		}
+	}
 
+	private double hoursUntilWorkloadDayThresholdExceedance(boolean checkDifficultCourses, int dayOfYear){
+		if(checkDifficultCourses==true){
+			if(dayHoursOfDifficultCourses.containsKey(dayOfYear)){
+				return MAX_DIFFICULT_LEARN_HOURS_PER_DAY-dayHoursOfDifficultCourses.get(dayOfYear);
+			}
+			else{
+				return MAX_DIFFICULT_LEARN_HOURS_PER_DAY;
+			}
+		}
+		else{
+			if(dayHoursOfEasyCourses.containsKey(dayOfYear)){
+				return MAX_LEARN_HOURS_PER_DAY-MAX_DIFFICULT_LEARN_HOURS_PER_DAY-dayHoursOfEasyCourses.get(dayOfYear);
+			}
+			else{
+				return MAX_LEARN_HOURS_PER_DAY-MAX_DIFFICULT_LEARN_HOURS_PER_DAY;
+			}
+		}
+	}
+	
 	/**
 	 * Returns the duration of all free time slots (as a sum of the subdurations).
 	 */

@@ -95,7 +95,7 @@ Course(c1):
 Course(c2):
   title: "Masters practicum course"
   remarks: "Remarks for course B"
-  difficulty: 1.2
+  difficulty: 0.8
   priority: 1.0
   color: 0xFBC411
   deadline: "2013-09-01 12:00"
@@ -105,7 +105,7 @@ Course(c2):
 Course(c3):
   title: "Efficient Algorithms and Data Structures"
   remarks: "Remarks for course C"
-  difficulty: 1.0
+  difficulty: 0.3
   priority: 0.7
   color: 0x39E912
   deadline: "2013-07-10 19:00"
@@ -125,7 +125,7 @@ Course(c4):
 Course(c5):
   title: "Spanish"
   remarks: "Remarks for course E"
-  difficulty: 1.0
+  difficulty: 0.2
   priority: 0.6
   color: 0xCD43FF
   deadline: "2013-06-30 12:00"
@@ -135,7 +135,7 @@ Course(c5):
 Course(c6):
   title: "Distributed Systems"
   remarks: "Remarks for course F"
-  difficulty: 0.8
+  difficulty: 0.2
   priority: 1.0
   color: 0x448FFF
   deadline: "2013-07-08 12:00"
