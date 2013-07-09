@@ -8,22 +8,43 @@ body {
   /* The html and body elements cannot have any padding or margin. */
 }
 
+.banner-placeholder{
+	height: 130px;
+}
+
+.nav > li > a{
+	font-size: 15px;
+}
+.nav > li > a:hover, .nav > li > a:focus{
+    background-color: rgba(230,230,230,0.5);
+}
+.nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus {
+    background-color: rgba(0, 136, 204,0.5);
+}
+
+
 .page-header{
-	background: white;
-	margin-top: 0px;
+	/*http://1.bp.blogspot.com/-EcrxS_sVaAM/UOZ8QMOPl3I/AAAAAAAAAHk/5ppz-KXK57Y/s1600/Tips-for-better-time-management.jpg*/
+	background-image: url('../images/banner.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: white;
+	min-width: 800px;
+	min-height: 100px;
+	margin: 0 auto;
 	padding-bottom: 0px;
 }
 
 .page-header h1{
   margin-top: 0px;
-  padding-top: 10px;
+  padding-top: 0px;
 }
 
 .page-header .banner {
 	font-size: 20px;
 	font-weight:bold;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 	/* margin-bottom: -115px; */
 }
 
@@ -78,7 +99,7 @@ body {
 }
 
 .right-header-box {
-	width: 320px;
+	width: 230px;
 }
 
 .right-header-box a {
@@ -92,7 +113,7 @@ body {
 .right-header-box .userpic {
 	float: left;
 	width: 100px;
-	margin-right: 15px;
+	margin-right: 10px;
 	margin-top: 3px;
 }
 

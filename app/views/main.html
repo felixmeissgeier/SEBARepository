@@ -9,9 +9,12 @@
           		
           	</div>
           	<div>
-	            Hi ${user.name}, <br />nice to see you!<br>
+	            Hi 
+	            %{
+	             print user.name.split(' ')[0];
+	            %}, <br />nice to see you!<br>
 	            <div class="right-header-link-box">
-	            	<a href="@{Application.settings()}">Settings</a><span class="menu-link-separator">&#8226;</span><a href="@{Secure.logout()}">Log Out</a>
+	            	<a href="@{Application.settings()}">Settings</a><span class="menu-link-separator">&#8226;</span><a href="@{Secure.logout()}">Logout</a>
 	            </div>
 	        </div>
           </div>
