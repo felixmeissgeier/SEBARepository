@@ -1,5 +1,8 @@
 package models;
 
+import javax.persistence.ManyToMany;
+
+import org.hibernate.annotations.CascadeType;
 import org.joda.time.DateTime;
 import org.joda.time.DurationFieldType;
 import org.joda.time.Period;

@@ -2,11 +2,12 @@ package dto;
 
 import helper.UserHelper;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import controllers.subtypes.ServiceSubscriptionPeriod;
+import models.CustomerPreferences;
 import models.User;
+
+import org.apache.commons.lang.ArrayUtils;
 
 /**
  * DTO for a user object used to transfer the data between controllers and
@@ -27,6 +28,8 @@ public class UserDTO {
     private String subscriptionPeriod;
     private String subscriptionExpires;
     private int subscriptionMonths;
+    private String privateCalendarURL;
+    private CustomerPreferences preferences;
 
     public UserDTO(String name, String email, String password, String question,
 	    String answer, String userpic, boolean sharedTimetable,
@@ -39,6 +42,8 @@ public class UserDTO {
 	this.sharedTimetable = sharedTimetable;
 	this.deadlineEmail = deadlineEmail;
 	this.learnSlotEmail = learnSlotEmail;
+	
+	System.out.println("!!!!!!!!!! EMPTY CONSTRUCTOR");
     }
 
     public UserDTO(User user) {
@@ -54,7 +59,10 @@ public class UserDTO {
 	this.subscriptionPeriod = UserHelper.subscriptionPeriodToText(user.serviceSubscriptionPeriod);
 	this.subscriptionMonths = UserHelper.subscriptionPeriodToMonths(user.serviceSubscriptionPeriod);
 	this.subscriptionExpires = UserHelper.expirationDateToString(user.subscriptionExpires);
-	this.paidUser = (user.subscriptionExpires != null && user.subscriptionExpires.after(new Date())); 
+	this.paidUser = (user.subscriptionExpires != null && user.subscriptionExpires.after(new Date()));
+	
+	this.privateCalendarURL = user.privateCalendarURL;
+	this.preferences = user.preferences;
     }
 
     public String getName() {
@@ -143,5 +151,13 @@ public class UserDTO {
     
     public boolean isPaidUser() {
 	return paidUser;
+    }
+    
+    public String getPrivateCalendarURL() {
+	return privateCalendarURL;
+    }
+    
+    public CustomerPreferences getPreferences() {
+	return preferences;
     }
 }

@@ -55,8 +55,7 @@ public class Application extends BaseController {
 	}
 
 	public static void settings(String category) {
-		String currentUser = session.get(Security.SESSION_USERID);
-		User user = User.find("byEmail", currentUser).first();
+		User user = getConnectedUser();
 		UserDTO userDto = new UserDTO(user);
 		renderArgs.put("userSettings", userDto);
 
@@ -70,10 +69,7 @@ public class Application extends BaseController {
 	}
 
 	public static void savePersonalData() {
-
-		String currentUserId = session.get(Security.SESSION_USERID);
-		User currentUser = User.find("byEmail", currentUserId).first();
-
+		User currentUser = getConnectedUser();
 		String name = params.get("name");
 		String email = params.get("email");
 		boolean sharedTimetable = getBooleanValue(params.get("sharedTimetable"));
@@ -131,8 +127,7 @@ public class Application extends BaseController {
 		}
 
 		if (payment > 0) {
-			String currentUserId = session.get(Security.SESSION_USERID);
-			User currentUser = User.find("byEmail", currentUserId).first();
+			User currentUser = getConnectedUser();
 
 			currentUser.serviceSubscriptionPeriod = UserHelper.monthsToSubscriptionPeriod(payment);
 			if (!currentUser.serviceSubscriptionPeriod.equals(ServiceSubscriptionPeriod.FREE)) {
@@ -162,7 +157,8 @@ public class Application extends BaseController {
 			CourseDTO courseDTO = new CourseDTO(course);
 			coursesList.add(courseDTO);
 		}
-		PersonalizedTimetable timetable = new PersonalizedTimetable(coursesList);
+		User user = getConnectedUser();
+		PersonalizedTimetable timetable = new PersonalizedTimetable(user, coursesList);
 		ScheduledTimetableEntryList entryList = timetable.scheduleTimeSlots();
 
 		render("Application/timetable.html", entryList);
@@ -176,7 +172,8 @@ public class Application extends BaseController {
 			CourseDTO courseDTO = new CourseDTO(course);
 			coursesList.add(courseDTO);
 		}
-		PersonalizedTimetable timetable = new PersonalizedTimetable(coursesList);
+		User user = getConnectedUser();
+		PersonalizedTimetable timetable = new PersonalizedTimetable(user, coursesList);
 		ScheduledTimetableEntryList entryList = timetable.scheduleTimeSlots();
 		render("Application/statistics.html", entryList, coursesList);
 	}

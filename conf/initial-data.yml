@@ -13,6 +13,14 @@ User(u1):
   userpic: 01.jpg
   serviceSubscriptionPeriod: ${controllers.subtypes.ServiceSubscriptionPeriod.SIX_MONTHS}
   subscriptionExpires: "2013-08-24 16:22"
+  privateCalendarURL: "https://www.google.com/calendar/ical/schmi.kalle%40gmail.com/private-82d40d6ada06fa5825d8910c4949e64f/basic.ics"
+  preferences:
+    maxLearningSlotDuration: 2.0
+    minLearningSlotDuration: 0.5
+    breakDuration: 0.2
+    intervalsOfRest: [0, 0, 12, 0, 22, 0, 23, 59]
+    daysOfRest:
+      - ${models.DateUtility.Day.Sunday}
 
 User(u2):
   name: Klaus 2
@@ -27,9 +35,17 @@ User(u2):
   userpic: 02.jpg
   serviceSubscriptionPeriod: ${controllers.subtypes.ServiceSubscriptionPeriod.TWELWE_MONTHS}
   subscriptionExpires: "2014-01-12 08:51"
+  privateCalendarURL: "https://www.google.com/calendar/ical/schmi.kalle%40gmail.com/private-82d40d6ada06fa5825d8910c4949e64f/basic.ics"
+  preferences:
+    maxLearningSlotDuration: 3.0
+    minLearningSlotDuration: 1.0
+    breakDuration: 0.5
+    intervalsOfRest: [0, 0, 10, 0, 22, 0, 23, 59]
+    daysOfRest:
+      - ${models.DateUtility.Day.Sunday}
 
 User(u3):
-  name: Andread Steiner 
+  name: Andreas Steiner 
   email: ka@ka.com
   password: "5ba5167eab3cb2ed2b679c3971045d462b8a169a" # "pwd"
   salt: "abd"
@@ -41,6 +57,15 @@ User(u3):
   userpic: 03.jpg
   serviceSubscriptionPeriod: ${controllers.subtypes.ServiceSubscriptionPeriod.FREE}
   subscriptionExpires: null
+  privateCalendarURL: "https://www.google.com/calendar/ical/schmi.kalle%40gmail.com/private-82d40d6ada06fa5825d8910c4949e64f/basic.ics"
+  preferences:
+    maxLearningSlotDuration: 2.0
+    minLearningSlotDuration: 0.5
+    breakDuration: 0.25
+    intervalsOfRest: [0, 0, 7, 0, 19, 0, 23, 59]
+    daysOfRest:
+      - ${models.DateUtility.Day.Sunday}
+      - ${models.DateUtility.Day.Saturday}
 
 # Course Materials
 

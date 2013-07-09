@@ -1,10 +1,8 @@
 package models;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 
 import play.data.binding.As;
 import play.data.validation.Email;
@@ -41,10 +39,8 @@ public class User extends Model {
     public boolean deadlineEmail;
     public boolean learnSlotEmail;
     
-    //to be implemented
-    //public String privateCalendarURL;
-    //public CustomerPreferences preferences;
-    
+    public String privateCalendarURL;
+    public CustomerPreferences preferences;
 
     public ServiceSubscriptionPeriod serviceSubscriptionPeriod;
     @As(lang = { "*" }, value = { "yyyy-MM-dd HH:mm" })

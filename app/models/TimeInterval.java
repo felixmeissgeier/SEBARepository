@@ -1,5 +1,9 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.Embeddable;
+
 import org.joda.time.LocalTime;
 
 /**
@@ -7,6 +11,7 @@ import org.joda.time.LocalTime;
  * intervals in the time schedule.
  * 
  */
+@Embeddable
 public class TimeInterval implements Comparable<TimeInterval> {
 
     private LocalTime time1 = null;
@@ -48,6 +53,25 @@ public class TimeInterval implements Comparable<TimeInterval> {
 	    return 1;
 	}
 	return 0;
+    }
+    
+    public void setT1(List<Integer> t) {
+	if (t != null && t.size() >= 2) { 
+	    System.out.println("*** T1: " + t.get(0) + " -- " + t.get(1));
+	    this.time1 = new LocalTime(t.get(0), t.get(1));
+	}
+    }
+    
+    public void setT2(List<Integer> t) {
+	if (t != null && t.size() >= 2) { 
+	    System.out.println("*** T2: " + t.get(0) + " -- " + t.get(1));
+	    this.time2 = new LocalTime(t.get(0), t.get(1));
+	}
+    }
+
+    @Override
+    public String toString() {
+	return String.format("[%d:%d - %d:%d]", time1.getHourOfDay(), time1.getMinuteOfHour(), time2.getHourOfDay(), time2.getMinuteOfHour());
     }
 
 }
