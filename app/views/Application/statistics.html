@@ -1,0 +1,228 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+#{set timeTableNavActive:'' /}
+#{set myCoursesNavActive: '' /}
+#{set statisticNavActive: 'active' /}
+
+#{set 'pageStyles'}
+
+  <style>
+
+
+  </style>     
+#{/set}
+#{set 'pageScripts'}
+  <script src="@{'/public/javascripts/highcharts.js'}"></script>
+  <script src="@{'/public/javascripts/bootstrap-carousel.js'}"></script>
+    <script type="text/javascript">
+$(function () {
+        $('#blockchart').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Hours Of Day - Block Chart'
+            },
+            
+            xAxis: {
+              type: 'datetime',
+
+              labels: {
+                      rotation: -90,
+                      align: 'right'
+              }
+              
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Hours Of Day'
+                }
+            },
+            plotOptions: {
+              series: {
+                  pointWidth: 5,
+                  pointPadding: 0.7
+              }
+            },
+            legend: {
+                backgroundColor: '#FFFFFF',
+            },
+                series: [
+             
+            %{
+            startDate = new org.joda.time.DateTime().plusYears(1);
+            for(entry in entryList.getScheduledTimeSlotList()){
+              if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                if(entry.getStartDateTime().isBefore(startDate)){
+                  startDate = entry.getStartDateTime();
+                }
+              }
+            }
+            courseCount = 0;
+            for(courseName in entryList.getCourseScheduleStatusList().keySet()){
+              if(courseCount!=0){
+                print ',';
+              }
+              print '{';
+              println 'pointInterval: 24 * 3600 * 1000,';
+              month = startDate.getMonthOfYear()-1;
+              year = startDate.getYear();
+              println 'pointStart: Date.UTC('+year+', '+month+','+startDate.getDayOfMonth()+'),';
+              println 'name: \''+courseName+'\',';
+              globalCourse = new dto.CourseDTO();
+              for(course in coursesList){
+                if(course.getTitle().equals(courseName)){
+                  globalCourse = course;
+                  break;
+                }
+              }
+              rgb = Integer.toHexString(globalCourse.getColor().getRGB());
+              rgb = rgb.substring(2, rgb.length());
+              println 'color: \'#'+rgb+'\',';
+              print 'data: [';
+              currentDayOfYear = 0;
+              hoursOfDay = 0;
+              dayCount = 0;
+              for(entry in entryList.getScheduledTimeSlotList()){
+                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                  if(currentDayOfYear<entry.getStartDateTime().getDayOfYear()){
+                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
+                    if(dayCount!=0){
+                      print ',';
+                    }
+                    print hoursOfDay;
+                    hoursOfDay = 0;
+                    dayCount++;
+                  }
+                  if(entry.getTitle().equals(courseName)){
+                    hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
+                  }
+                }
+              }
+              print ']';
+              println '}';
+              courseCount++;
+            }
+            %}                
+            ]
+        });
+
+        $('#linechart').highcharts({
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Hours Of Day -Line Chart'
+            },
+            
+            xAxis: {
+              type: 'datetime',
+
+              labels: {
+                      rotation: -90,
+                      align: 'right'
+              }
+              
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Hours Of Day'
+                }
+            },
+            plotOptions: {
+              series: {
+                  pointWidth: 5,
+                  pointPadding: 0.7
+              }
+            },
+            legend: {
+                backgroundColor: '#FFFFFF',
+            },
+                series: [
+             
+            %{
+            startDate = new org.joda.time.DateTime().plusYears(1);
+            for(entry in entryList.getScheduledTimeSlotList()){
+              if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                if(entry.getStartDateTime().isBefore(startDate)){
+                  startDate = entry.getStartDateTime();
+                }
+              }
+            }
+            courseCount = 0;
+            for(courseName in entryList.getCourseScheduleStatusList().keySet()){
+              if(courseCount!=0){
+                print ',';
+              }
+              print '{';
+              println 'pointInterval: 24 * 3600 * 1000,';
+              month = startDate.getMonthOfYear()-1;
+              year = startDate.getYear();
+              println 'pointStart: Date.UTC('+year+', '+month+','+startDate.getDayOfMonth()+'),';
+              println 'name: \''+courseName+'\',';
+              globalCourse = new dto.CourseDTO();
+              for(course in coursesList){
+                if(course.getTitle().equals(courseName)){
+                  globalCourse = course;
+                  break;
+                }
+              }
+              rgb = Integer.toHexString(globalCourse.getColor().getRGB());
+              rgb = rgb.substring(2, rgb.length());
+              println 'color: \'#'+rgb+'\',';
+              print 'data: [';
+              currentDayOfYear = 0;
+              hoursOfDay = 0;
+              dayCount = 0;
+              for(entry in entryList.getScheduledTimeSlotList()){
+                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                  if(currentDayOfYear<entry.getStartDateTime().getDayOfYear()){
+                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
+                    if(dayCount!=0){
+                      print ',';
+                    }
+                    print hoursOfDay;
+                    hoursOfDay = 0;
+                    dayCount++;
+                  }
+                  if(entry.getTitle().equals(courseName)){
+                    hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
+                  }
+                }
+              }
+              print ']';
+              println '}';
+              courseCount++;
+            }
+            %}                
+            ]
+        });
+ });
+    
+    </script>
+
+#{/set}
+
+
+<div id="myCarousel" class="carousel slide">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+  </ol>
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <div id="blockchart"  style="width: 800px; height: 400px; margin: 0 auto;"></div>
+      </div>
+      <div class="item" >
+        <div id="linechart" style="width: 800px; height: 400px; margin: 0 auto;"></div>
+      </div>
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+
+

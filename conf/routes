@@ -22,6 +22,8 @@ GET     /timetable                              Application.timetable
 GET     /courses                                Application.courses
 GET     /courses/{id}                           Application.course
 GET     /settings                               Application.settings
+GET     /statistics                             Application.statistics
+
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
