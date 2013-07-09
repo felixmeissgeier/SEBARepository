@@ -51,6 +51,84 @@
 			</td>
 		</tr>
 		<tr>
+			<td><label class="control-label">External calendar link:</label></td>
+			<td>
+				#{field 'calendarURL'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${userSettings.privateCalendarURL}"  />
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Maximal slot duration (hours):</label></td>
+			<td>
+				#{field 'maxSlotDuration'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${userSettings.preferences.maxLearningSlotDuration}"  />
+					<span class="help-inline">#{error 'maxSlotDuration' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Minimal slot duration (hours):</label></td>
+			<td>
+				#{field 'minSlotDuration'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${userSettings.preferences.minLearningSlotDuration}"  />
+					<span class="help-inline">#{error 'minSlotDuration' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Break duration (hours):</label></td>
+			<td>
+				#{field 'breakDuration'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${userSettings.preferences.breakDuration}"  />
+					<span class="help-inline">#{error 'breakDuration' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Days of rest:</label></td>
+			<td>
+				#{field 'daysOfRest'}
+				<div class="control-group">
+					<select class="multiselect" multiple="multiple" name="daysOfRest">
+					  <option value="monday" #{if userSettings.daysOfRestIndexes.contains('monday')} selected #{/if}>Monday</option>
+					  <option value="tuesday" #{if userSettings.daysOfRestIndexes.contains('tuesday')} selected #{/if}>Tuesday</option>
+					  <option value="wednesday" #{if userSettings.daysOfRestIndexes.contains('wednesday')} selected #{/if}>Wednesday</option>
+					  <option value="thursday" #{if userSettings.daysOfRestIndexes.contains('thursday')} selected #{/if}>Thursday</option>
+					  <option value="friday" #{if userSettings.daysOfRestIndexes.contains('friday')} selected #{/if}>Friday</option>
+					  <option value="saturday" #{if userSettings.daysOfRestIndexes.contains('saturday')} selected #{/if}>Saturday</option>
+					  <option value="sunday" #{if userSettings.daysOfRestIndexes.contains('sunday')} selected #{/if}>Sunday</option>
+					</select>				
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Rest intervals during a day:</label><br /><br /></td>
+			<td>
+				#{field 'breakDuration'}
+				<div class="control-group">
+					<div class="bootstrap-timepicker">
+						<input id="timepicker1" data-minute-step="1" type="text" class="input-small" name="starttime1" value="${userSettings.startTime1}" /> &#151;
+						<input id="timepicker2" data-minute-step="1" type="text" class="input-small" name="endtime1" value="${userSettings.endTime1}" />
+					</div>
+					<div class="bootstrap-timepicker">
+						<input id="timepicker3" data-minute-step="1" type="text" class="input-small" name="starttime2" value="${userSettings.startTime2}" /> &#151; 
+						<input id="timepicker4" data-minute-step="1" type="text" class="input-small" name="endtime2" value="${userSettings.endTime2}"  />
+					</div>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
 			<td>Shared timetable:</td>
 			<td><input type="checkbox" name="sharedTimetable" value="true" #{if userSettings.sharedTimetable } checked #{/if} /></td>
 		</tr>
@@ -62,9 +140,63 @@
 			<td>Send emails for slots:</td>
 			<td><input type="checkbox" name="learnSlotEmail" value="true" #{if userSettings.learnSlotEmail } checked #{/if} /></td>
 		</tr>
+
+
 		<tr>
 			<td><button type="submit" class="btn submit">Save Settings</button></td>
 			<td></td>
 		</tr>
 	</table>
 #{/form}
+    <script type="text/javascript">
+        $('#timepicker1').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 10,
+            showMeridian: false
+        });
+        $('#timepicker2').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 10,
+            showMeridian: false
+        });
+        $('#timepicker3').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 10,
+            showMeridian: false
+        });
+        $('#timepicker4').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 10,
+            showMeridian: false
+        });
+    </script>		
+	<script type="text/javascript">
+	  // Code sourse: http://davidstutz.github.io/bootstrap-multiselect/
+	  $(document).ready(function() {
+	    $('.multiselect').multiselect({
+	      buttonClass: 'btn',
+	      buttonWidth: 'auto',
+	      buttonContainer: '<div class="btn-group" />',
+	      maxHeight: false,
+	      buttonText: function(options) {
+	        if (options.length == 0) {
+	          return 'None selected <b class="caret"></b>';
+	        }
+	        else if (options.length > 3) {
+	          return options.length + ' selected  <b class="caret"></b>';
+	        }
+	        else {
+	          var selected = '';
+	          options.each(function() {
+	            selected += $(this).text() + ', ';
+	          });
+	          return selected.substr(0, selected.length -2) + ' <b class="caret"></b>';
+	        }
+	      }
+	    });
+	  });
+	</script>

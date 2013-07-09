@@ -87,7 +87,6 @@ public class CustomerPreferences {
     }
 
     public void setDaysOfRest(List<Day> daysOfRest) {
-	System.out.println("> setting day of rest: " + Arrays.toString(daysOfRest.toArray()));
 	this.daysOfRest = daysOfRest;
     }
 

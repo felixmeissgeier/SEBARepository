@@ -6,6 +6,7 @@ validation.required = This field cannot be empty
 validation.email = The email address is invalid
 validation.captcha = The security code is incorrect
 validation.user.exists = A user with this email already exists
+validation.settings.incorrect.float.value = The entered value is incorrect
 
 secure.signin = Log In
 secure.error = Login failed. Email or password are incorrect.
