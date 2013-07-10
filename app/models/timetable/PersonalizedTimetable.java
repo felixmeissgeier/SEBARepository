@@ -2,12 +2,14 @@ package models.timetable;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import models.User;
 import models.calendar.CalendarFeed;
 import models.calendar.GoogleCalendarConnector;
 import dto.CourseDTO;
+import exception.ExternalSynchronizationFailedException;
 
 /**
  * Represents a timetable for a single user. The timetable is built based on the
@@ -31,19 +33,21 @@ public class PersonalizedTimetable {
 	 *         calendar
 	 */
 	private List<TimetableEntry> importExternalCalendarData() {
-		List<TimetableEntry> receivedEntries = null;
-		GoogleCalendarConnector calConnector = null;
-		try {
-			calConnector = new GoogleCalendarConnector(new URL(user.privateCalendarURL));
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
-
-		calConnector.receiveCalendarFeed();
-		CalendarFeed feed = calConnector.getCalendarFeed();
-
-		if (feed != null) {
-			receivedEntries = feed.getTimetableEntryList();
+		List<TimetableEntry> receivedEntries = new ArrayList<TimetableEntry>();
+		
+		if (user.privateCalendarURL != null && !user.privateCalendarURL.isEmpty()) {
+			GoogleCalendarConnector calConnector = null;
+			try {
+				calConnector = new GoogleCalendarConnector(new URL(user.privateCalendarURL));
+				calConnector.receiveCalendarFeed();
+				CalendarFeed feed = calConnector.getCalendarFeed();
+		
+				if (feed != null) {
+					receivedEntries = feed.getTimetableEntryList();
+				}
+			} catch (Exception e) {
+				throw new ExternalSynchronizationFailedException(e, e.getMessage());
+			}
 		}
 
 		return receivedEntries;

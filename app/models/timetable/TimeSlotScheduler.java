@@ -464,6 +464,9 @@ public class TimeSlotScheduler {
 	 */
 	private List<TimetableEntry> addBlockedTimeSlots(List<TimetableEntry> timetableEntries, DateTime deadline) {
 		List<TimetableEntry> extendedTimetableEntries = timetableEntries;
+		if (extendedTimetableEntries == null) {
+			extendedTimetableEntries = new ArrayList<TimetableEntry>();
+		}
 		Collections.sort(extendedTimetableEntries);
 		DateTime date = new DateTime();
 		List<TimeInterval> restTimeIntervals = customerPreferences.getTimeIntervalsOfRest();

@@ -1,8 +1,10 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 import play.data.binding.As;
 import play.data.validation.Email;
@@ -44,5 +46,8 @@ public class User extends Model {
 	public ServiceSubscriptionPeriod serviceSubscriptionPeriod;
 	@As(lang = { "*" }, value = { "yyyy-MM-dd HH:mm" })
 	public Date subscriptionExpires;
+
+	@ManyToMany
+	public List<Course> courses;
 	// CSON: VisibilityModifierCheck
 }

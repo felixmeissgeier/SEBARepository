@@ -23,6 +23,7 @@ import controllers.subtypes.ServiceSubscriptionPeriod;
 import dto.CourseDTO;
 import dto.CourseMaterialDTO;
 import dto.UserDTO;
+import exception.ExternalSynchronizationFailedException;
 
 /**
  * Main controller of the application. Handles requests to the all content
@@ -44,18 +45,20 @@ public class Application extends BaseController {
 	}
 
 	public static void courses() {
-		List<Course> courses = Course.findAll();
+		List<Course> courses = getConnectedUser().courses;
 		List<CourseDTO> coursesList = new ArrayList<CourseDTO>();
-		for (Course course : courses) {
-			CourseDTO courseDTO = new CourseDTO(course);
-			coursesList.add(courseDTO);
+		if (courses != null) {
+			for (Course course : courses) {
+				CourseDTO courseDTO = new CourseDTO(course);
+				coursesList.add(courseDTO);
+			}
 		}
 
 		render("Application/courses.html", coursesList);
 	}
 
 	public static void course(Long id) {
-		Course course = Course.findById(id);
+		Course course = findCourseForUser(id);
 		if (course == null) {
 			redirect("Application.courses");
 		} else {
@@ -66,10 +69,14 @@ public class Application extends BaseController {
 	}
 
 	public static void courseSettings(Long id) {
-		Course course = Course.findById(id);
-		CourseDTO courseDTO = new CourseDTO(course);
-		renderArgs.put("course", courseDTO);
-		render("Application/course-settings.html");
+		Course course = findCourseForUser(id);
+		if (course == null) {
+			redirect("Application.courses");
+		} else {
+			CourseDTO courseDTO = new CourseDTO(course);
+			renderArgs.put("course", courseDTO);
+			render("Application/course-settings.html");
+		}
 	}
 
 	public static void settings(String category) {
@@ -186,7 +193,8 @@ public class Application extends BaseController {
 				currentUser.preferences.setDaysOfRest(new ArrayList<DateUtility.Day>());
 			}
 
-			currentUser.preferences.getTimeIntervalsOfRest().addAll(userDto.getPreferences().getTimeIntervalsOfRest());
+			currentUser.preferences.getTimeIntervalsOfRest().addAll(
+					userDto.getPreferences().getTimeIntervalsOfRest());
 			currentUser.preferences.getDaysOfRest().addAll(userDto.getPreferences().getDaysOfRest());
 
 			currentUser.save();
@@ -217,8 +225,7 @@ public class Application extends BaseController {
 		Course course = null;
 		try {
 			long id = Long.parseLong(idValue);
-			// --> get course & check user
-			course = Course.findById(id);
+			course = findCourseForUser(id);
 			if (course == null) {
 				throw new Exception("No course with such ID exists");
 			}
@@ -250,8 +257,8 @@ public class Application extends BaseController {
 			courseMaterial.setConsiderExpectedHours(considerExpectedHours);
 			courseMaterial.setWorkloadHoursExpected((float) getDoubleValue(workloadHoursExpectedValue));
 
-			CourseDTO courseDto = new CourseDTO(course.getId(), title, remarks, difficulty, priority, new DateTime(
-					deadline.getTime()), courseMaterial, color, periodicExercisesNeeded);
+			CourseDTO courseDto = new CourseDTO(course.getId(), title, remarks, difficulty, priority,
+					new DateTime(deadline.getTime()), courseMaterial, color, periodicExercisesNeeded);
 			renderArgs.put("course", courseDto);
 			render("Application/course-settings.html");
 		} else {
@@ -313,29 +320,41 @@ public class Application extends BaseController {
 	}
 
 	public static void timetable() {
-		List<Course> courses = Course.findAll();
+		User user = getConnectedUser();
+		List<Course> courses = user.courses;
 		List<CourseDTO> coursesList = new ArrayList<CourseDTO>();
 
-		for (Course course : courses) {
-			CourseDTO courseDTO = new CourseDTO(course);
-			coursesList.add(courseDTO);
+		if (courses != null) {
+			for (Course course : courses) {
+				CourseDTO courseDTO = new CourseDTO(course);
+				coursesList.add(courseDTO);
+			}
 		}
-		User user = getConnectedUser();
-		PersonalizedTimetable timetable = new PersonalizedTimetable(user, coursesList);
-		ScheduledTimetableEntryList entryList = timetable.scheduleTimeSlots();
 
-		render("Application/timetable.html", entryList);
+		try {
+			PersonalizedTimetable timetable = new PersonalizedTimetable(user, coursesList);
+			ScheduledTimetableEntryList entryList = timetable.scheduleTimeSlots();
+			render("Application/timetable.html", entryList);
+		} catch (ExternalSynchronizationFailedException e) {
+			renderArgs.put(
+					"error",
+					String.format("Unable to connecto to the external calendar. %s: %s", e.getCause()
+							.getClass().getName(), e.getMessage()));
+			render("Application/timetable-error.html");
+		}
 	}
 
 	public static void statistics() {
-		List<Course> courses = Course.findAll();
+		User user = getConnectedUser();
+		List<Course> courses = user.courses;
 		List<CourseDTO> coursesList = new ArrayList<CourseDTO>();
 
-		for (Course course : courses) {
-			CourseDTO courseDTO = new CourseDTO(course);
-			coursesList.add(courseDTO);
+		if (courses != null) {
+			for (Course course : courses) {
+				CourseDTO courseDTO = new CourseDTO(course);
+				coursesList.add(courseDTO);
+			}
 		}
-		User user = getConnectedUser();
 		PersonalizedTimetable timetable = new PersonalizedTimetable(user, coursesList);
 		ScheduledTimetableEntryList entryList = timetable.scheduleTimeSlots();
 		render("Application/statistics.html", entryList, coursesList);
@@ -376,5 +395,28 @@ public class Application extends BaseController {
 			i = 0;
 		}
 		return i;
+	}
+
+	/**
+	 * Returns a course with the required id belonging to the current user. If
+	 * no course with such id belongs to the current user, a null object is
+	 * returned.
+	 * 
+	 * @param id
+	 *            Course id
+	 * @return Course object
+	 */
+	private static Course findCourseForUser(long id) {
+		Course course = null;
+		List<Course> courses = getConnectedUser().courses;
+		if (courses != null) {
+			for (Course userCourse : courses) {
+				if (userCourse.id == id) {
+					course = userCourse;
+					break;
+				}
+			}
+		}
+		return course;
 	}
 }

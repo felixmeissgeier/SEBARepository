@@ -122,8 +122,8 @@
      failureCourses += statusKey;
     }
   }
-  if(statusAlert.equals('')){
-    print '<div class=\'alert alert-success\'><b>All '+courseSuccessCount+' courses were successfully scheduled</b><button class=\'btn btn-primary\' type=\'button\'>Reschedule</button>';
+  if(statusAlert == null || statusAlert.equals('')){
+    print '<div class=\'alert alert-success\'><b>All '+courseSuccessCount+' courses were successfully scheduled</b><br />';
     print '<br><a href=\'';
     %}
       @{Application.timetable()}

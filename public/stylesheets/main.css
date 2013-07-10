@@ -231,3 +231,10 @@ body {
 	padding: 10px 0 10px 0;
 	font-size: smaller;
 }
+
+.error-message {
+	border: 1px solid #804040;
+	background-color: #ffe0e0;
+	margin-top: 40px;
+	padding: 30px;
+}
