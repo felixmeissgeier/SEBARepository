@@ -1,0 +1,143 @@
+#{extends "main.html" /}
+#{set title: "${course.title}" /}
+#{set timeTableNavActive: "" /}
+#{set myCoursesNavActive: "active" /}
+#{set header: "Settings for &ldquo;${course.title}&rdquo;" /}
+
+
+#{ifErrors}
+    <p class="error">
+        Please correct these errors.
+    </p>
+#{/ifErrors}
+#{form @Application.saveCourseSettings(), method:'POST', id:'courseSettingsForm', class:'navbar-form pull-left'}
+	<input type="hidden" name="id" value="${course.id}"  />
+	<table class="personal-data-table">
+		<tr>
+			<td><label class="control-label">Course title:</label></td>
+			<td>
+				#{field 'title'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${course.title}"  />
+					<span class="help-inline">#{error 'title' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Course remarks:</label></td>
+			<td>
+				#{field 'remarks'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${course.remarks}"  />
+					<span class="help-inline">#{error 'remarks' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Course difficulty:</label></td>
+			<td>
+				#{field 'difficulty'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${course.difficulty}"  />
+					<span class="help-inline">#{error 'difficulty' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Course priority:</label></td>
+			<td>
+				#{field 'priority'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${course.priority}"  />
+					<span class="help-inline">#{error 'priority' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Color in calendar:</label></td>
+			<td>
+				#{field 'color'}
+				<div class="color control-group ${errors.forKey(field.name) ? 'error' : ''}" data-color-format="rgb">
+					<input type="text" class="colorpicker span4" value="${course.textColor}" name="color" />
+					<span class="help-inline">#{error 'color' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Course deadline:</label></td>
+			<td>
+				#{field 'deadline'}
+				<div class="${errors.forKey(field.name) ? 'error' : ''}">
+					<div id="datetimepicker1" class="input-append date">
+					    <input data-format="dd-MM-yyyy hh:mm" type="text" value="${course.textDeadline}" name="deadline"></input>
+					    <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+				  	</div>
+				    <span class="help-inline">#{error 'deadline' /}</span>
+			    </div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Script pages done:</label></td>
+			<td>
+				#{field 'scriptPagesDone'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${course.courseMaterial.scriptPagesDone}"  />
+					<span class="help-inline">#{error 'scriptPagesDone' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Script pages to do:</label></td>
+			<td>
+				#{field 'scriptPagesToDo'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${course.courseMaterial.scriptPagesToDo}"  />
+					<span class="help-inline">#{error 'scriptPagesToDo' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Excepted workload (hours):</label></td>
+			<td>
+				#{field 'workloadHoursExpected'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${course.courseMaterial.workloadHoursExpected}"  />
+					<span class="help-inline">#{error 'workloadHoursExpected' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td>Periodic exercises needed:</td>
+			<td><input type="checkbox" name="periodicExercisesNeeded" value="true" #{if course.periodicExercisesNeeded } checked #{/if} /></td>
+		</tr>
+		<tr>
+			<td>Consider expected hours:</td>
+			<td><input type="checkbox" name="considerExpectedHours" value="true" #{if course.courseMaterial.considerExpectedHours } checked #{/if} /></td>
+		</tr>
+
+		<tr>
+			<td><button type="submit" class="btn submit">Save course settings</button></td>
+			<td></td>
+		</tr>
+	</table>
+#{/form}
+    <script type="text/javascript">
+	    $(function() {
+	        $('#datetimepicker1').datetimepicker({
+	          language: 'en-US',
+        	  pickSeconds: false
+	        });
+	      });
+    </script>		
+	<script type="text/javascript">
+	  $('.colorpicker').colorpicker()
+	</script>

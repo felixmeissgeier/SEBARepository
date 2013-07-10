@@ -1,14 +1,8 @@
 package models;
 
-import java.awt.Color;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -38,4 +32,5 @@ public class Course extends Model {
     @NotNull
     @OneToOne
     public CourseMaterial courseMaterial;
+
 }

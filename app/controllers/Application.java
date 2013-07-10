@@ -2,12 +2,17 @@ package controllers;
 
 import helper.UserHelper;
 
+import java.awt.Color;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import models.Course;
+import models.CourseMaterial;
 import models.DateUtility;
 import models.TimeInterval;
 import models.User;
@@ -16,6 +21,7 @@ import models.timetable.ScheduledTimetableEntryList;
 import play.mvc.With;
 import controllers.subtypes.ServiceSubscriptionPeriod;
 import dto.CourseDTO;
+import dto.CourseMaterialDTO;
 import dto.UserDTO;
 
 /**
@@ -49,6 +55,13 @@ public class Application extends BaseController {
 	CourseDTO courseDTO = new CourseDTO(course);
 	renderArgs.put("course", courseDTO);
 	render("Application/course-details.html");
+    }
+
+    public static void courseSettings(Long id) {
+	Course course = Course.findById(id);
+	CourseDTO courseDTO = new CourseDTO(course);
+	renderArgs.put("course", courseDTO);
+	render("Application/course-settings.html");
     }
 
     public static void settings(String category) {
@@ -155,15 +168,13 @@ public class Application extends BaseController {
 
 	    if (currentUser.preferences.getTimeIntervalsOfRest() != null) {
 		currentUser.preferences.getTimeIntervalsOfRest().clear();
-	    }
-	    else {
+	    } else {
 		currentUser.preferences.setTimeIntervalsOfRest(new ArrayList<TimeInterval>());
 	    }
-	    
+
 	    if (currentUser.preferences.getDaysOfRest() != null) {
 		currentUser.preferences.getDaysOfRest().clear();
-	    }
-	    else {
+	    } else {
 		currentUser.preferences.setDaysOfRest(new ArrayList<DateUtility.Day>());
 	    }
 
@@ -177,6 +188,87 @@ public class Application extends BaseController {
 
 	    // Redirecting to the settings page
 	    redirect("Application.settings", SETTINGS_PERSONAL_DATA);
+	}
+    }
+
+    public static void saveCourseSettings() {
+
+	String idValue = params.get("id");
+	String title = params.get("title");
+	String remarks = params.get("remarks");
+	String difficultyValue = params.get("difficulty");
+	String priorityValue = params.get("priority");
+	String colorValue = params.get("color");
+	String deadlineValue = params.get("deadline");
+	String scriptPagesDoneValue = params.get("scriptPagesDone");
+	String scriptPagesToDoValue = params.get("scriptPagesToDo");
+	String workloadHoursExpectedValue = params.get("workloadHoursExpected");
+	boolean periodicExercisesNeeded = getBooleanValue(params.get("periodicExercisesNeeded"));
+	boolean considerExpectedHours = getBooleanValue(params.get("considerExpectedHours"));
+
+	Course course = null;
+	try {
+	    long id = Long.parseLong(idValue);
+	    // --> get course & check user
+	    course = Course.findById(id);
+	    if (course == null) {
+		throw new Exception("No course with such ID exists");
+	    }
+	} catch (Exception e) {
+	    redirect("Application.courses");
+	}
+
+	validation.required(title);
+	Date deadline = new Date();
+	try {
+	    deadline = CourseDTO.DATE_FORMAT.parse(deadlineValue);
+	} catch (Exception e) {
+	    validation.addError("deadline", "validation.course.incorrect.deadline.format");
+	}
+
+	double difficulty = getDoubleValue(difficultyValue);
+	double priority = getDoubleValue(priorityValue);
+
+	Color color = Color.GRAY;
+	try {
+	    color = Color.decode(colorValue);
+	} catch (Exception e) {
+	    validation.addError("color", "validation.course.incorrect.color.value");
+	}
+
+	if (validation.hasErrors()) {
+	    CourseMaterialDTO courseMaterial = new CourseMaterialDTO(getIntValue(scriptPagesToDoValue),
+		    getIntValue(scriptPagesDoneValue));
+	    courseMaterial.setConsiderExpectedHours(considerExpectedHours);
+	    courseMaterial.setWorkloadHoursExpected((float) getDoubleValue(workloadHoursExpectedValue));
+
+	    CourseDTO courseDto = new CourseDTO(course.getId(), title, remarks, difficulty, priority, new DateTime(
+		    deadline.getTime()), courseMaterial, color, periodicExercisesNeeded);
+	    renderArgs.put("course", courseDto);
+	    render("Application/course-settings.html");
+	} else {
+	    CourseMaterial courseMaterial = course.courseMaterial;
+	    if (courseMaterial == null) {
+		courseMaterial = new CourseMaterial();
+	    }
+
+	    courseMaterial.scriptPagesDone = getIntValue(scriptPagesDoneValue);
+	    courseMaterial.scriptPagesToDo = getIntValue(scriptPagesToDoValue);
+	    courseMaterial.considerExpectedHours = considerExpectedHours;
+	    courseMaterial.workloadHoursExpected = getDoubleValue(workloadHoursExpectedValue);
+	    courseMaterial.save();
+
+	    course.title = title;
+	    course.remarks = remarks;
+	    course.difficulty = difficulty;
+	    course.priority = priority;
+	    course.color = color.getRGB();
+	    course.deadline = deadline;
+	    course.courseMaterial = courseMaterial;
+	    course.periodicExercisesNeeded = periodicExercisesNeeded;
+
+	    course.save();
+	    redirect("Application.courses");
 	}
     }
 
@@ -247,6 +339,26 @@ public class Application extends BaseController {
 	}
 
 	return false;
+    }
+
+    private static double getDoubleValue(String value) {
+	double d = 0;
+	try {
+	    d = Double.parseDouble(value);
+	} catch (NumberFormatException e) {
+	    d = 0;
+	}
+	return d;
+    }
+
+    private static int getIntValue(String value) {
+	int i = 0;
+	try {
+	    i = Integer.parseInt(value);
+	} catch (NumberFormatException e) {
+	    i = 0;
+	}
+	return i;
     }
 
 }
