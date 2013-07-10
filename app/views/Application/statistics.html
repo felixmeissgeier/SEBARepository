@@ -9,6 +9,12 @@
   <script src="@{'/public/javascripts/highcharts.js'}"></script>
   <script src="@{'/public/javascripts/bootstrap-carousel.js'}"></script>
     <script type="text/javascript">
+    
+$(
+function printSeries(){
+
+}
+)
 $(function () {
         $('#blockchart').highcharts({
             chart: {
@@ -35,27 +41,26 @@ $(function () {
             },
             plotOptions: {
               series: {
-                  pointWidth: 5,
-                  pointPadding: 0.7
+                  pointWidth: 10,
+                  pointPadding: 0.1
               }
             },
             legend: {
                 backgroundColor: '#FFFFFF',
                 margin: 50
             },
-                series: [
+            series: [
              
             %{
-            startDate = new org.joda.time.DateTime().plusYears(1);
-            for(entry in entryList.getScheduledTimeSlotList()){
-              if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
-                if(entry.getStartDateTime().isBefore(startDate)){
-                  startDate = entry.getStartDateTime();
-                }
-              }
-            }
             courseCount = 0;
             for(courseName in entryList.getCourseScheduleStatusList().keySet()){
+              startDate = new org.joda.time.DateTime().plusYears(1);
+              for(entry in entryList.getScheduledTimeSlotList()){
+                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT && entry.getTitle().equals(courseName)){
+                  startDate = entry.getStartDateTime();
+                  break;
+                }
+              }
               if(courseCount!=0){
                 print ',';
               }
@@ -76,25 +81,32 @@ $(function () {
               rgb = rgb.substring(2, rgb.length());
               println 'color: \'#'+rgb+'\',';
               print 'data: [';
-              currentDayOfYear = 0;
+              currentDayOfYear = startDate.getDayOfYear();
               hoursOfDay = 0;
               dayCount = 0;
               for(entry in entryList.getScheduledTimeSlotList()){
-                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT && entry.getTitle().equals(courseName)){
                   if(currentDayOfYear<entry.getStartDateTime().getDayOfYear()){
-                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
                     if(dayCount!=0){
                       print ',';
                     }
                     print hoursOfDay;
                     hoursOfDay = 0;
+                    if((entry.getStartDateTime().getDayOfYear()-currentDayOfYear)>1){
+                      for(i=0;i<(entry.getStartDateTime().getDayOfYear()-currentDayOfYear)-1;i++){
+                        print ',';
+                        print '0';
+                        dayCount++;
+                      }
+                    }
+                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
                     dayCount++;
                   }
-                  if(entry.getTitle().equals(courseName)){
-                    hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
-                  }
+                  
+                  hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
                 }
               }
+              print ','+hoursOfDay;
               print ']';
               println '}';
               courseCount++;
@@ -128,8 +140,9 @@ $(function () {
             },
             plotOptions: {
               series: {
-                  pointWidth: 5,
-                  pointPadding: 0.7
+                  pointWidth: 2,
+                  pointPadding: 0.2,
+                  connectNulls: true
               }
             },
             legend: {
@@ -139,16 +152,15 @@ $(function () {
                 series: [
              
             %{
-            startDate = new org.joda.time.DateTime().plusYears(1);
-            for(entry in entryList.getScheduledTimeSlotList()){
-              if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
-                if(entry.getStartDateTime().isBefore(startDate)){
-                  startDate = entry.getStartDateTime();
-                }
-              }
-            }
             courseCount = 0;
             for(courseName in entryList.getCourseScheduleStatusList().keySet()){
+              startDate = new org.joda.time.DateTime().plusYears(1);
+              for(entry in entryList.getScheduledTimeSlotList()){
+                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT && entry.getTitle().equals(courseName)){
+                  startDate = entry.getStartDateTime();
+                  break;
+                }
+              }
               if(courseCount!=0){
                 print ',';
               }
@@ -169,25 +181,32 @@ $(function () {
               rgb = rgb.substring(2, rgb.length());
               println 'color: \'#'+rgb+'\',';
               print 'data: [';
-              currentDayOfYear = 0;
+              currentDayOfYear = startDate.getDayOfYear();
               hoursOfDay = 0;
               dayCount = 0;
               for(entry in entryList.getScheduledTimeSlotList()){
-                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT && entry.getTitle().equals(courseName)){
                   if(currentDayOfYear<entry.getStartDateTime().getDayOfYear()){
-                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
                     if(dayCount!=0){
                       print ',';
                     }
                     print hoursOfDay;
                     hoursOfDay = 0;
+                    if((entry.getStartDateTime().getDayOfYear()-currentDayOfYear)>1){
+                      for(i=0;i<(entry.getStartDateTime().getDayOfYear()-currentDayOfYear)-1;i++){
+                        print ',';
+                        print '0';
+                        dayCount++;
+                      }
+                    }
+                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
                     dayCount++;
                   }
-                  if(entry.getTitle().equals(courseName)){
-                    hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
-                  }
+                  
+                  hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
                 }
               }
+              print ','+hoursOfDay;
               print ']';
               println '}';
               courseCount++;
@@ -220,7 +239,7 @@ $(function () {
             },
             plotOptions: {
               series: {
-                  pointWidth: 15,
+                  pointWidth: 5,
                   pointPadding: 0.7,
                   stacking: 'normal'
               }
@@ -232,16 +251,16 @@ $(function () {
                 series: [
              
             %{
-            startDate = new org.joda.time.DateTime().plusYears(1);
-            for(entry in entryList.getScheduledTimeSlotList()){
-              if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
-                if(entry.getStartDateTime().isBefore(startDate)){
-                  startDate = entry.getStartDateTime();
-                }
-              }
-            }
+            
             courseCount = 0;
             for(courseName in entryList.getCourseScheduleStatusList().keySet()){
+              startDate = new org.joda.time.DateTime().plusYears(1);
+              for(entry in entryList.getScheduledTimeSlotList()){
+                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT && entry.getTitle().equals(courseName)){
+                  startDate = entry.getStartDateTime();
+                  break;
+                }
+              }
               if(courseCount!=0){
                 print ',';
               }
@@ -263,30 +282,44 @@ $(function () {
               rgb = rgb.substring(2, rgb.length());
               println 'color: \'#'+rgb+'\',';
               print 'data: [';
-              currentDayOfYear = 0;
+              currentDayOfYear = startDate.getDayOfYear();
               hoursOfDay = 0;
               dayCount = 0;
               for(entry in entryList.getScheduledTimeSlotList()){
-                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT && entry.getTitle().equals(courseName)){
                   if(currentDayOfYear<entry.getStartDateTime().getDayOfYear()){
-                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
                     if(dayCount!=0){
                       print ',';
                     }
                     print hoursOfDay;
                     hoursOfDay = 0;
+                    if((entry.getStartDateTime().getDayOfYear()-currentDayOfYear)>1){
+                      for(i=0;i<(entry.getStartDateTime().getDayOfYear()-currentDayOfYear)-1;i++){
+                        print ',';
+                        print '0';
+                        dayCount++;
+                      }
+                    }
+                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
                     dayCount++;
                   }
-                  if(entry.getTitle().equals(courseName)){
-                    hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
-                  }
+                  
+                  hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
                 }
               }
+              print ','+hoursOfDay;
               print ']';
               println '}';
               courseCount++;
             }
             
+            startDate = new org.joda.time.DateTime().plusYears(1);
+            for(entry in entryList.getScheduledTimeSlotList()){
+              if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                startDate = entry.getStartDateTime();
+                break;
+              }
+            }
             print ',{';
               println 'type: \'line\',';
               println 'pointInterval: 24 * 3600 * 1000,';
@@ -294,24 +327,33 @@ $(function () {
               year = startDate.getYear();
               println 'pointStart: Date.UTC('+year+', '+month+','+startDate.getDayOfMonth()+'),';
               println 'name: \'Accumulated Workload Per Day\',';
+              println 'connectNulls: true,';
               print 'data: [';
-              currentDayOfYear = 0;
+              currentDayOfYear = startDate.getDayOfYear();
               hoursOfDay = 0;
               dayCount = 0;
               for(entry in entryList.getScheduledTimeSlotList()){
                 if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
                   if(currentDayOfYear<entry.getStartDateTime().getDayOfYear()){
-                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
                     if(dayCount!=0){
                       print ',';
                     }
                     print hoursOfDay;
                     hoursOfDay = 0;
+                    if((entry.getStartDateTime().getDayOfYear()-currentDayOfYear)>1){
+                      for(i=0;i<(entry.getStartDateTime().getDayOfYear()-currentDayOfYear)-1;i++){
+                        print ',0';
+                        dayCount++;
+                      }
+                    }
+                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
                     dayCount++;
                   }
+                  
                   hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
                 }
               }
+              print ','+hoursOfDay;
               print ']';
               println '}';
             %}                
