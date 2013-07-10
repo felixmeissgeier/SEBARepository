@@ -11,16 +11,14 @@ import org.joda.time.DateTime;
  */
 public class TimetableEntry implements Comparable<TimetableEntry> {
 
+	private static final Color DEFAULT_COLOR = new Color(120, 130, 140);
+
 	/**
 	 * Type of the timetable entry.
 	 * 
 	 */
 	public enum TimetableEntryType {
-		EXTERNAL,
-		SCHEDULED_LEARNINGSLOT,
-		SCHEDULED_EXERCISESLOT,
-		SCHEDULED_BREAKSLOT,
-		BLOCKED
+		EXTERNAL, SCHEDULED_LEARNINGSLOT, SCHEDULED_EXERCISESLOT, SCHEDULED_BREAKSLOT, BLOCKED
 	}
 
 	private String title;
@@ -33,7 +31,8 @@ public class TimetableEntry implements Comparable<TimetableEntry> {
 	public TimetableEntry() {
 	}
 
-	public TimetableEntry(String title, String description, DateTime startDateTime, DateTime endDateTime, TimetableEntryType entryType, Color color) {
+	public TimetableEntry(String title, String description, DateTime startDateTime, DateTime endDateTime,
+			TimetableEntryType entryType, Color color) {
 		this.title = title;
 		this.description = description;
 		this.startDateTime = startDateTime;
@@ -42,7 +41,7 @@ public class TimetableEntry implements Comparable<TimetableEntry> {
 		if (color != null) {
 			this.entryColor = color;
 		} else {
-			this.entryColor = new Color(120, 130, 140);
+			this.entryColor = DEFAULT_COLOR;
 		}
 	}
 

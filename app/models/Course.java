@@ -16,11 +16,12 @@ import play.db.jpa.Model;
 @Entity
 public class Course extends Model {
 
+    // CSOFF: VisibilityModifierCheck
     public String title;
     public String remarks;
     public double difficulty;
     public double priority;
-    public int color = -1;
+	public int color = -1;
 
     @NotNull
     @As(lang = { "*" }, value = { "yyyy-MM-dd HH:mm" })
@@ -32,5 +33,6 @@ public class Course extends Model {
     @NotNull
     @OneToOne
     public CourseMaterial courseMaterial;
+    // CSON: VisibilityModifierCheck
 
 }

@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: SEBA conventions checkstyle configuration
+    Checkstyle-Configuration: SEBA checkstyle configuration
     Description: none
 -->
 <module name="Checker">
@@ -41,7 +41,7 @@
     <module name="RedundantImport"/>
     <module name="UnusedImports"/>
     <module name="LineLength">
-      <property name="max" value="120"/>
+      <property name="max" value="130"/>
     </module>
     <module name="MethodLength"/>
     <module name="ParameterNumber">

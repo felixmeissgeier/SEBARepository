@@ -6,7 +6,7 @@ import controllers.Secure;
 
 /**
  * CRUD object to manage course entities.
- *
+ * 
  */
 @With(Secure.class)
 public class Courses extends CRUD {

@@ -14,62 +14,61 @@ import net.fortuna.ical4j.util.CompatibilityHints;
 
 /**
  * Implementation of an {@link CalendarConnector} for Google Calendar.
- *
+ * 
  */
 public class GoogleCalendarConnector implements CalendarConnector {
 
-    private static final int MAX_CONNECT_TIMEOUT = 10000;
-    private URL privateCalendarURL = null;
-    private HttpURLConnection httpConnection = null;
-    private CalendarFeed latestCalendarFeed = null;
+	private static final int MAX_CONNECT_TIMEOUT = 10000;
+	private URL privateCalendarURL = null;
+	private HttpURLConnection httpConnection = null;
+	private CalendarFeed latestCalendarFeed = null;
 
-    public GoogleCalendarConnector(URL privateCalendarURL) {
-	this.privateCalendarURL = privateCalendarURL;
-	CompatibilityHints.setHintEnabled(CompatibilityHints.KEY_RELAXED_UNFOLDING, true);
-    }
-
-    @Override
-    public void receiveCalendarFeed() {
-
-	try {
-	    httpConnection = (HttpURLConnection) privateCalendarURL.openConnection();
-	    httpConnection.setRequestMethod("GET");
-	    httpConnection.setDoOutput(true);
-	    httpConnection.setReadTimeout(MAX_CONNECT_TIMEOUT);
-	    httpConnection.connect();
-
-	    BufferedReader rd = null;
-	    rd = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
-	    StringBuilder sb = new StringBuilder();
-	    String line = null;
-	    while ((line = rd.readLine()) != null) {
-		sb.append(line + '\n');
-	    }
-
-	    String responseICS = sb.toString();
-
-	    // System.out.println(responseICS);
-	    StringReader sin = new StringReader(responseICS);
-	    CalendarBuilder builder = new CalendarBuilder();
-	    Calendar receivedGoogleCalendar = null;
-	    try {
-		receivedGoogleCalendar = builder.build(sin);
-	    } catch (ParserException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
-
-	    latestCalendarFeed = new CalendarFeed(receivedGoogleCalendar);
-
-	} catch (IOException e1) {
-	    e1.printStackTrace();
+	public GoogleCalendarConnector(URL privateCalendarURL) {
+		this.privateCalendarURL = privateCalendarURL;
+		CompatibilityHints.setHintEnabled(CompatibilityHints.KEY_RELAXED_UNFOLDING, true);
 	}
 
-    }
+	@Override
+	public void receiveCalendarFeed() {
 
-    @Override
-    public CalendarFeed getCalendarFeed() {
-	return latestCalendarFeed;
-    }
+		try {
+			httpConnection = (HttpURLConnection) privateCalendarURL.openConnection();
+			httpConnection.setRequestMethod("GET");
+			httpConnection.setDoOutput(true);
+			httpConnection.setReadTimeout(MAX_CONNECT_TIMEOUT);
+			httpConnection.connect();
+
+			BufferedReader rd = null;
+			rd = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = rd.readLine()) != null) {
+				sb.append(line + '\n');
+			}
+
+			String responseICS = sb.toString();
+
+			// System.out.println(responseICS);
+			StringReader sin = new StringReader(responseICS);
+			CalendarBuilder builder = new CalendarBuilder();
+			Calendar receivedGoogleCalendar = null;
+			try {
+				receivedGoogleCalendar = builder.build(sin);
+			} catch (ParserException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			latestCalendarFeed = new CalendarFeed(receivedGoogleCalendar);
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	@Override
+	public CalendarFeed getCalendarFeed() {
+		return latestCalendarFeed;
+	}
 
 }

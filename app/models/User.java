@@ -18,31 +18,31 @@ import controllers.subtypes.ServiceSubscriptionPeriod;
 @Entity
 public class User extends Model {
 
-    // CSOFF: VisibilityModifierCheck
-    public String name;
-    // CSON: VisibilityModifierCheck
+	// CSOFF: VisibilityModifierCheck
+	public String name;
 
-    @Email
-    @Required
-    @Unique
-    public String email;
-    public String userpic;
+	@Email
+	@Required
+	@Unique
+	public String email;
+	public String userpic;
 
-    @Required
-    public String password;
-    public String salt;
+	@Required
+	public String password;
+	public String salt;
 
-    public String question;
-    public String answer;
+	public String question;
+	public String answer;
 
-    public boolean sharedTimetable;
-    public boolean deadlineEmail;
-    public boolean learnSlotEmail;
-    
-    public String privateCalendarURL;
-    public CustomerPreferences preferences;
+	public boolean sharedTimetable;
+	public boolean deadlineEmail;
+	public boolean learnSlotEmail;
 
-    public ServiceSubscriptionPeriod serviceSubscriptionPeriod;
-    @As(lang = { "*" }, value = { "yyyy-MM-dd HH:mm" })
-    public Date subscriptionExpires;
+	public String privateCalendarURL;
+	public CustomerPreferences preferences;
+
+	public ServiceSubscriptionPeriod serviceSubscriptionPeriod;
+	@As(lang = { "*" }, value = { "yyyy-MM-dd HH:mm" })
+	public Date subscriptionExpires;
+	// CSON: VisibilityModifierCheck
 }

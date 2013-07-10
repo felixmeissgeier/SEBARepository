@@ -1,8 +1,5 @@
 package models;
 
-import javax.persistence.ManyToMany;
-
-import org.hibernate.annotations.CascadeType;
 import org.joda.time.DateTime;
 import org.joda.time.DurationFieldType;
 import org.joda.time.Period;
@@ -12,7 +9,14 @@ import org.joda.time.PeriodType;
  * Helper class used to provide auxiliary routines for date/time support.
  * 
  */
-public class DateUtility {
+public final class DateUtility {
+
+	/**
+	 * Hidden constructor.
+	 */
+	private DateUtility() {
+
+	}
 
 	/**
 	 * Defines time of studying.
@@ -23,7 +27,8 @@ public class DateUtility {
 	}
 
 	/**
-	 * Defines a day of the week. Used as preferred/unpreferred days of studying.
+	 * Defines a day of the week. Used as preferred/unpreferred days of
+	 * studying.
 	 * 
 	 */
 	public enum Day {
@@ -34,7 +39,7 @@ public class DateUtility {
 	 * Converts day index into the value of {@link Day} type.
 	 * 
 	 * @param ordinalNumber
-	 *          Day index
+	 *            Day index
 	 * @return Day corresponding to the index
 	 */
 	public static Day getDayConstByOrdinal(int ordinalNumber) {
@@ -52,14 +57,16 @@ public class DateUtility {
 	 * Returns the interval in minutes between two daytime objects.
 	 */
 	public static int getMinutesOfDuration(DateTime date1, DateTime date2) {
-		return new Period(date1, date2, PeriodType.forFields(new DurationFieldType[] { DurationFieldType.minutes() })).getMinutes();
+		return new Period(date1, date2, PeriodType.forFields(new DurationFieldType[] { DurationFieldType
+				.minutes() })).getMinutes();
 	}
 
 	/**
 	 * Returns the interval in days between two daytime objects.
 	 */
 	public static int getDaysOfDuration(DateTime date1, DateTime date2) {
-		return new Period(date1, date2, PeriodType.forFields(new DurationFieldType[] { DurationFieldType.days() })).getDays();
+		return new Period(date1, date2, PeriodType.forFields(new DurationFieldType[] { DurationFieldType
+				.days() })).getDays();
 	}
 
 	/**
@@ -71,39 +78,46 @@ public class DateUtility {
 	 * @param preferredDayTime
 	 * @return
 	 */
-	public static DateTime getBestDayTimeMatch(DateTime startDateTime, DateTime endDateTime, LearningDayTime preferredDayTime) {
+	public static DateTime getBestDayTimeMatch(DateTime startDateTime, DateTime endDateTime,
+			LearningDayTime preferredDayTime) {
 		DateTime nearestStartTime = getNearestDayTimeMatch(startDateTime, endDateTime, preferredDayTime);
-		DateTimeInterval prefDayTimeInterval = getDayTimeInterval(startDateTime, endDateTime, preferredDayTime);
-		if(nearestStartTime.isBefore(prefDayTimeInterval.getStartDateTime()) || nearestStartTime.isAfter(prefDayTimeInterval.getEndDateTime())){
+		DateTimeInterval prefDayTimeInterval = getDayTimeInterval(startDateTime, endDateTime,
+				preferredDayTime);
+		if (nearestStartTime.isBefore(prefDayTimeInterval.getStartDateTime())
+				|| nearestStartTime.isAfter(prefDayTimeInterval.getEndDateTime())) {
 			return null;
 		}
 
 		return nearestStartTime;
 	}
-	
-	public static DateTime getNearestDayTimeMatch(DateTime startDateTime, DateTime endDateTime, LearningDayTime preferredDayTime){
-		DateTimeInterval prefDayTimeInterval = getDayTimeInterval(startDateTime, endDateTime, preferredDayTime);
+
+	public static DateTime getNearestDayTimeMatch(DateTime startDateTime, DateTime endDateTime,
+			LearningDayTime preferredDayTime) {
+		DateTimeInterval prefDayTimeInterval = getDayTimeInterval(startDateTime, endDateTime,
+				preferredDayTime);
 		DateTime prefDayTimeStart = prefDayTimeInterval.getStartDateTime();
 		DateTime prefDayTimeEnd = prefDayTimeInterval.getEndDateTime();
-		DateTime bestStartTime = startDateTime;		
+		DateTime bestStartTime = startDateTime;
 
-		if ((startDateTime.isBefore(prefDayTimeStart) || startDateTime.isEqual(prefDayTimeStart)) && endDateTime.isAfter(prefDayTimeStart)) {
-			bestStartTime = bestStartTime.withHourOfDay(prefDayTimeStart.getHourOfDay()).withMinuteOfHour(prefDayTimeStart.getMinuteOfHour());
-		} 
-		else if (startDateTime.isAfter(prefDayTimeStart) && startDateTime.isBefore(prefDayTimeEnd)) {
-			bestStartTime = bestStartTime.withHourOfDay(startDateTime.getHourOfDay()).withMinuteOfHour(startDateTime.getMinuteOfHour());
-		} 
-		else if(startDateTime.isAfter(prefDayTimeEnd) || startDateTime.isEqual(prefDayTimeEnd)){
+		if ((startDateTime.isBefore(prefDayTimeStart) || startDateTime.isEqual(prefDayTimeStart))
+				&& endDateTime.isAfter(prefDayTimeStart)) {
+			bestStartTime = bestStartTime.withHourOfDay(prefDayTimeStart.getHourOfDay()).withMinuteOfHour(
+					prefDayTimeStart.getMinuteOfHour());
+		} else if (startDateTime.isAfter(prefDayTimeStart) && startDateTime.isBefore(prefDayTimeEnd)) {
+			bestStartTime = bestStartTime.withHourOfDay(startDateTime.getHourOfDay()).withMinuteOfHour(
+					startDateTime.getMinuteOfHour());
+		} else if (startDateTime.isAfter(prefDayTimeEnd) || startDateTime.isEqual(prefDayTimeEnd)) {
 			bestStartTime = startDateTime;
-		}
-		else if(endDateTime.isBefore(prefDayTimeStart) || endDateTime.isEqual(prefDayTimeStart)){
+		} else if (endDateTime.isBefore(prefDayTimeStart) || endDateTime.isEqual(prefDayTimeStart)) {
 			bestStartTime = endDateTime;
 		}
-	
+
 		return bestStartTime;
 	}
-	
-	private static DateTimeInterval getDayTimeInterval(DateTime startDateTime, DateTime endDateTime, LearningDayTime preferredDayTime){
+
+	private static DateTimeInterval getDayTimeInterval(DateTime startDateTime, DateTime endDateTime,
+			LearningDayTime preferredDayTime) {
+		// CSOFF: MagicNumber
 		DateTimeInterval dayTimeInterval = new DateTimeInterval();
 		if (preferredDayTime.equals(LearningDayTime.MORNING)) {
 			dayTimeInterval.setStartDateTime(startDateTime.withHourOfDay(7).withMinuteOfHour(0));
@@ -121,7 +135,8 @@ public class DateUtility {
 			dayTimeInterval.setStartDateTime(startDateTime.withHourOfDay(0).withMinuteOfHour(0));
 			dayTimeInterval.setEndDateTime(endDateTime.withHourOfDay(6).withMinuteOfHour(59));
 		}
-		
+		// CSON: MagicNumber
+
 		return dayTimeInterval;
 	}
 }

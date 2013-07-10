@@ -3,8 +3,6 @@ package controllers;
 import helper.UserHelper;
 
 import java.awt.Color;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,20 +34,8 @@ public class Application extends BaseController {
 
 	public static final String SETTINGS_PERSONAL_DATA = "personalData";
 	public static final String SETTINGS_PAYMENT = "payment";
-	private static PersonalizedTimetable timetable;
-	private static ScheduledTimetableEntryList entryList;
 
 	public Application() {
-		// List<Course> courses = Course.findAll();
-		// List<CourseDTO> coursesList = new ArrayList<CourseDTO>();
-		//
-		// for (Course course : courses) {
-		// CourseDTO courseDTO = new CourseDTO(course);
-		// coursesList.add(courseDTO);
-		// }
-		//
-		// timetable = new PersonalizedTimetable(coursesList);
-		// entryList = timetable.scheduleTimeSlots();
 
 	}
 
@@ -72,8 +58,7 @@ public class Application extends BaseController {
 		Course course = Course.findById(id);
 		if (course == null) {
 			redirect("Application.courses");
-		}
-		else {
+		} else {
 			CourseDTO courseDTO = new CourseDTO(course);
 			renderArgs.put("course", courseDTO);
 			render("Application/course-details.html");
@@ -356,6 +341,9 @@ public class Application extends BaseController {
 		render("Application/statistics.html", entryList, coursesList);
 	}
 
+	/**
+	 * Converts a submitted input parameter to a boolean value.
+	 */
 	private static boolean getBooleanValue(String value) {
 		if (value != null && !value.isEmpty()) {
 			return true;
@@ -364,6 +352,9 @@ public class Application extends BaseController {
 		return false;
 	}
 
+	/**
+	 * Converts a submitted input parameter to a double value.
+	 */
 	private static double getDoubleValue(String value) {
 		double d = 0;
 		try {
@@ -374,6 +365,9 @@ public class Application extends BaseController {
 		return d;
 	}
 
+	/**
+	 * Converts a submitted input parameter to an integer value.
+	 */
 	private static int getIntValue(String value) {
 		int i = 0;
 		try {
