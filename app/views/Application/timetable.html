@@ -36,6 +36,19 @@
       slotminutes: 60,
       editable: false,
       firstDay: 1,
+      timeFormat: 'HH:mm{ - HH:mm}',
+      axisFormat: 'HH:mm',
+      columnFormat: {
+    	    month: 'ddd',
+    	    week: 'ddd, dd.MM',
+    	    day: 'dddd, dd.MM'    	  
+      },
+      titleFormat: {
+    	    month: 'MMMM yyyy',
+    	    week: "d [MMMM ][ yyyy]{ '&#8212;' d MMMM yyyy}",
+    	    day: 'dddd, d MMMM yyyy'
+	  },
+	  firstHour: 7,
       events: [
   %{
     i = 0;
