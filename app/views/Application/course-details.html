@@ -4,52 +4,154 @@
 #{set myCoursesNavActive: "active" /}
 #{set header: "${course.title}" /}
 
-<table class="course-details">
-	<tr>
-		<td width="50%">
-			<div class="course-desc-block">
-				<div class="subheader">Notifications</div>
-				<ul>
-					<li>Exercise 2 deadline tomorrow</li>
-					<li>Lecture overview next Monday</li>
-				</ul>
-			</div>
-			<div class="course-desc-block">
-				<div class="subheader">Status</div>
-				You are doing well to prepare for your exam.
-			</div>
-			<div class="course-desc-block">
-				<div class="subheader">Details</div>
-				<div>Spent time so far: 50h (3h/week)</div>
-				<div>Time planned to spend: 60h (3h/week)</div>
-				<div>Overall difficulty factor: 1.2</div>
-				<div>Personal difficulty factor: 0.9</div>
-				<div>Community course rating: ***** (4.6 of 5)</div>
-			</div>
-		</td>
-		<td width="50%">
-			<div class="course-desc-block">
-				<div class="subheader">Course material</div>
-				<div><a href="#">Lecture slides</a></div>
-				<div><a href="#">Exercises</a></div>
-				<div><a href="#">Wiki</a></div>
-			</div>
-			<div class="course-desc-block">
-				<div class="subheader">Further reading</div>
-				<div><a href="#">Web Site Design Patterns</a></div>
-				<div><a href="#">Business model in a nutshell</a></div>
-			</div>
-			<div class="course-desc-block">
-				<div class="subheader">Rate the subject</div>
-				<div class="slider-row"><div class="slider-label">Difficulty: </div><div id="slider-difficulty" data-slider-min="1" data-slider-max="5" data-slider-step="1" data-slider-value="4"></div></div>
-				<div class="slider-row"><div class="slider-label">Interest: </div><div id="slider-interest" data-slider-min="1" data-slider-max="5" data-slider-step="1" data-slider-value="5"></div></div>
-			</div>
-		</td>
-	</tr>
-</table>
+#{set 'pageStyles'}
+
+  <style>
+    tr{ vertical-align:top;}
+  </style>     
+#{/set}
+
+#{ifErrors}
+    <p class="error">
+        Please correct these errors.
+    </p>
+#{/ifErrors}
+#{form @Application.saveCourseData(), method:'POST', id:'courseSettingsForm', class:'navbar-form pull-left'}
+  <table width="700px" class="course-data-table" vertical-align:top>
+    <tr>
+      <td width="100%" colspan="2">
+          <div class="subheader2">General</div>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align:middle;"><label class="control-label">Name:</label></td>
+      <td>
+        #{field 'title'}
+        <div class="control-group ${errors.forKey(field.title) ? 'error' : ''}">
+           <input class="span4" type="text" name="title" value="${course.title}"  />
+           <input type="hidden" class="span4" type="text" name="id" value="${courseID}"  />
+           
+          <span class="help-inline">#{error 'title' /}</span>
+        </div>
+        #{/field}
+      </td>      
+    </tr>
+    <tr>
+      <td style="vertical-align:middle;"><label class="control-label">Remarks:</label></td>
+      <td>
+        #{field 'remarks'}
+        <div class="control-group ${errors.forKey(field.remarks) ? 'error' : ''}">
+           <input class="span4" type="text" name="remarks" value="${course.remarks}"  />
+           
+          <span class="help-inline">#{error 'remarks' /}</span>
+        </div>
+        #{/field}
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align:middle;"><label class="control-label">Color:</label></td>
+      <td>
+        #{field 'color'}
+        <div class="control-group ${errors.forKey(field.color) ? 'error' : ''}">
+           <input class="span4" type="text" name="color" value="${String.format("#%02x%02x%02x", course.color.getRed(), course.color.getGreen(), course.color.getBlue())}"  />
+          <span class="help-inline">#{error 'color' /}</span>
+        </div>
+        #{/field}
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align:middle;"><label class="control-label">Deadline:</label></td>
+      <td>
+        #{field 'deadline'}
+        <div class="control-group ${errors.forKey(field.deadline) ? 'error' : ''}">
+           <input class="span4" type="text" name="deadline" value="${course.deadline.toString('yyyy-MM-dd HH:mm')}"  />
+          <span class="help-inline">#{error 'deadline' /}</span>
+        </div>
+        #{/field}
+      </td>
+    </tr>
+    <tr>
+      <td width="100%" colspan="2">
+          <div class="subheader2">Personal Settings</div>
+      </td>
+    </tr>
+    <tr>
+      <td><label class="control-label">Difficulty (hours/${models.timetable.TimeSlotScheduler.DIFFICULTY_RELATION_PAGES_PER_X_HOURS} pages):</label></td>
+      <td>
+      #{field 'difficulty'}
+      <div class="control-group ${errors.forKey(field.difficulty) ? 'error' : ''}">
+         <input class="span4" type="text" name="difficulty" value="${course.difficulty}"  />
+        <span class="help-inline">#{error 'difficulty' /}</span>
+      </div>
+      #{/field}
+      </td>
+    </tr>
+    <tr>
+      <td><label class="control-label">Priority:</label></td>
+      <td>
+      #{field 'priority'}
+      <div class="control-group ${errors.forKey(field.priority) ? 'error' : ''}">
+         <input class="span4" type="text" name="priority" value="${course.priority}"  />
+        <span class="help-inline">#{error 'priority' /}</span>
+      </div>
+      #{/field}
+      </td>
+    </tr>
+    <tr>
+      <td width="100%" colspan="2">
+          <div class="subheader2">Course Material</div>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align:middle;"><label class="control-label">Script Pages Done:</label></td>
+      <td>
+        #{field 'scriptPagesDone'}
+        <div class="control-group ${errors.forKey(field.scriptPagesDone) ? 'error' : ''}">
+           <input class="span4" type="text" name="scriptPagesDone" value="${course.courseMaterial.scriptPagesDone}"  />
+          <span class="help-inline">#{error 'scriptPagesDone' /}</span>
+        </div>
+        #{/field}
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align:middle;"><label class="control-label">Script Pages ToDo:</label></td>
+      <td>
+        #{field 'scriptPagesToDo'}
+        <div class="control-group ${errors.forKey(field.scriptPagesToDo) ? 'error' : ''}">
+           <input class="span4" type="text" name="scriptPagesToDo" value="${course.courseMaterial.scriptPagesToDo}"  />
+          <span class="help-inline">#{error 'scriptPagesToDo' /}</span>
+        </div>
+        #{/field}
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align:middle;"><label class="control-label">Workload Hours Expected:</label></td>
+      <td>
+        #{field 'workloadHoursExpected'}
+        <div class="control-group ${errors.forKey(field.workloadHoursExpected) ? 'error' : ''}">
+           <input class="span4" type="text" name="workloadHoursExpected" value="${course.courseMaterial.workloadHoursExpected}"  />
+          <span class="help-inline">#{error 'workloadHoursExpected' /}</span>
+        </div>
+        #{/field}
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align:middle;"><label class="control-label">Considering Expected Hours:</label></td>
+      <td><input type="checkbox" name="considerExpectedHours" value="true" #{if course.courseMaterial.considerExpectedHours } checked #{/if} /></td>
+    </tr> 
+    <tr>
+      <td><button type="submit" class="btn submit">Save Settings</button></td>
+      <td></td>
+    </tr>
+  </table>
+#{/form}
 <script>
   $(function() {
     $("#slider-difficulty").slider();
-    $("#slider-interest").slider();
+    $("#slider-priority").slider();
   });
 </script>
+
+
+
+

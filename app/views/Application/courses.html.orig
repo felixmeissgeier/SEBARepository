@@ -1,0 +1,58 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+#{set timeTableNavActive:'' /}
+#{set myCoursesNavActive:'active' /}
+#{set statisticNavActive: '' /}
+#{set header:'Course overview' /}
+
+
+<table class="table table-hover tablesorter" id="courseList">
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  %{
+    i = 0;
+    for (course in coursesList) {
+      i++; 
+  }%
+  
+  <tr>
+  	<td><a href="@{Application.course(course.id)}">${course.title}</a></td>
+  	<td>${course.hint}</td>
+<<<<<<< HEAD
+  	<td><a href="@{Application.courseSettings(course.id)}">manage</a></td>
+=======
+  	<td><a href="@{Application.course(course.id)}">manage</a></td>
+>>>>>>> f54f3944289c15c818086d388c74fae45575aa99
+  </tr>
+  
+  %{
+    }
+  }%
+  </tbody>
+</table>
+<script language="JavaScript">
+	$(document).ready(function() {
+	  $(function() {
+	    $("table#courseList").tablesorter({ sortList: [[0,0]], headers: { 1: { sorter: false}, 2: {sorter: false} } });
+	  });
+	});
+</script>
+
+#{form @Application.courses()}
+<button class="btn" type="submit" #{if !user.isPaidUser() && coursesList.size() > 0} disabled #{/if}>Add a new course</button>
+
+#{if !user.isPaidUser() && coursesList.size() > 0} 
+<div class="course-limit-reached">
+	The number of courses you already have is ${coursesList.size()}. 
+	Your current plan does not allow to add a new course. Please
+	upgrade your plan to be able to add more courses.
+</div>
+#{/if}
+
+#{/form}

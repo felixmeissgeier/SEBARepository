@@ -159,6 +159,12 @@ body {
 	margin: 0 0 10px 0;
 }
 
+.subheader2 {
+  font-weight: bold;
+  font-size: larger;
+  margin: 20px 0 0px 0;
+}
+
 .slider-row {
 	margin-bottom: 10px;
 }
@@ -207,6 +213,20 @@ body {
 	margin: 15px 0 10px 0;
 }
 
+.course-data-table TD {
+  padding: 0 30px 6px 0;
+}
+
+.course-data-table TD IMG {
+  padding: 6px 0;
+}
+
+.course-data-table TD BUTTON {
+  margin: 5px 10px 10px 10px;
+}
+.course-data-table TD BUTTON.submit {
+  margin: 15px 0 10px 0;
+}
 .course-limit-reached {
 	padding: 10px 0 10px 0;
 	font-size: smaller;
