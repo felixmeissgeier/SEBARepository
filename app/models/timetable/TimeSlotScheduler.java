@@ -27,7 +27,9 @@ public class TimeSlotScheduler {
 
 	public static final int DIFFICULTY_RELATION_PAGES_PER_X_HOURS = 10;
 	public static final double MAX_DIFFICULT_LEARN_HOURS_PER_DAY = 4.0;
-	public static final double MAX_LEARN_HOURS_PER_DAY = 8.0;	
+	public static final double MAX_LEARN_HOURS_PER_DAY = 8.0;
+	public static final double COURSE_IS_DIFFICULT_THRESHOLD = 1.0;
+	
 
 	private List<CourseDTO> courses;
 	private CustomerPreferences customerPreferences;
@@ -75,7 +77,7 @@ public class TimeSlotScheduler {
 	 * Computes learning time slots for each course
 	 */
 	private ScheduledTimetableEntryList computeCourseLearningSlots(ScheduledTimetableEntryList currentTimetableEntryList, CourseDTO course) {
-		boolean isDifficultCourse = (course.getDifficulty()>0.5)?true:false;
+		boolean isDifficultCourse = (course.getDifficulty()>COURSE_IS_DIFFICULT_THRESHOLD)?true:false;
 		List<TimetableEntry> currentTimetable = currentTimetableEntryList.getScheduledTimeSlotList();
 		ScheduledTimetableEntryList.ScheduleStatus status = ScheduledTimetableEntryList.ScheduleStatus.SUCCESS;
 		currentCourseColor = course.getColor();
@@ -96,9 +98,9 @@ public class TimeSlotScheduler {
 			//double averageFreeTimeHoursPerDay = accumulatedFreeTimeHours / coursePeriodNumberOfDays;
 			double hoursToSchedule = 0;
 			if (course.getCourseMaterial().isConsiderExpectedHours()) {
-				hoursToSchedule = course.getCourseMaterial().getWorkloadHoursExpected();
+				hoursToSchedule = (int)(course.getCourseMaterial().getWorkloadHoursExpected());
 			} else {
-				hoursToSchedule = (course.getDifficulty() / DIFFICULTY_RELATION_PAGES_PER_X_HOURS) * course.getCourseMaterial().getScriptPagesToDo();
+				hoursToSchedule = (int)((course.getDifficulty() / DIFFICULTY_RELATION_PAGES_PER_X_HOURS) * course.getCourseMaterial().getScriptPagesToDo());
 			}
 			//double averageNeededHoursPerDay = hoursToSchedule / coursePeriodNumberOfDays;
 	
