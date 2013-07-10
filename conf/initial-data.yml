@@ -19,7 +19,7 @@ CourseMaterial(cm3):
   considerExpectedHours: true
 
 CourseMaterial(cm4):
-  scriptPagesDone: 80
+  scriptPagesDone: 800
   scriptPagesToDo: 50
   workloadHoursExpected: 0.0
   considerExpectedHours: false
