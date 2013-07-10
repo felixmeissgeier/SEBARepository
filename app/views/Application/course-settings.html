@@ -13,8 +13,13 @@
 #{form @Application.saveCourseSettings(), method:'POST', id:'courseSettingsForm', class:'navbar-form pull-left'}
 	<input type="hidden" name="id" value="${course.id}"  />
 	<table class="personal-data-table">
+	    <tr>
+	      <td width="100%" colspan="2">
+	          <div class="subheader2">General</div>
+	      </td>
+	    </tr>
 		<tr>
-			<td><label class="control-label">Course title:</label></td>
+			<td><label class="control-label">Title:</label></td>
 			<td>
 				#{field 'title'}
 				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
@@ -25,34 +30,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td><label class="control-label">Course remarks:</label></td>
+			<td><label class="control-label">Remarks:</label></td>
 			<td>
 				#{field 'remarks'}
 				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
 					<input class="span4" type="text" name="${field.name}" value="${course.remarks}"  />
 					<span class="help-inline">#{error 'remarks' /}</span>
-				</div>
-				#{/field}
-			</td>
-		</tr>
-		<tr>
-			<td><label class="control-label">Course difficulty:</label></td>
-			<td>
-				#{field 'difficulty'}
-				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
-					<input class="span4" type="text" name="${field.name}" value="${course.difficulty}"  />
-					<span class="help-inline">#{error 'difficulty' /}</span>
-				</div>
-				#{/field}
-			</td>
-		</tr>
-		<tr>
-			<td><label class="control-label">Course priority:</label></td>
-			<td>
-				#{field 'priority'}
-				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
-					<input class="span4" type="text" name="${field.name}" value="${course.priority}"  />
-					<span class="help-inline">#{error 'priority' /}</span>
 				</div>
 				#{/field}
 			</td>
@@ -82,6 +65,42 @@
 				#{/field}
 			</td>
 		</tr>
+		<tr>
+			<td>Periodic exercises needed:</td>
+			<td><input type="checkbox" name="periodicExercisesNeeded" value="true" #{if course.periodicExercisesNeeded } checked #{/if} /></td>
+		</tr>
+	    <tr>
+	      <td width="100%" colspan="2">
+	          <div class="subheader2">Personal Settings</div>
+	      </td>
+	    </tr>
+		<tr>
+			<td><label class="control-label">Difficulty (hours per 10 pages):</label></td>
+			<td>
+				#{field 'difficulty'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${course.difficulty}"  />
+					<span class="help-inline">#{error 'difficulty' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+		<tr>
+			<td><label class="control-label">Priority:</label></td>
+			<td>
+				#{field 'priority'}
+				<div class="control-group ${errors.forKey(field.name) ? 'error' : ''}">
+					<input class="span4" type="text" name="${field.name}" value="${course.priority}"  />
+					<span class="help-inline">#{error 'priority' /}</span>
+				</div>
+				#{/field}
+			</td>
+		</tr>
+	    <tr>
+	      <td width="100%" colspan="2">
+	          <div class="subheader2">Course Material</div>
+	      </td>
+	    </tr>
 		<tr>
 			<td><label class="control-label">Script pages done:</label></td>
 			<td>
@@ -116,11 +135,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>Periodic exercises needed:</td>
-			<td><input type="checkbox" name="periodicExercisesNeeded" value="true" #{if course.periodicExercisesNeeded } checked #{/if} /></td>
-		</tr>
-		<tr>
-			<td>Consider expected hours:</td>
+			<td>Considering expected hours:</td>
 			<td><input type="checkbox" name="considerExpectedHours" value="true" #{if course.courseMaterial.considerExpectedHours } checked #{/if} /></td>
 		</tr>
 
