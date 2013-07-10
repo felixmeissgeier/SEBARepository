@@ -86,6 +86,21 @@
 			</td>
 		</tr>
 		<tr>
+      <td><label class="control-label">Preferred Learning Daytime:</label></td>
+      <td>
+        #{field 'preferredLearningDayTime'}
+        <div class="control-group">
+          <select name="preferredLearningDayTime">
+            <option value="morning" #{if userSettings.preferences.preferredLearningDayTime.equals(models.DateUtility.LearningDayTime.MORNING)} selected #{/if}>Morning</option>
+            <option value="afternoon" #{if userSettings.preferences.preferredLearningDayTime.equals(models.DateUtility.LearningDayTime.AFTERNOON)} selected #{/if}>Afternoon</option>
+            <option value="evening" #{if userSettings.preferences.preferredLearningDayTime.equals(models.DateUtility.LearningDayTime.EVENING)} selected #{/if}>Evening</option>
+            <option value="night" #{if userSettings.preferences.preferredLearningDayTime.equals(models.DateUtility.LearningDayTime.NIGHT)} selected #{/if}>Night</option>
+          </select>       
+        </div>
+        #{/field}
+      </td>
+    </tr>
+		<tr>
 			<td><label class="control-label">Days of rest:</label></td>
 			<td>
 				#{field 'daysOfRest'}

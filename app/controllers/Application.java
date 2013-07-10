@@ -13,6 +13,7 @@ import models.CourseMaterial;
 import models.DateUtility;
 import models.TimeInterval;
 import models.User;
+import models.DateUtility.LearningDayTime;
 import models.timetable.PersonalizedTimetable;
 import models.timetable.ScheduledTimetableEntryList;
 
@@ -150,6 +151,21 @@ public class Application extends BaseController {
 		userDto.getPreferences().setMinLearningSlotDuration(minSlotDuration);
 		userDto.getPreferences().setMaxLearningSlotDuration(maxSlotDuration);
 		userDto.setDaysOfRest(daysOfRestValue);
+		LearningDayTime learningDayTime = LearningDayTime.MORNING;
+		if(params.get("preferredLearningDayTime").equals("morning")){
+			learningDayTime = LearningDayTime.MORNING;
+		}
+		else if(params.get("preferredLearningDayTime").equals("afternoon")){
+			learningDayTime = LearningDayTime.AFTERNOON;
+		}
+		else if(params.get("preferredLearningDayTime").equals("evening")){
+			learningDayTime = LearningDayTime.EVENING;
+		}
+		else if(params.get("preferredLearningDayTime").equals("night")){
+			learningDayTime = LearningDayTime.NIGHT;
+		}
+		
+		userDto.getPreferences().setPreferredLearningDayTime(learningDayTime);
 		if (userDto.getPreferences().getTimeIntervalsOfRest() != null) {
 			userDto.getPreferences().getTimeIntervalsOfRest().clear();
 		}
@@ -173,6 +189,7 @@ public class Application extends BaseController {
 			currentUser.preferences.setMaxLearningSlotDuration(maxSlotDuration);
 			currentUser.preferences.setMinLearningSlotDuration(minSlotDuration);
 			currentUser.preferences.setBreakDuration(breakDuration);
+			currentUser.preferences.setPreferredLearningDayTime(learningDayTime);
 
 			if (currentUser.preferences.getTimeIntervalsOfRest() != null) {
 				currentUser.preferences.getTimeIntervalsOfRest().clear();

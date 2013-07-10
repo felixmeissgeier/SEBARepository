@@ -15,7 +15,7 @@ $(function () {
                 type: 'column'
             },
             title: {
-                text: 'Hours Of Day - Block Chart'
+                text: 'Scheduled Workload Per Day - Block Chart'
             },
             
             xAxis: {
@@ -30,7 +30,7 @@ $(function () {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Hours Of Day'
+                    text: 'Hours Per Day'
                 }
             },
             plotOptions: {
@@ -41,6 +41,7 @@ $(function () {
             },
             legend: {
                 backgroundColor: '#FFFFFF',
+                margin: 50
             },
                 series: [
              
@@ -107,7 +108,7 @@ $(function () {
                 type: 'line'
             },
             title: {
-                text: 'Hours Of Day -Line Chart'
+                text: 'Scheduled Workload Per Day - Line Chart'
             },
             
             xAxis: {
@@ -122,7 +123,7 @@ $(function () {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Hours Of Day'
+                    text: 'Hours Per Day'
                 }
             },
             plotOptions: {
@@ -133,6 +134,7 @@ $(function () {
             },
             legend: {
                 backgroundColor: '#FFFFFF',
+                margin: 50
             },
                 series: [
              
@@ -193,6 +195,128 @@ $(function () {
             %}                
             ]
         });
+        
+        $('#accumulationchart').highcharts({
+            chart: {
+            },
+            title: {
+                text: 'Accumulated Workload Per Day'
+            },
+            
+            xAxis: {
+              type: 'datetime',
+
+              labels: {
+                      rotation: -90,
+                      align: 'right'
+              }
+              
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Hours Per Day'
+                }
+            },
+            plotOptions: {
+              series: {
+                  pointWidth: 15,
+                  pointPadding: 0.7,
+                  stacking: 'normal'
+              }
+            },
+            legend: {
+                backgroundColor: '#FFFFFF',
+                margin: 50
+            },
+                series: [
+             
+            %{
+            startDate = new org.joda.time.DateTime().plusYears(1);
+            for(entry in entryList.getScheduledTimeSlotList()){
+              if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                if(entry.getStartDateTime().isBefore(startDate)){
+                  startDate = entry.getStartDateTime();
+                }
+              }
+            }
+            courseCount = 0;
+            for(courseName in entryList.getCourseScheduleStatusList().keySet()){
+              if(courseCount!=0){
+                print ',';
+              }
+              print '{';
+              println 'type: \'column\',';
+              println 'pointInterval: 24 * 3600 * 1000,';
+              month = startDate.getMonthOfYear()-1;
+              year = startDate.getYear();
+              println 'pointStart: Date.UTC('+year+', '+month+','+startDate.getDayOfMonth()+'),';
+              println 'name: \''+courseName+'\',';
+              globalCourse = new dto.CourseDTO();
+              for(course in coursesList){
+                if(course.getTitle().equals(courseName)){
+                  globalCourse = course;
+                  break;
+                }
+              }
+              rgb = Integer.toHexString(globalCourse.getColor().getRGB());
+              rgb = rgb.substring(2, rgb.length());
+              println 'color: \'#'+rgb+'\',';
+              print 'data: [';
+              currentDayOfYear = 0;
+              hoursOfDay = 0;
+              dayCount = 0;
+              for(entry in entryList.getScheduledTimeSlotList()){
+                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                  if(currentDayOfYear<entry.getStartDateTime().getDayOfYear()){
+                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
+                    if(dayCount!=0){
+                      print ',';
+                    }
+                    print hoursOfDay;
+                    hoursOfDay = 0;
+                    dayCount++;
+                  }
+                  if(entry.getTitle().equals(courseName)){
+                    hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
+                  }
+                }
+              }
+              print ']';
+              println '}';
+              courseCount++;
+            }
+            
+            print ',{';
+              println 'type: \'line\',';
+              println 'pointInterval: 24 * 3600 * 1000,';
+              month = startDate.getMonthOfYear()-1;
+              year = startDate.getYear();
+              println 'pointStart: Date.UTC('+year+', '+month+','+startDate.getDayOfMonth()+'),';
+              println 'name: \'Accumulated Workload Per Day\',';
+              print 'data: [';
+              currentDayOfYear = 0;
+              hoursOfDay = 0;
+              dayCount = 0;
+              for(entry in entryList.getScheduledTimeSlotList()){
+                if(entry.getEntryType()==models.timetable.TimetableEntry.TimetableEntryType.SCHEDULED_LEARNINGSLOT){
+                  if(currentDayOfYear<entry.getStartDateTime().getDayOfYear()){
+                    currentDayOfYear = entry.getStartDateTime().getDayOfYear();
+                    if(dayCount!=0){
+                      print ',';
+                    }
+                    print hoursOfDay;
+                    hoursOfDay = 0;
+                    dayCount++;
+                  }
+                  hoursOfDay += models.DateUtility.getMinutesOfDuration(entry.getStartDateTime(),entry.getEndDateTime())/60.0;
+                }
+              }
+              print ']';
+              println '}';
+            %}                
+            ]
+        });
  });
     
     </script>
@@ -208,10 +332,14 @@ Following charts show the result of statistical analysis of your course and sche
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
   </ol>
     <!-- Carousel items -->
     <div class="carousel-inner">
-      <div class="item active">
+      <div class="item active" >
+        <div id="accumulationchart" style="width: 800px; height: 400px; margin: 0 auto;"></div>
+      </div>
+      <div class="item">
         <div id="blockchart"  style="width: 800px; height: 400px; margin: 0 auto;"></div>
       </div>
       <div class="item" >
