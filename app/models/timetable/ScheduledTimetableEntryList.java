@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
-
 /**
  * Contains the list of scheduled entries for the timetable. The entried are
  * used for rendering in the calendar.

@@ -19,8 +19,6 @@ import models.timetable.ScheduledTimetableEntryList;
 
 import org.joda.time.DateTime;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
-
 import play.mvc.With;
 import controllers.subtypes.ServiceSubscriptionPeriod;
 import dto.CourseDTO;
